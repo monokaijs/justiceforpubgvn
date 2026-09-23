@@ -12,7 +12,7 @@ const LanguageContext = createContext<{ language: Language; chooseLanguage: (nex
 export function LanguageProvider({ children, initialLanguage }: { children: ReactNode; initialLanguage: Language }) {
   const chooseLanguage = (next: Language) => {
     document.cookie = `${languageCookie}=${next}; Path=/; Max-Age=31536000; SameSite=Lax${location.protocol === "https:" ? "; Secure" : ""}`;
-    const path = location.pathname.replace(/^\/(vi|th|en|ko)(?=\/|$)/, "");
+    const path = location.pathname.replace(/^\/(vi|th|en|ko|zh)(?=\/|$)/, "");
     location.assign(`/${next}${path === "/" ? "" : path}${location.search}${location.hash}`);
   };
 

@@ -8,6 +8,7 @@ function languageForCountry(country: string | null): Language {
     case "VN": return "vi";
     case "TH": return "th";
     case "KR": return "ko";
+    case "CN": return "zh";
     default: return "en";
   }
 }

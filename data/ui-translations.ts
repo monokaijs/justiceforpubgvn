@@ -1,4 +1,5 @@
-// Thai and Korean editorial copy, keyed by the existing English text.
+// Thai, Korean, and Simplified Chinese editorial copy, keyed by the existing English text.
+import { zhEntries } from "./zh-translations";
 const entries: [string, string, string][] = [
   ["CASE TIMELINE", "ลำดับเหตุการณ์", "사건 경과"],
   ["SOURCES", "แหล่งข้อมูล", "자료 출처"],
@@ -297,6 +298,10 @@ const entries: [string, string, string][] = [
   ["A livestream page visible in footage; a still alone does not establish intent or misconduct.", "หน้าสตรีมที่ปรากฏในวิดีโอ ภาพนิ่งเพียงภาพเดียวไม่ยืนยันเจตนาหรือการกระทำผิด", "영상에 방송 페이지가 보이지만 정지 화면만으로 의도나 위반을 입증할 수 없습니다."],
 ];
 
-export const translations: Record<string, { th: string; ko: string }> = Object.fromEntries(
-  entries.map(([en, th, ko]) => [en, { th, ko }]),
+if (zhEntries.length !== entries.length) {
+  throw new Error("Chinese translation count does not match UI copy");
+}
+
+export const translations: Record<string, { th: string; ko: string; zh: string }> = Object.fromEntries(
+  entries.map(([en, th, ko], index) => [en, { th, ko, zh: zhEntries[index] }]),
 );

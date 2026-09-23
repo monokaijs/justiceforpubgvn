@@ -291,7 +291,7 @@ export default function TimelineExperience() {
     const onScroll = () => { if (!frame) frame = window.requestAnimationFrame(update); };
     let touchStart: { x: number; y: number } | null = null;
     const onHeroTouchStart = (event: TouchEvent) => {
-      if (!window.matchMedia("(pointer: coarse), (max-width: 600px)").matches || event.touches.length !== 1) return;
+      if (!window.matchMedia("(max-width: 600px)").matches || event.touches.length !== 1) return;
       if ((event.target as HTMLElement).closest("a, button, input, select, textarea")) return;
       touchStart = { x: event.touches[0].clientX, y: event.touches[0].clientY };
     };

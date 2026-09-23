@@ -199,23 +199,6 @@ export default function SourcesPage() {
           </div>
           <LocalizedAnchor className="evidence-manifest-link" href="/attachments/evidence-manifest.json" target="_blank" rel="noopener noreferrer">IMAGE FILE MANIFEST ↗</LocalizedAnchor>
         </section>
-
-        <section id="campaign-image" className="evidence-archive" aria-labelledby="campaign-image-title">
-          <p className="eyebrow dark-eyebrow">04 / <L vi="HÌNH MINH HỌA" en="CAMPAIGN VISUAL" /></p>
-          <h2 id="campaign-image-title"><L vi="HÌNH MINH HỌA" en="CAMPAIGN VISUAL" /></h2>
-          <p className="evidence-archive-intro"><L vi="Ảnh đen trắng dùng ở phần mở đầu do người dùng cung cấp. Đây là hình minh họa cho chiến dịch, không phải chứng cứ điều tra hoặc ảnh do PUBG xác nhận." en="The user supplied the black-and-white hero image. It is campaign artwork, not investigation evidence or a PUBG-verified image." /></p>
-          <article className="evidence-archive-card campaign-archive-card">
-            <LocalizedAnchor href={visualManifest.path} target="_blank" rel="noopener noreferrer"><img src={visualManifest.path} alt="Hình minh họa đen trắng của hai tuyển thủ" /></LocalizedAnchor>
-            <div className="evidence-archive-card-body">
-              <span><L vi="HÌNH MINH HỌA DO NGƯỜI DÙNG CUNG CẤP" en="USER-SUPPLIED CAMPAIGN VISUAL" /></span>
-              <h3>{visualManifest.filename}</h3>
-              <p><L vi="Bản lưu cục bộ nguyên file. Nguồn ảnh gốc và danh tính trong ảnh chưa được xác minh độc lập." en="The local original is preserved. Its source and the identities depicted have not been independently verified." /></p>
-              <LocalizedAnchor href={visualManifest.path} download><L vi="TẢI PNG GỐC ↓" en="DOWNLOAD ORIGINAL PNG ↓" /></LocalizedAnchor>
-              <div className="archive-checksum">SHA-256 {visualManifest.sha256}</div>
-            </div>
-          </article>
-          <LocalizedAnchor className="evidence-manifest-link" href="/attachments/visual-manifest.json" target="_blank" rel="noopener noreferrer">VISUAL FILE MANIFEST ↗</LocalizedAnchor>
-        </section>
       </main>
       <footer className="site-footer"><div className="page-width archive-footer"><L vi="Kho tư liệu độc lập cho dòng thời gian Justice for PUBG VN." en="Independent source archive for the Justice for PUBG VN timeline." /> <LocalizedAnchor href="/"><L vi="← DÒNG THỜI GIAN" en="← TIMELINE" /></LocalizedAnchor></div></footer>
     </div>

@@ -77,7 +77,7 @@ export const timeline: TimelineEvent[] = [
     month: "SEP",
     category: "action",
     label: { vi: "Quyết định ban đầu", en: "Initial decision" },
-    title: { vi: "Himass và TanVuu bị loại khỏi phần còn lại", en: "Himass and TanVuu are removed from the event" },
+    title: { vi: "Himass và TanVuu bị loại khỏi giải đấu", en: "Himass and TanVuu are removed from the event" },
     description: {
       vi: "Trong thông báo ngày 19/09 do Kakao PUBG đăng lại từ KRAFTON, ban tổ chức quyết định loại hai người khỏi các trận còn lại và nói sẽ tiếp tục điều tra sự việc.",
       en: "In a September 19 notice reposted by Kakao PUBG from KRAFTON, organizers removed both players from the remaining matches and said the investigation would continue.",
