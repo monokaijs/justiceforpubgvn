@@ -1,0 +1,18 @@
+[
+  {
+    "filename": "soopi-alt-tab.png",
+    "path": "/attachments/evidences/soopi-alt-tab.png",
+    "origin": "user-provided; original capture source and date not independently verified",
+    "observed_at_utc": "2026-09-23T18:28:24+00:00",
+    "bytes": 554235,
+    "sha256": "cba9c80f362aae781c1d82bc38dcbdb464a943c32117f89b522ad192bd044f15"
+  },
+  {
+    "filename": "soopi-watching-livestream.png",
+    "path": "/attachments/evidences/soopi-watching-livestream.png",
+    "origin": "user-provided; original capture source and date not independently verified",
+    "observed_at_utc": "2026-09-23T18:28:24+00:00",
+    "bytes": 288270,
+    "sha256": "1f6173a7047fc92414ccb8a22c5ad265fc2d5f65b06ba3416074e8d9863a35e1"
+  }
+]

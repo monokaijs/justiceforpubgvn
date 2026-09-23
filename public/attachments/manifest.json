@@ -1,0 +1,56 @@
+[
+  {
+    "filename": "pubg-findings-2026-09-23-vi.html.txt",
+    "source_url": "https://pubg.com/vi/news/11155",
+    "description": "PUBG official notice, Vietnamese",
+    "capture_method": "raw HTTP response via curl",
+    "retrieved_at_utc": "2026-09-23T18:28:24+00:00",
+    "bytes": 617377,
+    "sha256": "7f4f49e36e62089eecd49cc632eae7f557debddb6d2900ae68ff76bebe09ead2"
+  },
+  {
+    "filename": "pubg-findings-2026-09-23-ko.html.txt",
+    "source_url": "https://www.pubg.com/ko/news/11155",
+    "description": "PUBG official notice, Korean",
+    "capture_method": "raw HTTP response via curl",
+    "retrieved_at_utc": "2026-09-23T18:28:24+00:00",
+    "bytes": 665779,
+    "sha256": "d1eef6fd9750f0869f56c6979ed2ddb60a147bf5f317eeba478a87c2ed75b608"
+  },
+  {
+    "filename": "pubg-asia-stars-event-notice-2026-09-11-vi.html.txt",
+    "source_url": "https://pubg.com/vi/events/notice/10926",
+    "description": "PUBG official event notice, Vietnamese",
+    "capture_method": "raw HTTP response via curl",
+    "retrieved_at_utc": "2026-09-23T18:28:24+00:00",
+    "bytes": 764366,
+    "sha256": "e2589c63e3879e08d8bd5093516a9377f7d60a6ab66fc7147ce6e72af2d4b776"
+  },
+  {
+    "filename": "pubg-asia-stars-web-event-rules.pdf",
+    "source_url": "https://www.pubg.com/static/guide-pubgasiastars/event/PUBG_ASIASTARS_Event_Official_Rules_en.pdf",
+    "description": "PUBG official web event rules PDF (different from tournament rulebook)",
+    "capture_method": "raw HTTP response via curl",
+    "retrieved_at_utc": "2026-09-23T18:28:24+00:00",
+    "bytes": 113767,
+    "sha256": "46bd6700a0c7fed0ac34d9d201003973aa7e1d07e46127c2a6563730140ae1a0"
+  },
+  {
+    "filename": "kakao-notice-2026-09-19-ko.txt",
+    "source_url": "https://bbs-pubg.kakaogames.com/gaia/do/pubg/notice/read?articleId=4372&bbsId=PN001&pageIndex=1",
+    "description": "Kakao PUBG repost of KRAFTON notice, visible article text, Korean",
+    "capture_method": "browser-captured visible article text; not raw server HTML",
+    "retrieved_at_utc": "2026-09-23T18:28:00.065Z",
+    "bytes": 2158,
+    "sha256": "813289e7ca1d8b41a1dede6b139fd51ee17ea0b65daad68be6267f4c14c56939"
+  },
+  {
+    "filename": "kakao-notice-2026-09-20-ko.txt",
+    "source_url": "https://bbs-pubg.kakaogames.com/gaia/do/pubg/notice/read?articleId=4373&bbsId=PN001&objCate1=223&pageIndex=1",
+    "description": "Kakao PUBG repost of KRAFTON notice, visible article text, Korean",
+    "capture_method": "browser-captured visible article text; not raw server HTML",
+    "retrieved_at_utc": "2026-09-23T18:27:59.339Z",
+    "bytes": 10515,
+    "sha256": "96c131fce85bcc84ec972de2f32e4b9de13b6b55b93b337e4c2dd98cbee4ec44"
+  }
+]
