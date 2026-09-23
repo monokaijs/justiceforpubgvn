@@ -13,8 +13,10 @@ function Flag({ language }: { language: Language }) {
 
 export default function LanguageSelector() {
   const { language, chooseLanguage } = useLanguage();
+  const label = { vi: "Ngôn ngữ", th: "ภาษา", en: "Language", ko: "언어" }[language];
   const [open, setOpen] = useState(false);
   const root = useRef<HTMLDivElement>(null);
+  const focusOption = (index: number) => root.current?.querySelectorAll<HTMLButtonElement>(".language-menu button")[index]?.focus();
 
   useEffect(() => {
     if (!open) return;
@@ -26,11 +28,17 @@ export default function LanguageSelector() {
   }, [open]);
 
   return <div className="language-selector" ref={root}>
-    <button className="language-trigger" type="button" aria-label={`Language: ${languageNames[language]}`} aria-haspopup="listbox" aria-expanded={open} onClick={() => setOpen(!open)}>
+    <button className="language-trigger" type="button" aria-label={`${label}: ${languageNames[language]}`} aria-haspopup="listbox" aria-controls="site-language-options" aria-expanded={open} onClick={() => setOpen(!open)} onKeyDown={(event) => {
+      if (event.key === "ArrowDown" || event.key === "ArrowUp") { event.preventDefault(); setOpen(true); window.requestAnimationFrame(() => focusOption(event.key === "ArrowDown" ? 0 : languages.length - 1)); }
+    }}>
       <Flag language={language} /><span>{languageNames[language]}</span><svg className="language-chevron" viewBox="0 0 12 8" aria-hidden="true"><path d="m1 1 5 5 5-5" fill="none" stroke="currentColor" strokeWidth="1.5"/></svg>
     </button>
-    {open && <div className="language-menu" role="listbox" aria-label="Language">
-      {languages.map((option) => <button key={option} type="button" role="option" aria-selected={language === option} onClick={() => { chooseLanguage(option); setOpen(false); }}><Flag language={option} /><span>{languageNames[option]}</span>{language === option && <span className="language-check" aria-hidden="true">✓</span>}</button>)}
+    {open && <div className="language-menu" id="site-language-options" role="listbox" aria-label={label}>
+      {languages.map((option, index) => <button key={option} type="button" role="option" aria-selected={language === option} onClick={() => { chooseLanguage(option); setOpen(false); root.current?.querySelector<HTMLButtonElement>(".language-trigger")?.focus(); }} onKeyDown={(event) => {
+        if (event.key === "ArrowDown" || event.key === "ArrowUp") { event.preventDefault(); focusOption((index + (event.key === "ArrowDown" ? 1 : -1) + languages.length) % languages.length); }
+        if (event.key === "Home") { event.preventDefault(); focusOption(0); }
+        if (event.key === "End") { event.preventDefault(); focusOption(languages.length - 1); }
+      }}><Flag language={option} /><span>{languageNames[option]}</span>{language === option && <span className="language-check" aria-hidden="true">✓</span>}</button>)}
     </div>}
   </div>;
 }

@@ -156,7 +156,6 @@ function SourceLink({ sourceKey, label }: { sourceKey: SourceKey; label: string 
 }
 
 function ReportedSanctionChanges({ language, compact = false }: { language: Language; compact?: boolean }) {
-  const isVi = language === "vi";
   return <aside className={`reported-sanction-changes${compact ? " reported-sanction-changes-compact" : ""}`} aria-label={loc(language, "Thông tin về các mức phạt được kể lại, chưa xác minh", "Unverified account of earlier sanction lengths")}>
     <span className="reported-sanction-label">{loc(language, "PHẢN ÁNH CHƯA ĐƯỢC XÁC MINH", "UNVERIFIED PARTICIPANT ACCOUNT")}</span>
     <div className="reported-sanction-sequence" aria-label={loc(language, "Theo lời kể: một năm, sáu tháng, rồi vĩnh viễn", "Reported: one year, six months, then permanent")}>
@@ -171,7 +170,6 @@ function CaseModule({ id, language, response, explanation }: { id: keyof typeof 
   const module = modules[id];
   const title = loc(language, module.vi.title, module.en.title);
   const body = loc(language, module.vi.body, module.en.body);
-  const isVi = language === "vi";
   return <aside className={`case-module case-module-${id}`} aria-label={title}>
     <span className="case-module-eyebrow">{loc(language, "LẬP LUẬN CỦA TRANG", "THIS SITE'S ARGUMENT")}</span>
     <h3>{title}</h3>
@@ -375,7 +373,7 @@ export default function TimelineExperience() {
                       <button type="button" className="hero-support-button" onClick={standWithThem} disabled={supportPending || support?.supported} aria-pressed={support?.supported ?? false}>
                         <span aria-hidden="true">{support?.supported ? "✓" : "+"}</span>{support?.supported ? t.supportedButton : t.supportButton}
                       </button>
-                      <div className="hero-support-count" aria-live="polite"><strong>{support ? new Intl.NumberFormat(loc(language, "vi-VN", "en-US")).format(support.count) : "—"}</strong><span>{t.supportCount}</span></div>
+                      <div className="hero-support-count" aria-live="polite"><strong>{support ? new Intl.NumberFormat({ vi: "vi-VN", th: "th-TH", en: "en-US", ko: "ko-KR" }[language]).format(support.count) : "—"}</strong><span>{t.supportCount}</span></div>
                     </div>
                     {supportError && <p className="hero-support-error" role="alert">{t.supportError}</p>}
                     <p className="hero-intro-credit">{t.independent} · {t.heroVisualSource}</p>
@@ -392,7 +390,7 @@ export default function TimelineExperience() {
                     <p className="magazine-context">{loc(language, "Điều lệ có nghĩa vụ chống gian lận và yêu cầu theo dõi thông báo Discord. PUBG sau đó thừa nhận các tiêu chuẩn công bằng chưa được cụ thể hóa đủ.", "The rulebook contains anti-cheating duties and requires participants to follow Discord notices. PUBG later acknowledged that its fairness standards were not specific enough.")}</p>
                     <a className="magazine-source" href="/sources#rulebook-vi-3-7">{loc(language, "Đọc điều lệ gốc · §3.7", "Read the rulebook · §3.7")} ↗</a>
                   </div>
-                  <div className="magazine-rule-excerpt"><span>VI RULEBOOK · §3.7 · 14.09.2026</span><strong>§3.7</strong><blockquote>“Khuyến nghị tất cả người chơi livestream cá nhân phải cài đặt độ trễ hợp lý để tránh bị lộ thông tin.”</blockquote><p>{loc(language, "Trích nguyên văn trang 16/17. Chưa có bản lưu hướng dẫn Discord trước sự việc để đối chiếu.", "Translation: Players who stream personally are encouraged to set a reasonable delay to prevent information exposure. Pre-event Discord guidance is not archived here.")}</p></div>
+                  <div className="magazine-rule-excerpt"><span>{loc(language, "ĐIỀU LỆ VI", "VI RULEBOOK")} · §3.7 · 14.09.2026</span><strong>§3.7</strong><blockquote>“Khuyến nghị tất cả người chơi livestream cá nhân phải cài đặt độ trễ hợp lý để tránh bị lộ thông tin.”</blockquote><p>{loc(language, "Trích nguyên văn trang 16/17. Chưa có bản lưu hướng dẫn Discord trước sự việc để đối chiếu.", "Translation: Players who stream personally are encouraged to set a reasonable delay to prevent information exposure. Pre-event Discord guidance is not archived here.")}</p></div>
                 </div>
               </article>
 
@@ -454,17 +452,17 @@ export default function TimelineExperience() {
               <div className="page-width story-inner">
                 <div className="story-content">
                   <div className="story-kicker"><span>{String(index + 1).padStart(2, "0")} / {String(timeline.length).padStart(2, "0")}</span><span>{localized(event.label, language)}</span></div>
-                  <div className="story-date"><strong>{event.day}</strong><span>{event.month}<br />2026</span></div>
+                  <div className="story-date"><strong>{event.day}</strong><span>{{ vi: "THG 9", th: "ก.ย.", en: event.month, ko: "9월" }[language]}<br />2026</span></div>
                   <h2>{localized(event.title, language)}</h2>
                   <div className="story-main-point"><span>{t.whatHappened}</span><p className="story-description">{localized(event.description, language)}</p></div>
-                  <div className="story-sources"><span>{event.sources.length === 1 ? t.source : t.sources}</span><div>{event.sources.map((sourceKey) => <SourceLink key={sourceKey} sourceKey={sourceKey} label={sources[sourceKey].label} />)}</div></div>
+                  <div className="story-sources"><span>{event.sources.length === 1 ? t.source : t.sources}</span><div>{event.sources.map((sourceKey) => <SourceLink key={sourceKey} sourceKey={sourceKey} label={loc(language, sources[sourceKey].label, sources[sourceKey].label)} />)}</div></div>
                   {index < timeline.length - 1 && <a className="story-next" href={`#${timeline[index + 1].id}`}>{t.next} <span>↓</span></a>}
                 </div>
                 {event.id in modules ? (
                   <CaseModule id={event.id as keyof typeof modules} language={language} response={localized(event.response, language)} explanation={localized(event.explanation, language)} />
                 ) : (
                   <div className="story-explainer story-explainer-compact">
-                    <span className="story-explainer-top">CASE FILE / {String(index + 1).padStart(2, "0")}</span>
+                    <span className="story-explainer-top">{loc(language, "HỒ SƠ VỤ VIỆC", "CASE FILE")} / {String(index + 1).padStart(2, "0")}</span>
                     <p className="story-explainer-summary">{loc(language, "Diễn biến được ghi nhận từ tài liệu nguồn. Mở phần giải thích để xem lập luận và giới hạn của mốc này.", "This milestone draws on the linked source. Open the explanation for context and limits.")}</p>
                     <details className="case-read-more"><summary>{t.readMore}<span aria-hidden="true">+</span></summary><div><p><strong>{t.responseLabel}:</strong> {localized(event.response, language)}</p><p><strong>{t.explanationLabel}:</strong> {localized(event.explanation, language)}</p></div></details>
                     <span className="story-explainer-bottom">JUSTICE FOR PUBG VN · 2026</span>

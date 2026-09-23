@@ -49,9 +49,9 @@ export default function LegalPage() {
   return <div className="interior-page legal-page">
     <InteriorHeader section="LEGAL / ABOUT" />
     <main>
-      <section className="legal-hero"><div className="page-width"><p className="interior-kicker">TRANSPARENCY / 24.09.2026</p><h1><DualLanguage vi="THÔNG TIN PHÁP LÝ" en="LEGAL INFORMATION" /><span>.</span></h1><p><DualLanguage vi="Cách trang này sử dụng nguồn, hình ảnh và dữ liệu; cùng những giới hạn cần biết khi đọc hồ sơ vụ việc." en="How this site uses sources, images, and data, and the limits to keep in mind when reading the case file." /></p></div></section>
+      <section className="legal-hero"><div className="page-width"><p className="interior-kicker"><DualLanguage vi="MINH BẠCH" en="TRANSPARENCY" /> / 24.09.2026</p><h1><DualLanguage vi="THÔNG TIN PHÁP LÝ" en="LEGAL INFORMATION" /><span>.</span></h1><p><DualLanguage vi="Cách trang này sử dụng nguồn, hình ảnh và dữ liệu; cùng những giới hạn cần biết khi đọc hồ sơ vụ việc." en="How this site uses sources, images, and data, and the limits to keep in mind when reading the case file." /></p></div></section>
       <div className="legal-layout page-width"><aside className="legal-toc"><span><DualLanguage vi="TRÊN TRANG NÀY" en="ON THIS PAGE" /></span>{sections.map((section) => <a href={`#${section.id}`} key={section.id}><small>{section.number}</small><DualLanguage {...section.title} /></a>)}<a className="legal-source-link" href="/sources"><DualLanguage vi="KHO TÀI LIỆU ↗" en="SOURCE ARCHIVE ↗" /></a></aside><div className="legal-content">{sections.map((section) => <section id={section.id} className="legal-section" key={section.id}><span className="legal-section-number">{section.number} / 05</span><h2><DualLanguage {...section.title} /></h2>{section.paragraphs.map((paragraph, index) => <p key={index}><DualLanguage {...paragraph} /></p>)}</section>)}</div></div>
-      <div className="legal-end page-width"><span>JUSTICE FOR PUBG VN / INDEPENDENT CASE FILE</span><a href="/"><DualLanguage vi="← VỀ DÒNG THỜI GIAN" en="← BACK TO TIMELINE" /></a></div>
+      <div className="legal-end page-width"><span>JUSTICE FOR PUBG VN / <DualLanguage vi="HỒ SƠ ĐỘC LẬP" en="INDEPENDENT CASE FILE" /></span><a href="/"><DualLanguage vi="← VỀ DÒNG THỜI GIAN" en="← BACK TO TIMELINE" /></a></div>
     </main>
   </div>;
 }

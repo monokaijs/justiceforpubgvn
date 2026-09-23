@@ -112,7 +112,7 @@ export default function SourcesPage() {
 
       <main className="archive-main page-width">
         <p className="eyebrow dark-eyebrow">02 / <L vi="KHO TÀI LIỆU" en="SOURCE ARCHIVE" /></p>
-        <h1><L vi="KHO TÀI LIỆU" en="SOURCE ARCHIVE" /><span> / SOURCES</span></h1>
+        <h1><L vi="KHO TÀI LIỆU" en="SOURCE ARCHIVE" /><span> / <L vi="NGUỒN" en="SOURCES" /></span></h1>
         <p className="archive-intro"><L vi="Mỗi mục cho biết địa chỉ gốc, nơi xuất bản và bản lưu cục bộ khi có. Trang PUBG được lưu dưới dạng HTML thô; hai thông báo Kakao được lưu dưới dạng văn bản bài viết từ trang hiển thị vì tải trực tiếp trả HTTP 403. SHA-256 giúp kiểm tra bản lưu có thay đổi hay không." en="Each record identifies the original URL, publisher and local copy when available. PUBG pages are archived as raw HTML; two Kakao notices contain captured visible article text because direct HTML retrieval returned HTTP 403. SHA-256 hashes help verify the local files." /></p>
         <div className="archive-meta"><span>{records.length} <L vi="NGUỒN" en="SOURCES" /></span><span>{manifest.length + 2} <L vi="TỆP TÀI LIỆU CỤC BỘ" en="LOCAL DOCUMENT FILES" /></span><a href="/attachments/manifest.json" target="_blank" rel="noopener noreferrer"><L vi="TẢI MANIFEST NGUỒN ↗" en="SOURCE MANIFEST ↗" /></a></div>
 
@@ -130,7 +130,7 @@ export default function SourcesPage() {
                     <a href={record.source} target="_blank" rel="noopener noreferrer"><L vi="NGUỒN GỐC ↗" en="ORIGINAL SOURCE ↗" /></a>
                     {archived ? <a href={`/attachments/${archived.filename}`} download><L vi="TẢI BẢN LƯU ↓" en="LOCAL COPY ↓" /></a> : record.id === "rulebook" ? <a href="#rulebook-vi-3-7"><L vi="XEM PDF ĐÍNH KÈM ↓" en="VIEW SUPPLIED PDF ↓" /></a> : <span><L vi="CHƯA CÓ BẢN LƯU" en="LOCAL COPY UNAVAILABLE" /></span>}
                   </div>
-                  {archived && <div className="archive-checksum"><span>CAPTURED {archived.retrieved_at_utc.replace("T", " ").replace("+00:00", " UTC")}</span><span>{archived.capture_method}</span><span>SHA-256 {archived.sha256}</span></div>}
+                  {archived && <div className="archive-checksum"><span><L vi="LƯU LÚC" en="CAPTURED" /> {archived.retrieved_at_utc.replace("T", " ").replace("+00:00", " UTC")}</span><span>{archived.capture_method}</span><span>SHA-256 {archived.sha256}</span></div>}
                   <div className="archive-url">{record.source}</div>
                 </div>
               </article>
@@ -140,15 +140,15 @@ export default function SourcesPage() {
 
         <section className="rulebook-source" aria-labelledby="rulebook-source-title">
           <p className="eyebrow dark-eyebrow">02A / <L vi="ĐIỀU LỆ GIẢI ĐẤU" en="TOURNAMENT RULEBOOK" /></p>
-          <h2 id="rulebook-source-title"><L vi="ĐIỀU LỆ GIẢI ĐẤU" en="TOURNAMENT RULEBOOK" /> <span>/ RULEBOOK</span></h2>
+          <h2 id="rulebook-source-title"><L vi="ĐIỀU LỆ GIẢI ĐẤU" en="TOURNAMENT RULEBOOK" /></h2>
           <p><L vi="Hai bản PDF tiếng Việt và tiếng Anh có trong tệp đính kèm của dự án. Bìa ghi phiên bản 14.09.2026 (VI) và 2026.09.14 (EN). Liên kết Liquipedia ở mục trên là một bản mirror công khai; chúng tôi chưa xác minh được hai tệp cục bộ có được tải từ mirror đó hay được PUBG phát hành tại một URL cụ thể." en="The project attachments contain Vietnamese and English PDFs. Their covers show versions 14.09.2026 (VI) and 2026.09.14 (EN). The Liquipedia link above is a public mirror; we have not verified whether these supplied files came from that mirror or a specific PUBG URL." /></p>
           <div className="rulebook-files">
             <a href={`/attachments/${rulebookVi}#page=16`} target="_blank" rel="noopener noreferrer"><L vi="MỞ BẢN VI · TRANG 16 ↗" en="OPEN VI · PAGE 16 ↗" /></a>
-            <a href={`/attachments/${rulebookEn}#page=18`} target="_blank" rel="noopener noreferrer">OPEN EN · PAGE 18 ↗</a>
+            <a href={`/attachments/${rulebookEn}#page=18`} target="_blank" rel="noopener noreferrer"><L vi="MỞ BẢN EN · TRANG 18 ↗" en="OPEN EN · PAGE 18 ↗" /></a>
           </div>
           <div className="rulebook-checksums"><span>VI SHA-256 {rulebookHash(rulebookVi)}</span><span>EN SHA-256 {rulebookHash(rulebookEn)}</span></div>
           <article className="rulebook-excerpt" id="rulebook-vi-3-7">
-            <span>VI RULEBOOK · §3.7 · TRANG 16/17 · PHIÊN BẢN 14.09.2026</span>
+            <span><L vi="ĐIỀU LỆ VI" en="VI RULEBOOK" /> · §3.7 · <L vi="TRANG 16/17" en="PAGE 16/17" /> · 14.09.2026</span>
             <h3><L vi="Biện pháp chống gian lận" en="Anti-cheating measures" /></h3>
             <blockquote>“Khuyến nghị tất cả người chơi livestream cá nhân phải cài đặt độ trễ hợp lý để tránh bị lộ thông tin.”</blockquote>
             <TranslatedQuote quote="delay" />
@@ -156,7 +156,7 @@ export default function SourcesPage() {
             <a href={`/attachments/${rulebookVi}#page=16`} target="_blank" rel="noopener noreferrer"><L vi="ĐỌC NGUYÊN TRANG PDF ↗" en="READ FULL PDF PAGE ↗" /></a>
           </article>
           <article className="rulebook-excerpt" id="rulebook-vi-4-1">
-            <span>VI RULEBOOK · §4.1 · TRANG 16/17 · PHIÊN BẢN 14.09.2026</span>
+            <span><L vi="ĐIỀU LỆ VI" en="VI RULEBOOK" /> · §4.1 · <L vi="TRANG 16/17" en="PAGE 16/17" /> · 14.09.2026</span>
             <h3><L vi="Quy tắc ứng xử và nghĩa vụ chung" en="Conduct and general duties" /></h3>
             <blockquote>“Tất cả Người tham gia có nghĩa vụ tự tìm hiểu, ghi nhớ bộ quy tắc này và mọi thông báo chính thức được đăng trên kênh Discord của giải đấu.”</blockquote>
             <TranslatedQuote quote="notices" />
@@ -176,7 +176,7 @@ export default function SourcesPage() {
 
         <section id="evidence" className="evidence-archive" aria-labelledby="evidence-title">
           <p className="eyebrow dark-eyebrow">03 / <L vi="TƯ LIỆU DO NGƯỜI DÙNG CUNG CẤP" en="USER-SUPPLIED MATERIAL" /></p>
-          <h2 id="evidence-title"><L vi="HÌNH ẢNH ĐÍNH KÈM" en="SUPPLIED IMAGES" /><span> / IMAGES</span></h2>
+          <h2 id="evidence-title"><L vi="HÌNH ẢNH ĐÍNH KÈM" en="SUPPLIED IMAGES" /></h2>
           <p className="evidence-archive-intro"><L vi="Hai ảnh được đưa vào thư mục dự án bởi người dùng. Chúng được lưu nguyên file và hiển thị tại mốc đối chiếu người tham gia. Không có URL gốc hoặc thông tin xác thực ngày chụp, nên chúng được tách khỏi các thông báo chính thức của PUBG." en="The user supplied these two images, which are preserved as provided and shown at the participant comparison milestone. Their original URLs and capture dates have not been independently verified, so they are separate from official PUBG notices." /></p>
           <div className="evidence-archive-grid">
             {evidenceManifest.map((item, index) => (
@@ -197,7 +197,7 @@ export default function SourcesPage() {
 
         <section id="campaign-image" className="evidence-archive" aria-labelledby="campaign-image-title">
           <p className="eyebrow dark-eyebrow">04 / <L vi="HÌNH MINH HỌA" en="CAMPAIGN VISUAL" /></p>
-          <h2 id="campaign-image-title"><L vi="HÌNH MINH HỌA" en="CAMPAIGN VISUAL" /><span> / VISUAL</span></h2>
+          <h2 id="campaign-image-title"><L vi="HÌNH MINH HỌA" en="CAMPAIGN VISUAL" /></h2>
           <p className="evidence-archive-intro"><L vi="Ảnh đen trắng dùng ở phần mở đầu do người dùng cung cấp. Đây là hình minh họa cho chiến dịch, không phải chứng cứ điều tra hoặc ảnh do PUBG xác nhận." en="The user supplied the black-and-white hero image. It is campaign artwork, not investigation evidence or a PUBG-verified image." /></p>
           <article className="evidence-archive-card campaign-archive-card">
             <a href={visualManifest.path} target="_blank" rel="noopener noreferrer"><img src={visualManifest.path} alt="Hình minh họa đen trắng của hai tuyển thủ" /></a>
