@@ -8,6 +8,7 @@ const labels = {
   th: { share: "แชร์", copied: "คัดลอกลิงก์แล้ว", error: "คัดลอกลิงก์ไม่ได้" },
   en: { share: "Share", copied: "Link copied", error: "Could not copy link" },
   ko: { share: "공유", copied: "링크 복사됨", error: "링크를 복사할 수 없습니다" },
+  zh: { share: "分享", copied: "链接已复制", error: "无法复制链接" },
 } as const;
 
 export default function ShareButton({ className = "" }: { className?: string }) {

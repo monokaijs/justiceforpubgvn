@@ -417,7 +417,7 @@ export default function TimelineExperience() {
                       <button type="button" className="hero-support-button" onClick={standWithThem} disabled={supportPending || support?.supported} aria-pressed={support?.supported ?? false}>
                         <SupportIcon supported={support?.supported ?? false} />{support?.supported ? t.supportedButton : t.supportButton}
                       </button>
-                      <div className="hero-support-count" aria-live="polite"><strong>{support ? new Intl.NumberFormat({ vi: "vi-VN", th: "th-TH", en: "en-US", ko: "ko-KR" }[language]).format(support.count) : "…"}</strong><span>{t.supportCount}</span></div>
+                      <div className="hero-support-count" aria-live="polite"><strong>{support ? new Intl.NumberFormat({ vi: "vi-VN", th: "th-TH", en: "en-US", ko: "ko-KR", zh: "zh-CN" }[language]).format(support.count) : "…"}</strong><span>{t.supportCount}</span></div>
                     </div>
                     {supportError && <p className="hero-support-error" role="alert">{t.supportError}</p>}
                     <p className="hero-intro-credit">{t.independent} · {t.heroVisualSource}</p>
@@ -501,7 +501,7 @@ export default function TimelineExperience() {
               <div className="page-width story-inner">
                 <div className="story-content">
                   <div className="story-kicker"><span>{String(index + 1).padStart(2, "0")} / {String(timeline.length).padStart(2, "0")}</span><span>{localized(event.label, language)}</span></div>
-                  <div className="story-date"><strong>{event.day}</strong><span>{{ vi: "THG 9", th: "ก.ย.", en: event.month, ko: "9월" }[language]}<br />2026</span></div>
+                  <div className="story-date"><strong>{event.day}</strong><span>{{ vi: "THG 9", th: "ก.ย.", en: event.month, ko: "9월", zh: "9月" }[language]}<br />2026</span></div>
                   <h2>{localized(event.title, language)}</h2>
                   <div className="story-main-point"><span>{t.whatHappened}</span><p className="story-description">{localized(event.description, language)}</p></div>
                   <div className="story-sources"><span>{event.sources.length === 1 ? t.source : t.sources}</span><div>{event.sources.map((sourceKey) => <SourceLink key={sourceKey} sourceKey={sourceKey} label={loc(language, sources[sourceKey].label, sources[sourceKey].label)} />)}</div></div>
