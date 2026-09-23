@@ -182,7 +182,7 @@ export default function SourcesPage() {
         <section id="evidence" className="evidence-archive" aria-labelledby="evidence-title">
           <p className="eyebrow dark-eyebrow">03 / <L vi="TƯ LIỆU DO NGƯỜI DÙNG CUNG CẤP" en="USER-SUPPLIED MATERIAL" /></p>
           <h2 id="evidence-title"><L vi="HÌNH ẢNH ĐÍNH KÈM" en="SUPPLIED IMAGES" /></h2>
-          <p className="evidence-archive-intro"><L vi="Hai ảnh được đưa vào thư mục dự án bởi người dùng. Chúng được lưu nguyên file và hiển thị tại mốc đối chiếu người tham gia. Không có URL gốc hoặc thông tin xác thực ngày chụp, nên chúng được tách khỏi các thông báo chính thức của PUBG." en="The user supplied these two images, which are preserved as provided and shown at the participant comparison milestone. Their original URLs and capture dates have not been independently verified, so they are separate from official PUBG notices." /></p>
+          <p className="evidence-archive-intro"><L vi="Hai ảnh được người dùng cung cấp và đã được làm mờ khuôn mặt của Soopi trước khi hiển thị tại mốc đối chiếu người tham gia. Không có URL gốc hoặc thông tin xác thực ngày chụp, nên chúng được tách khỏi các thông báo chính thức của PUBG." en="The user supplied these two images. Soopi's face has been blurred in the displayed copies. Their original URLs and capture dates have not been independently verified, so they are separate from official PUBG notices." /></p>
           <div className="evidence-archive-grid">
             {evidenceManifest.map((item, index) => (
               <article className="evidence-archive-card" id={index === 0 ? "evidence-soopi-alt-tab" : "evidence-soopi-watching-livestream"} key={item.filename}>
@@ -191,7 +191,7 @@ export default function SourcesPage() {
                   <span><L vi="ẢNH DO NGƯỜI DÙNG CUNG CẤP" en="USER-SUPPLIED IMAGE" /> / {String(index + 1).padStart(2, "0")}</span>
                   <h3>{item.filename}</h3>
                   <p><L vi={index === 0 ? "Màn hình chuyển ứng dụng trong video Soopi; bối cảnh chụp chưa được xác minh độc lập." : "Trang livestream xuất hiện trong video; ảnh tĩnh không tự chứng minh mục đích hoặc vi phạm."} en={index === 0 ? "Application switcher in Soopi-related footage; capture context is unverified." : "A livestream page visible in footage; a still alone does not establish intent or misconduct."} /></p>
-                  <LocalizedAnchor href={item.path} download><L vi="TẢI PNG GỐC ↓" en="DOWNLOAD ORIGINAL PNG ↓" /></LocalizedAnchor>
+                  <LocalizedAnchor href={item.path} download><L vi="TẢI PNG ĐÃ LÀM MỜ ↓" en="DOWNLOAD REDACTED PNG ↓" /></LocalizedAnchor>
                   <div className="archive-checksum">SHA-256 {item.sha256}</div>
                 </div>
               </article>
