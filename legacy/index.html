@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PUBG Asia Stars Drama Timeline</title>
+  <style>
+    :root {
+      --bg: #fafafa;
+      --surface: #ffffff;
+      --text: #111111;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --accent: #111111;
+      --pill: #f3f4f6;
+      --shadow: 0 1px 2px rgba(0,0,0,0.04);
+      --radius: 18px;
+      --max: 980px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    a {
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid #cfd4dc;
+    }
+
+    a:hover {
+      border-bottom-color: var(--text);
+    }
+
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 28px 18px 80px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .brand {
+      font-size: 14px;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+
+    .lang-switch {
+      display: inline-flex;
+      padding: 4px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      box-shadow: var(--shadow);
+    }
+
+    .lang-switch button {
+      border: 0;
+      background: transparent;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      cursor: pointer;
+      color: var(--muted);
+    }
+
+    .lang-switch button.active {
+      background: var(--text);
+      color: #fff;
+    }
+
+    .hero {
+      padding: 28px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: calc(var(--radius) + 4px);
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--pill);
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .sub {
+      margin: 0;
+      color: var(--muted);
+      max-width: 760px;
+      font-size: 15px;
+    }
+
+    .notice {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border: 1px dashed var(--line);
+      border-radius: 14px;
+      background: #fcfcfc;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    @media (max-width: 860px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .panel-head {
+      padding: 18px 20px 10px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .panel-head h2 {
+      margin: 0 0 4px;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+    }
+
+    .panel-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .timeline {
+      position: relative;
+      padding: 8px 20px 20px 20px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 31px;
+      top: 18px;
+      bottom: 24px;
+      width: 1px;
+      background: var(--line);
+    }
+
+    .item {
+      position: relative;
+      padding-left: 38px;
+      padding-top: 14px;
+      padding-bottom: 14px;
+    }
+
+    .item::before {
+      content: "";
+      position: absolute;
+      left: 24px;
+      top: 22px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 2px solid var(--text);
+    }
+
+    .date {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 8px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .title {
+      margin: 0 0 6px;
+      font-size: 17px;
+      letter-spacing: -0.02em;
+    }
+
+    .desc {
+      margin: 0 0 10px;
+      color: #374151;
+      font-size: 14px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      background: var(--pill);
+      color: #374151;
+      border-radius: 999px;
+      font-size: 12px;
+    }
+
+    .refs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .ref {
+      display: inline-flex;
+      padding: 7px 10px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: 13px;
+      transition: 0.15s ease;
+    }
+
+    .ref:hover {
+      border-color: #c7cbd3;
+      transform: translateY(-1px);
+    }
+
+    .resources {
+      padding: 8px 20px 22px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .resource-card, .summary-card {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px;
+      background: #fff;
+    }
+
+    .resource-card h3, .summary-card h3 {
+      margin: 0 0 6px;
+      font-size: 15px;
+    }
+
+    .resource-card p, .summary-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .list {
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: #374151;
+      font-size: 14px;
+    }
+
+    .list li + li {
+      margin-top: 8px;
+    }
+
+    .footer {
+      margin-top: 18px;
+      padding: 18px 2px 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    [data-lang] { display: none; }
+    html.lang-vi [data-lang="vi"] { display: block; }
+    html.lang-en [data-lang="en"] { display: block; }
+
+    html.lang-vi [data-inline="vi"] { display: inline; }
+    html.lang-vi [data-inline="en"] { display: none; }
+    html.lang-en [data-inline="vi"] { display: none; }
+    html.lang-en [data-inline="en"] { display: inline; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">PUBG ASIA STARS · Timeline</div>
+      <div class="lang-switch" aria-label="Language switch">
+        <button id="btn-vi" class="active" type="button">VI</button>
+        <button id="btn-en" type="button">EN</button>
+      </div>
+    </div>
+
+    <section class="hero">
+      <div class="eyebrow">
+        <span data-inline="vi">Tóm tắt trung lập, tối giản, có nguồn dẫn</span>
+        <span data-inline="en">Minimal, neutral, source-linked summary</span>
+      </div>
+
+      <h1>
+        <span data-inline="vi">Drama Himass · TanVuu · Soopi</span>
+        <span data-inline="en">Himass · TanVuu · Soopi Drama</span>
+      </h1>
+
+      <p class="sub">
+        <span data-inline="vi">
+          Một trang timeline song ngữ tóm tắt các mốc chính của vụ việc tại PUBG Asia Stars:
+          lịch giải, thông báo chính thức, các biện pháp xử lý, và phần giải thích về rulebook.
+        </span>
+        <span data-inline="en">
+          A bilingual timeline page summarizing the key milestones of the PUBG Asia Stars controversy:
+          event schedule, official notices, disciplinary actions, and the rulebook explanation.
+        </span>
+      </p>
+
+      <div class="notice">
+        <span data-lang="vi">
+          <strong>Lưu ý:</strong> Phần “không có quy định cấm stream sniping” được diễn đạt thận trọng:
+          theo thông báo chính thức ngày 20/09/2026, rulebook có các nghĩa vụ chung về công bằng
+          và sportsmanship, nhưng <strong>chưa định nghĩa cụ thể</strong> và <strong>chưa tách riêng chế tài</strong>
+          cho các hành vi như nhận thông tin ngoài qua chat trực tiếp, xem stream của người tham gia khác,
+          hoặc nhận/sử dụng thông tin ngoài game.
+        </span>
+        <span data-lang="en">
+          <strong>Note:</strong> The “no stream-sniping rule” point is phrased carefully.
+          In its official notice dated Sep 20, 2026, PUBG said the rulebook contained broad fairness
+          and sportsmanship obligations, but it did <strong>not specifically define</strong> or
+          <strong>granularly sanction</strong> behaviors such as checking external information via live chat,
+          watching another participant’s stream, or receiving/using out-of-game information.
+        </span>
+      </div>
+    </section>
+
+    <div class="grid">
+      <section class="panel">
+        <div class="panel-head">
+          <h2>
+            <span data-inline="vi">Timeline sự kiện</span>
+            <span data-inline="en">Event timeline</span>
+          </h2>
+          <p>
+            <span data-inline="vi">Các mốc chính, sắp xếp theo thời gian</span>
+            <span data-inline="en">Key milestones in chronological order</span>
+          </p>
+        </div>
+
+        <div class="timeline">
+
+          <article class="item">
+            <div class="date">2026-09-11</div>
+            <h3 class="title">
+              <span data-inline="vi">PUBG công bố PUBG Asia Stars</span>
+              <span data-inline="en">PUBG announces PUBG Asia Stars</span>
+            </h3>
+            <p class="desc">
+              <span data-inline="vi">
+                Trang sự kiện chính thức giới thiệu giải đấu với 6 khu vực, lịch phát sóng trong 3 ngày
+                (17, 19, 20/09), thể thức 48 người chơi và tổng giải thưởng 70.000 USD.
+              </span>
+              <span data-inline="en">
+                The official event page introduces the tournament with 6 regions, a 3-day broadcast schedule
+                (Sep 17, 19, 20), a 48-player format, and a total prize pool of $70,000.
+              </span>
+            </p>
+            <div class="tags">
+              <span class="tag">Official</span>
+              <span class="tag">Schedule</span>
+              <span class="tag">Tournament Info</span>
+            </div>
+            <div class="refs">
+              <a class="ref" href="https://pubg.com/en/events/notice/10926" target="_blank" rel="noopener noreferrer">
+                Official Notice
+              </a>
+              <a class="ref" href="https://www.pubg.com/en/events/pubgasiastars" target="_blank" rel="noopener noreferrer">
+                Event Page
+              </a>
+            </div>
+          </article>
+
+          <article class="item">
+            <div class="date">2026-09-17</div>
+            <h3 class="title">
+              <span data-inline="vi">Day 1 diễn ra</span>
+              <span data-inline="en">Day 1 takes place</span>
+            </h3>
+            <p class="desc">
+              <span data-inline="vi">
+                Theo thông báo sau đó của PUBG, sự cố liên quan đến Team VIE (Himass, TanVuu) bắt nguồn từ Day 1.
+                Đây là mốc mà PUBG xác nhận hai người đã kiểm tra thông tin ngoài game qua nội dung stream cá nhân.
+              </span>
+              <span data-inline="en">
+                According to PUBG’s later notice, the issue involving Team VIE (Himass, TanVuu) originated on Day 1.
+                PUBG later confirmed that the two checked out-of-game information through personal stream content.
+              </span>
+            </p>
+            <div class="tags">
+              <span class="tag">Day 1</span>
+              <span class="tag">Incident Origin</span>
+            </div>
+            <div class="refs">
+              <a class="ref" href="https://bbs-pubg.kakaogames.com/gaia/do/pubg/notice/read?articleId=4373&bbsId=PN001&objCate1=223&pageIndex=1" target="_blank" rel="noopener noreferrer">
+                Official Additional Notice
+              </a>
+            </div>
+          </article>
+
+          <article class="item">
+            <div class="date">2026-09-20</div>
+            <h3 class="title">
+              <span data-inline="vi">PUBG ra thông báo bổ sung về vụ việc</span>
+              <span data-inline="en">PUBG publishes an additional notice</span>
+            </h3>
+            <p class="desc">
+              <span data-inline="vi">
+                PUBG xác nhận Himass và TanVuu đã kiểm tra thông tin ngoài game qua nội dung stream cá nhân trong Day 1.
+                Đồng thời họ nói vẫn tiếp tục kiểm tra thêm các câu hỏi khác như có trực tiếp xem stream người khác hay không,
+                và liệu thông tin đó có được sử dụng trong thi đấu hay không.
+              </span>
+              <span data-inline="en">
+                PUBG confirms that Himass and TanVuu checked out-of-game information via personal stream content during Day 1.
+                It also says further review is ongoing regarding whether they directly watched another participant’s stream
+                and whether the information was actually used in gameplay.
+              </span>
+            </p>
+            <div class="tags">
+              <span class="tag">Official Statement</span>
+              <span class="tag">Fact Confirmation</span>
+            </div>
+            <div class="refs">
+              <a class="ref" href="https://bbs-pubg.kakaogames.com/gaia/do/pubg/notice/read?articleId=4373&bbsId=PN001&objCate1=223&pageIndex=1" target="_blank" rel="noopener noreferrer">
+                Additional Notice
+              </a>
+            </div>
+          </article>
+
+          <article class="item">
+            <div class="date">2026-09-20</div>
+            <h3 class="title">
+              <span data-inline="vi">Các biện pháp xử lý được công bố</span>
+              <span data-inline="en">Disciplinary and operational actions are announced</span>
+            </h3>
+            <p class="desc">
+              <span data-inline="vi">
+                PUBG cho biết đã loại Himass và TanVuu khỏi phần còn lại của PUBG Asia Stars,
+                điều chỉnh điểm của một số nội dung liên quan, áp dụng stream delay cho các phần sau,
+                tăng giám sát, và thu hồi tư cách PUBG Vietnam Partner của hai người.
+              </span>
+              <span data-inline="en">
+                PUBG says it removed Himass and TanVuu from the remaining PUBG Asia Stars schedule,
+                adjusted scores in some related events, applied stream delay afterward, strengthened monitoring,
+                and revoked their PUBG Vietnam Partner status.
+              </span>
+            </p>
+            <div class="tags">
+              <span class="tag">Actions</span>
+              <span class="tag">Penalty</span>
+            </div>
+            <div class="refs">
+              <a class="ref" href="https://bbs-pubg.kakaogames.com/gaia/do/pubg/notice/read?articleId=4373&bbsId=PN001&objCate1=223&pageIndex=1" target="_blank" rel="noopener noreferrer">
+                Action Details
+              </a>
+            </div>
+          </article>
+
+          <article class="item">
+            <div class="date">2026-09-20</div>
+            <h3 class="title">
+              <span data-inline="vi">PUBG thừa nhận rulebook chưa đủ cụ thể</span>
+              <span data-inline="en">PUBG admits the rulebook was not specific enough</span>
+            </h3>
+            <p class="desc">
+              <span data-inline="vi">
+                PUBG nói rulebook có các nghĩa vụ chung về công bằng, sportsmanship, trách nhiệm với việc stream cá nhân
+                và quyền điều tra của ban tổ chức, nhưng chưa định nghĩa/chia nhỏ chế tài cho các hành vi như:
+                nhận thông tin ngoài qua chat trực tiếp, xem stream của người tham gia khác,
+                hoặc nhận/sử dụng thông tin ngoài game.
+              </span>
+              <span data-inline="en">
+                PUBG states that the rulebook included broad obligations around fairness, sportsmanship,
+                participant responsibility related to personal streams, and organizer authority,
+                but did not specifically define or granularly sanction behaviors such as:
+                checking external information through live chat, watching another participant’s stream,
+                or receiving/using out-of-game information.
+              </span>
+            </p>
+            <div class="tags">
+              <span class="tag">Rulebook</span>
+              <span class="tag">Fairness</span>
+              <span class="tag">Important Context</span>
+            </div>
+            <div class="refs">
+              <a class="ref" href="https://bbs-pubg.kakaogames.com/gaia/do/pubg/notice/read?articleId=4373&bbsId=PN001&objCate1=223&pageIndex=1" target="_blank" rel="noopener noreferrer">
+                Rulebook Explanation
+              </a>
+            </div>
+          </article>
+
+          <article class="item">
+            <div class="date">2026-09-20</div>
+            <h3 class="title">
+              <span data-inline="vi">Day 3 bị hủy</span>
+              <span data-inline="en">Day 3 is canceled</span>
+            </h3>
+            <p class="desc">
+              <span data-inline="vi">
+                PUBG quyết định không tổ chức Day 3, cho rằng không còn điều kiện tin cậy và công bằng
+                để tiếp tục bình thường. Vì lịch còn lại không diễn ra, giải thưởng được chia theo cùng một tiêu chuẩn
+                cho tất cả khu vực thay vì chốt xếp hạng cuối cùng.
+              </span>
+              <span data-inline="en">
+                PUBG decides not to hold Day 3, saying it is difficult to continue under equal trust and conditions.
+                Because the remaining schedule is not played out, prize money will be distributed under the same standard
+                to all participating regions rather than finalizing a final ranking.
+              </span>
+            </p>
+            <div class="tags">
+              <span class="tag">Day 3</span>
+              <span class="tag">Cancellation</span>
+              <span class="tag">Prize Distribution</span>
+            </div>
+            <div class="refs">
+              <a class="ref" href="https://bbs-pubg.kakaogames.com/gaia/do/pubg/notice/read?articleId=4373&bbsId=PN001&objCate1=223&pageIndex=1" target="_blank" rel="noopener noreferrer">
+                Cancellation Notice
+              </a>
+            </div>
+          </article>
+
+          <article class="item">
+            <div class="date">After Sep 20</div>
+            <h3 class="title">
+              <span data-inline="vi">Vụ việc tiếp tục được theo dõi</span>
+              <span data-inline="en">The case remains under follow-up review</span>
+            </h3>
+            <p class="desc">
+              <span data-inline="vi">
+                Trong cùng thông báo, PUBG cho biết vẫn tiếp tục kiểm tra thêm các tài liệu như video sự kiện,
+                POV stream cá nhân, team voice, tình trạng truyền/nhận thông tin ngoài game, khả năng sử dụng thông tin đó,
+                cũng như các cáo buộc khác nếu có.
+              </span>
+              <span data-inline="en">
+                In the same notice, PUBG says it is still reviewing event footage, personal stream POVs, team voice,
+                the transmission/reception of out-of-game information, whether it was used in play,
+                and any additional related allegations.
+              </span>
+            </p>
+            <div class="tags">
+              <span class="tag">Ongoing Review</span>
+              <span class="tag">Follow-up</span>
+            </div>
+            <div class="refs">
+              <a class="ref" href="https://bbs-pubg.kakaogames.com/gaia/do/pubg/notice/read?articleId=4373&bbsId=PN001&objCate1=223&pageIndex=1" target="_blank" rel="noopener noreferrer">
+                Ongoing Review
+              </a>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <aside class="panel">
+        <div class="panel-head">
+          <h2>
+            <span data-inline="vi">Tài liệu & ghi chú</span>
+            <span data-inline="en">Resources & notes</span>
+          </h2>
+          <p>
+            <span data-inline="vi">Nguồn chính và ngữ cảnh quan trọng</span>
+            <span data-inline="en">Primary references and important context</span>
+          </p>
+        </div>
+
+        <div class="resources">
+          <div class="summary-card">
+            <h3>
+              <span data-inline="vi">Tóm tắt ngắn</span>
+              <span data-inline="en">Quick summary</span>
+            </h3>
+            <p>
+              <span data-inline="vi">
+                Đây là tranh cãi phát sinh trong PUBG Asia Stars sau Day 1. Về mặt chính thức, PUBG xác nhận
+                Himass và TanVuu đã kiểm tra thông tin ngoài game qua nội dung stream cá nhân, công bố nhiều biện pháp xử lý,
+                đồng thời thừa nhận khung rulebook của giải chưa đủ cụ thể đối với loại hành vi này.
+              </span>
+              <span data-inline="en">
+                This controversy emerged after Day 1 of PUBG Asia Stars. Officially, PUBG confirmed that Himass and TanVuu
+                checked out-of-game information through personal stream content, announced multiple corrective actions,
+                and also admitted that the tournament rule framework was not specific enough for this type of conduct.
+              </span>
+            </p>
+          </div>
+
+          <div class="resource-card">
+            <h3>
+              <span data-inline="vi">Nguồn chính thức quan trọng</span>
+              <span data-inline="en">Key official sources</span>
+            </h3>
+            <ul class="list">
+              <li>
+                <a href="https://pubg.com/en/events/notice/10926" target="_blank" rel="noopener noreferrer">
+                  PUBG Asia Stars Tournament & Web Event
+                </a>
+              </li>
+              <li>
+                <a href="https://www.pubg.com/en/events/pubgasiastars" target="_blank" rel="noopener noreferrer">
+                  PUBG Asia Stars Event Page
+                </a>
+              </li>
+              <li>
+                <a href="https://bbs-pubg.kakaogames.com/gaia/do/pubg/notice/read?articleId=4373&bbsId=PN001&objCate1=223&pageIndex=1" target="_blank" rel="noopener noreferrer">
+                  Additional Notice / Day 3 Cancellation (Kakao PUBG notice)
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="resource-card">
+            <h3>
+              <span data-inline="vi">File điều luật / rules</span>
+              <span data-inline="en">Rules / rulebook files</span>
+            </h3>
+            <ul class="list">
+              <li>
+                <a href="https://www.pubg.com/static/guide-pubgasiastars/event/PUBG_ASIASTARS_Event_Official_Rules_en.pdf" target="_blank" rel="noopener noreferrer">
+                  Official Web Event Rules (official PUBG PDF)
+                </a>
+              </li>
+              <li>
+                <a href="https://liquipedia.net/commons/File:PUBG_ASIA_STARS_2026_Rulebook.pdf" target="_blank" rel="noopener noreferrer">
+                  PUBG Asia Stars 2026 Rulebook (public mirror via Liquipedia)
+                </a>
+              </li>
+            </ul>
+            <p style="margin-top:10px;">
+              <span data-inline="vi">
+                Ghi chú: file “Rulebook” ở trên là bản mirror công khai. Trong thông báo chính thức ngày 20/09,
+                PUBG không nói “không có rule”, mà nói rulebook có phần nghĩa vụ chung nhưng chưa cụ thể hóa đủ
+                các hành vi kiểu stream-related information abuse.
+              </span>
+              <span data-inline="en">
+                Note: the “Rulebook” link above is a public mirror. In its Sep 20 official notice,
+                PUBG did not say there were no rules at all; it said the rulebook had general obligations,
+                but did not sufficiently specify these stream-related information-abuse scenarios.
+              </span>
+            </p>
+          </div>
+
+          <div class="resource-card">
+            <h3>
+              <span data-inline="vi">Nếu bạn muốn mở rộng thêm</span>
+              <span data-inline="en">If you want to expand this further</span>
+            </h3>
+            <p>
+              <span data-inline="vi">
+                Bạn có thể bổ sung thêm ảnh đại diện streamer, embed video, tab “Key claims”, hoặc cột “What is confirmed / What remains under review”.
+              </span>
+              <span data-inline="en">
+                You can further add streamer avatars, embedded videos, a “Key claims” tab,
+                or a split between “What is confirmed” and “What remains under review.”
+              </span>
+            </p>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="footer">
+      <span data-lang="vi">
+        Built as a minimal one-page timeline. Sources linked per event. Last manually assembled from official pages cited in this page.
+      </span>
+      <span data-lang="en">
+        Built as a minimal one-page timeline. Sources linked per event. Last manually assembled from official pages cited in this page.
+      </span>
+    </div>
+  </div>
+
+  <script>
+    const root = document.documentElement;
+    const viBtn = document.getElementById('btn-vi');
+    const enBtn = document.getElementById('btn-en');
+
+    function setLang(lang) {
+      root.classList.remove('lang-vi', 'lang-en');
+      root.classList.add(`lang-${lang}`);
+      viBtn.classList.toggle('active', lang === 'vi');
+      enBtn.classList.toggle('active', lang === 'en');
+      localStorage.setItem('pas_timeline_lang', lang);
+      document.documentElement.lang = lang === 'vi' ? 'vi' : 'en';
+    }
+
+    viBtn.addEventListener('click', () => setLang('vi'));
+    enBtn.addEventListener('click', () => setLang('en'));
+
+    const saved = localStorage.getItem('pas_timeline_lang') || 'vi';
+    setLang(saved);
+  </script>
+</body>
+</html>

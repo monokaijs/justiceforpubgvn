@@ -1,0 +1,557 @@
+{
+  "SOURCES": {
+    "ko": "출처",
+    "th": "แหล่งที่มา "
+  },
+  "JUSTICE FOR PUBG VN  /  17 — 23.09.2026": {
+    "th": "ความยุติธรรมสำหรับ PUBG VN/17 — 23.09.2026",
+    "ko": "PUBG VN/17 — 23.09.2026에 대한 정의"
+  },
+  "CASE TIMELINE": {
+    "ko": "케이스 일정",
+    "th": "ไทม์ไลน์ของเคส"
+  },
+  "Fair treatment for": {
+    "th": "การปฏิบัติที่เป็นธรรมสำหรับ",
+    "ko": "에 대한 공정한 대우"
+  },
+  "Himass & TanVuu.": {
+    "th": "Himass & TanVuu",
+    "ko": "Himass & TanVuu."
+  },
+  "Not a defense of cheating. A call for clear rules, transparent investigation, and proportionate sanctions.": {
+    "th": "ไม่ใช่การป้องกันการโกงการเรียกร้องให้มีกฎระเบียบที่ชัดเจนการตรวจสอบที่โปร่งใสและการลงโทษตามสัดส่วน",
+    "ko": "부정 행위에 대한 방어가 아닙니다. 명확한 규칙, 투명한 조사, 비례적인 제재 촉구."
+  },
+  "A showmatch still requires fair play. But a career-altering punishment demands clear reasoning, consistent standards, and a meaningful opportunity to respond.": {
+    "th": "การแข่งขันโชว์ยังคงต้องมีการเล่นที่ยุติธรรมแต่การลงโทษที่เปลี่ยนอาชีพต้องใช้เหตุผลที่ชัดเจนมาตรฐานที่สอดคล้องกันและโอกาสที่มีความหมายในการตอบสนอง",
+    "ko": "쇼 매치는 여전히 페어 플레이가 필요합니다. 그러나 직업을 바꾸는 처벌은 명확한 추론, 일관된 기준, 그리고 대응할 수 있는 의미 있는 기회를 요구합니다."
+  },
+  "INTRODUCTION": {
+    "th": "บทนำ",
+    "ko": "서론"
+  },
+  "View timeline & sources": {
+    "th": "ดูไทม์ไลน์และแหล่งที่มา",
+    "ko": "타임라인 및 소스 보기"
+  },
+  "Skip to timeline": {
+    "th": "ข้ามไปยังไทม์ไลน์",
+    "ko": "타임라인으로 건너뛰기"
+  },
+  "Scroll to continue": {
+    "th": "เลื่อนเพื่อดำเนินการต่อ",
+    "ko": "계속하려면 스크롤하세요"
+  },
+  "Campaign visual supplied by a user": {
+    "th": "ภาพแคมเปญที่จัดทำโดยผู้ใช้",
+    "ko": "사용자가 제공한 캠페인 비주얼"
+  },
+  "Stand with them": {
+    "th": "ยืนเคียงข้างพวกเขา",
+    "ko": "그들과 함께하세요"
+  },
+  "You stand with them": {
+    "th": "คุณยืนอยู่กับพวกเขา",
+    "ko": "당신은 그들과 함께합니다."
+  },
+  "supporters": {
+    "th": "ผู้สนับสนุน",
+    "ko": "서포터즈"
+  },
+  "Could not update. Please try again.": {
+    "th": "ไม่สามารถอัปเดตแผนที่ กรุณาลองอีกครั้ง",
+    "ko": "업데이트할 수 없습니다. 다시 시도하십시오."
+  },
+  "Independent summary · not affiliated with PUBG or KRAFTON": {
+    "th": "บทสรุปอิสระ · ไม่เกี่ยวข้องกับ PUBG หรือ KRAFTON",
+    "ko": "독립 요약 · PUBG 또는 KRAFTON과 제휴하지 않음"
+  },
+  "This page summarizes PUBG's cited notices. The September 20 review status should be read alongside the later September 23 findings.": {
+    "th": "หน้านี้สรุปประกาศที่อ้างถึงของ PUBG ควรอ่านสถานะการรีวิว 20 กันยายนควบคู่ไปกับการค้นพบ 23 กันยายนในภายหลัง",
+    "ko": "이 페이지는 PUBG의 인용 통지를 요약한 것입니다. 9월 20일 후기 상태는 9월 23일 후반 조사 결과와 함께 읽어야 합니다."
+  },
+  "VIEW SOURCE": {
+    "ko": "소스보기",
+    "th": "ดูแหล่งที่มา"
+  },
+  "CASE MILESTONE": {
+    "ko": "케이스 마일스톤",
+    "th": "เหตุการณ์สำคัญของเคส"
+  },
+  "USER-SUPPLIED IMAGES": {
+    "th": "รูปภาพที่ผู้ใช้จัดหาให้",
+    "ko": "사용자가 제공한 이미지"
+  },
+  "SCROLL FOR THE NEXT MILESTONE": {
+    "th": "เลื่อนเพื่อดูเหตุการณ์สำคัญถัดไป",
+    "ko": "스크롤하여 다음 마일스톤을 확인하세요"
+  },
+  "A screenshot of an application switcher in Soopi footage. Its origin and capture time have not been independently verified.": {
+    "th": "ภาพหน้าจอของตัวสลับแอปพลิเคชันในฟุตเทจ Soopi ต้นกำเนิดและเวลาการจับภาพของมันยังไม่ได้รับการยืนยันอย่างอิสระ",
+    "ko": "Soopi 영상에서 애플리케이션 전환기의 스크린샷. 그 기원과 포획 시간은 독립적으로 확인되지 않았습니다."
+  },
+  "A screenshot showing a livestream page in footage. A still image alone does not establish intent or a rule violation.": {
+    "th": "ภาพหน้าจอที่แสดงหน้าไลฟ์สตรีมในคลิปภาพนิ่งเพียงอย่างเดียวไม่ได้สร้างเจตนาหรือการละเมิดกฎ",
+    "ko": "라이브 방송 페이지가 영상으로 표시된 스크린샷. 정지 이미지만으로는 의도나 규칙 위반이 확립되지 않습니다."
+  },
+  "OPEN ORIGINAL IMAGE": {
+    "th": "ภาพต้นฉบับ",
+    "ko": "메타데이터"
+  },
+  "WHAT HAPPENED": {
+    "th": "สิ่งที่เกิดขึ้น ",
+    "ko": "그리고 앞으로는 어떻게 그러한 것을 방지할 수 있는지를"
+  },
+  "IMAGE PROVENANCE": {
+    "ko": "이미지 출처",
+    "th": "การพิสูจน์ด้วยภาพ"
+  },
+  "DEFENSE / RESPONSE": {
+    "th": "การป้องกัน/การตอบสนอง",
+    "ko": "방어/대응"
+  },
+  "WHAT THIS MEANS": {
+    "th": "นี่หมายถึง",
+    "ko": "이게 무슨 말이냐면."
+  },
+  "CHECK THE CONTEXT": {
+    "th": "ตรวจสอบบริบท",
+    "ko": "맥락 확인"
+  },
+  "Read more": {
+    "th": "อ่านเพิ่มเติม",
+    "ko": "더 알아보기"
+  },
+  "Rules must be clear": {
+    "th": "กฎต้องชัดเจน",
+    "ko": "규칙은 명확해야 합니다"
+  },
+  "The absence of a specific clause does not make cheating permissible. Ambiguity in the rules and the organizer's responsibility should still be weighed when imposing sanctions.": {
+    "th": "การไม่มีข้อใดข้อหนึ่งโดยเฉพาะไม่ได้ทำให้การโกงเป็นที่ยอมรับได้ความคลุมเครือในกฎและความรับผิดชอบของผู้จัดควรได้รับการชั่งน้ำหนักเมื่อมีการลงโทษ",
+    "ko": "특정 조항이 없다고 해서 부정 행위가 허용되는 것은 아닙니다. 제재를 가할 때 규칙과 주최자의 책임에 대한 모호성을 여전히 고려해야 합니다."
+  },
+  "The investigation must be fair": {
+    "th": "การสอบสวนต้องเป็นธรรม",
+    "ko": "조사는 공정해야 합니다."
+  },
+  "Clarify the evidence for each person, apply the same standard to everyone, and ensure access to evidence and the chance to explain and challenge it.": {
+    "th": "ชี้แจงหลักฐานสำหรับแต่ละคนใช้มาตรฐานเดียวกันกับทุกคนและตรวจสอบให้แน่ใจว่าเข้าถึงหลักฐานและมีโอกาสที่จะอธิบายและท้าทายหลักฐานนั้น",
+    "ko": "각 개인에 대한 증거를 명확히 하고, 모든 사람에게 동일한 기준을 적용하며, 증거에 대한 접근성과 이를 설명하고 이의를 제기할 기회를 보장합니다."
+  },
+  "The penalty must fit": {
+    "th": "บทลงโทษต้องตรงกับ",
+    "ko": "페널티가 부합해야 합니다"
+  },
+  "Why should a violation in a showmatch lead to a permanent ban rather than a time-limited suspension? The harshest penalty needs a proportionate basis.": {
+    "th": "เหตุใดการละเมิดในโชว์แมตช์จึงควรนำไปสู่การแบนถาวรมากกว่าการระงับการใช้งานแบบจำกัดเวลาบทลงโทษที่รุนแรงที่สุดต้องเป็นไปตามสัดส่วน",
+    "ko": "쇼매치에서 위반이 시간 제한적인 일시 중지가 아닌 영구적인 금지로 이어져야 하는 이유는 무엇인가요? 가장 가혹한 페널티는 적절한 근거가 필요합니다."
+  },
+  "Clear rules. Shared accountability.": {
+    "th": "ล้างกฎความรับผิดชอบร่วมกัน",
+    "ko": "명확한 규칙. 책임감 공유."
+  },
+  "The absence of an explicit clause does not automatically permit unfair play. But ambiguity in the rules or organizer guidance must be considered when assessing responsibility and punishment.": {
+    "th": "การไม่มีข้อกำหนดที่ชัดเจนไม่อนุญาตให้มีการเล่นที่ไม่เป็นธรรมโดยอัตโนมัติแต่ต้องพิจารณาความคลุมเครือในกฎหรือคำแนะนำของผู้จัดเมื่อประเมินความรับผิดชอบและการลงโทษ",
+    "ko": "명시적인 조항이 없다고 해서 불공정한 플레이가 자동으로 허용되는 것은 아닙니다. 그러나 책임과 처벌을 평가할 때는 규칙이나 주최자 지침의 모호성을 고려해야 합니다."
+  },
+  "VI rulebook · §3.7": {
+    "th": "VI กฎระเบียบ · § 3.7",
+    "ko": "VI 규칙서 · § 3.7"
+  },
+  "Participant duties · §4.1": {
+    "th": "หน้าที่ของผู้เข้าร่วม · § 4.1",
+    "ko": "참가자의 의무 · § 4.1"
+  },
+  "Organizer on rule clarity": {
+    "th": "ผู้จัดเกี่ยวกับความชัดเจนของกฎ",
+    "ko": "규칙 명확성에 대한 주최자"
+  },
+  "Show how the conclusion was reached.": {
+    "th": "แสดงให้เห็นว่าได้ข้อสรุปอย่างไร",
+    "ko": "결론에 도달한 방법을 보여줍니다."
+  },
+  "A conclusion alone does not explain the evidence. Each player’s conduct should be assessed individually, with a clear distinction between receiving information, actively seeking it, and using it in play.": {
+    "th": "ข้อสรุปเพียงอย่างเดียวไม่ได้อธิบายหลักฐานความประพฤติของผู้เล่นแต่ละคนควรได้รับการประเมินเป็นรายบุคคลโดยมีความแตกต่างอย่างชัดเจนระหว่างการรับข้อมูลการแสวงหาข้อมูลอย่างกระตือรือร้นและการใช้ข้อมูลในการเล่น",
+    "ko": "결론만으로는 증거를 설명할 수 없습니다. 각 플레이어의 행동은 정보를 받는 것, 적극적으로 추구하는 것, 그리고 플레이에 사용하는 것 사이에 명확한 구별을 두고 개별적으로 평가되어야 합니다."
+  },
+  "20 Sep allegations": {
+    "th": "20 ก.ย. ข้อกล่าวหา",
+    "ko": "9월 20일 혐의"
+  },
+  "PUBG findings": {
+    "th": "ผลการวิจัย PUBG",
+    "ko": "PUBG 조사 결과"
+  },
+  "One standard for everyone.": {
+    "th": "หนึ่งมาตรฐานสำหรับทุกคน",
+    "ko": "모두를 위한 하나의 표준."
+  },
+  "Korean notice": {
+    "th": "ประกาศของเกาหลี",
+    "ko": "한국어 안내문"
+  },
+  "Soopi still · app switcher": {
+    "th": "Soopi ยังคง · ตัวสลับแอป",
+    "ko": "Soopi 스틸 · 앱 전환기"
+  },
+  "Opening a stream is not, by itself, proof of exploiting it. The same questions about timing, participation status, information sharing, and in-game use should be applied to every participant.": {
+    "th": "การเปิดสตรีมไม่ใช่การพิสูจน์ว่ามีการใช้ประโยชน์จากสตรีมคำถามเดียวกันเกี่ยวกับเวลาสถานะการเข้าร่วมการแบ่งปันข้อมูลและการใช้งานในเกมควรนำไปใช้กับผู้เข้าร่วมทุกคน",
+    "ko": "스트림을 여는 것은 그 자체로 그것을 악용한다는 증거가 아닙니다. 타이밍, 참여 상태, 정보 공유 및 게임 내 사용에 대한 동일한 질문을 모든 참가자에게 적용해야 합니다."
+  },
+  "Soopi still · stream page": {
+    "th": "Soopi ยังคง · หน้าสตรีม",
+    "ko": "Soopi 스틸 · 스트림 페이지"
+  },
+  "PUBG review criteria": {
+    "th": "ทบทวนเกณฑ์",
+    "ko": "리뷰 기준"
+  },
+  "A penalty must fit the violation.": {
+    "th": "บทลงโทษต้องเหมาะสมกับการละเมิด",
+    "ko": "위반 시 페널티가 적용되어야 합니다."
+  },
+  "A permanent sanction affecting a professional career requires an explanation of why a time-limited suspension would not be sufficient. Players should be able to review the relevant evidence, challenge its interpretation, and receive a meaningful response.": {
+    "th": "การลงโทษถาวรที่ส่งผลกระทบต่ออาชีพการงานจำเป็นต้องมีคำอธิบายว่าเหตุใดการพักงานที่จำกัดเวลาจึงไม่เพียงพอผู้เล่นควรสามารถตรวจสอบหลักฐานที่เกี่ยวข้องท้าทายการตีความและได้รับการตอบสนองที่มีความหมาย",
+    "ko": "직업 경력에 영향을 미치는 영구적인 제재는 시간 제한 정지가 충분하지 않은 이유에 대한 설명이 필요합니다. 플레이어는 관련 증거를 검토하고 해석에 이의를 제기하며 의미 있는 응답을 받을 수 있어야 합니다."
+  },
+  "Rulebook · §4.1": {
+    "th": "หนังสือกฎ · § 4.1",
+    "ko": "규칙서 · § 4.1"
+  },
+  "Sanction announcement": {
+    "ko": "제재 발표",
+    "th": "ประกาศการคว่ำบาตร"
+  },
+  "20 Sep measures": {
+    "th": "20 ก.ย. มาตรการ",
+    "ko": "9월 20일 조치"
+  },
+  "UNVERIFIED PARTICIPANT ACCOUNT": {
+    "th": "บัญชีผู้เข้าร่วมที่ไม่ได้รับการยืนยัน",
+    "ko": "인증되지 않은 참가자 계정"
+  },
+  "Unverified account of earlier sanction lengths": {
+    "th": "บัญชีที่ยังไม่ได้ยืนยันระยะเวลาการลงโทษก่อนหน้านี้",
+    "ko": "이전 제재 기간에 대한 확인되지 않은 계정"
+  },
+  "Reported: one year, six months, then permanent": {
+    "th": "รายงาน: หนึ่งปีหกเดือนแล้วถาวร",
+    "ko": "보고됨: 1년 6개월 후 영구"
+  },
+  "1 year": {
+    "ko": "1년",
+    "th": "1 ปี"
+  },
+  "permanent": {
+    "th": "ถาวร",
+    "ko": "영구"
+  },
+  "6 months": {
+    "ko": "6개월",
+    "th": "6 เดือน"
+  },
+  "Several sources among Vietnam team members who participated in the tournament said the organizers had initially issued a ban of one year, then reduced it to six months after Himass and Tanvuu posted apologies. It was later changed to a permanent ban.": {
+    "th": "แหล่งข่าวหลายแห่งในหมู่สมาชิกทีมเวียดนามที่เข้าร่วมการแข่งขันกล่าวว่าในตอนแรกผู้จัดงานได้ออกคำสั่งห้ามเป็นเวลาหนึ่งปีจากนั้นลดลงเหลือหกเดือนหลังจากที่ Himass และ Tanvuu โพสต์ขอโทษต่อมาได้เปลี่ยนเป็นการแบนถาวร",
+    "ko": "토너먼트에 참가한 베트남 팀원 중 여러 소식통은 주최측이 처음에 1 년 금지를 발표 한 후 Himass와 Tanvuu가 사과를 게시 한 후 6 개월로 줄였다고 말했습니다. 이후 영구 금지령으로 바뀌었다."
+  },
+  "Read provenance and limits": {
+    "th": "อ่าน proofance และข้อจำกัด",
+    "ko": "출처 및 한도 읽기"
+  },
+  "THIS SITE'S ARGUMENT": {
+    "th": "อาร์กิวเมนต์ของเว็บไซต์นี้",
+    "ko": "이 사이트의 주장"
+  },
+  "Exact excerpt from the Vietnamese rulebook. §4.1 also requires participants to read official Discord notices; this site has no archived pre-event guidance.": {
+    "th": "ข้อความที่ตัดตอนมาจากหนังสือกฎของเวียดนาม § 4.1 ยังกำหนดให้ผู้เข้าร่วมต้องอ่านประกาศความบาดหมางอย่างเป็นทางการเว็บไซต์นี้ไม่มีคำแนะนำก่อนเหตุการณ์ที่เก็บถาวร",
+    "ko": "베트남 규칙서에서 발췌. § 4.1은 또한 참가자에게 공식 Discord 공지 사항을 읽도록 요구합니다. 이 사이트에는 아카이브된 이벤트 전 지침이 없습니다."
+  },
+  "Claim, evidence, finding": {
+    "th": "การเรียกร้องหลักฐานการค้นหา",
+    "ko": "소유권 주장, 증거, 찾기"
+  },
+  "CLAIM": {
+    "th": "การเรียกร้องค่าสินไหมทดแทน;ค่าสินไหมทดแทน",
+    "ko": "요구"
+  },
+  "Himass and TanVuu viewed and used out-of-game information.": {
+    "th": "Himass และ TanVuu ดูและใช้ข้อมูลนอกเกม",
+    "ko": "Himass와 TanVuu는 게임 외 정보를 보고 사용했습니다."
+  },
+  "EVIDENCE PUBG CITES": {
+    "th": "หลักฐาน PUBG CITES",
+    "ko": "증거 PUBG CITES"
+  },
+  "Broadcasts, participant footage, in-game data and replays; the complete player-specific record is not public in the sources archived here.": {
+    "th": "การออกอากาศฟุตเทจผู้เข้าร่วมข้อมูลในเกมและการรีเพลย์บันทึกเฉพาะผู้เล่นทั้งหมดจะไม่ถูกเปิดเผยต่อสาธารณะในแหล่งที่มาที่จัดเก็บไว้ที่นี่",
+    "ko": "브로드캐스트, 참가자 영상, 게임 내 데이터 및 재생; 전체 플레이어별 기록은 여기에 보관된 출처에 공개되지 않습니다."
+  },
+  "FINDING": {
+    "th": "Finding",
+    "ko": "찾는 중"
+  },
+  "PUBG concluded the information informed play. This is an attributed finding, not this site's independent verification.": {
+    "th": "PUBG สรุปข้อมูลเกี่ยวกับการเล่นนี่เป็นการค้นพบที่มาไม่ใช่การตรวจสอบที่เป็นอิสระของเว็บไซต์นี้",
+    "ko": "PUBG는 정보에 입각한 플레이를 마쳤습니다. 이것은 이 사이트의 독립적인 검증이 아닌 귀속된 결과입니다."
+  },
+  "This site has no archived player-specific evidence file or verified individual responses, so it cannot independently check each step of the reasoning.": {
+    "th": "เว็บไซต์นี้ไม่มีไฟล์หลักฐานเฉพาะผู้เล่นที่เก็บถาวรหรือการตอบกลับแต่ละรายการที่ได้รับการยืนยันแล้วดังนั้นจึงไม่สามารถตรวจสอบเหตุผลแต่ละขั้นตอนได้อย่างอิสระ",
+    "ko": "이 사이트에는 보관된 플레이어별 증거 파일이나 검증된 개별 응답이 없으므로 추론의 각 단계를 독립적으로 확인할 수 없습니다."
+  },
+  "THE SAME THREE QUESTIONS FOR EACH CASE": {
+    "th": "สามคำถามเดียวกันสำหรับแต่ละกรณี",
+    "ko": "각 케이스에 대해 동일한 세 가지 질문"
+  },
+  "PUBG dates conduct to Day 1": {
+    "th": "PUBG DATES ดำเนินการถึงวันที่ 1",
+    "ko": "PUBG는 1일차까지의 수행 날짜를 기입합니다."
+  },
+  "PUBG says another stream was viewed": {
+    "th": "PUBG บอกว่ามีคนดูสตรีมอื่นแล้ว",
+    "ko": "PUBG에 따르면 다른 스트림이 조회되었습니다"
+  },
+  "PUBG found strategic use": {
+    "th": "PUBG พบการใช้งานเชิงกลยุทธ์",
+    "ko": "PUBG는 전략적 사용을 발견했습니다"
+  },
+  "SOOPI-RELATED STILLS": {
+    "th": "ภาพนิ่งที่เชื่อมต่อกับ SOOPI",
+    "ko": "SOOPI 관련 스틸"
+  },
+  "Not publicly established": {
+    "th": "ไม่เป็นที่ยอมรับของสาธารณชน",
+    "ko": "공개적으로 확립되지 않음"
+  },
+  "Stills show an interface; sharing is not established": {
+    "th": "Stills แสดงอินเทอร์เฟซไม่มีการสร้างการแชร์",
+    "ko": "스틸에 인터페이스가 표시되지만 공유가 설정되지 않았습니다."
+  },
+  "Timing / status": {
+    "th": "เวลา/สถานะ",
+    "ko": "시간/상태"
+  },
+  "Viewed / shared content": {
+    "th": "เนื้อหาที่ดู/แชร์",
+    "ko": "조회/공유된 콘텐츠"
+  },
+  "In-game use": {
+    "th": "การใช้งานในเกม",
+    "ko": "게임 내 사용"
+  },
+  "User-supplied app switcher still": {
+    "th": "ตัวสลับแอปที่ผู้ใช้จัดหาให้ยังคงอยู่",
+    "ko": "사용자가 제공한 앱 전환기는 여전히"
+  },
+  "In its later 23 Sep findings, PUBG says it reviewed similar allegations involving others and found no further sanctionable violation; the notice does not name Soopi in that finding.": {
+    "th": "ในการค้นพบในวันที่ 23 กันยายนต่อมา PUBG กล่าวว่าได้ตรวจสอบข้อกล่าวหาที่คล้ายกันซึ่งเกี่ยวข้องกับผู้อื่นและพบว่าไม่มีการละเมิดที่สามารถลงโทษได้อีกต่อไปประกาศดังกล่าวไม่ได้ระบุชื่อ Soopi ในการค้นพบดังกล่าว",
+    "ko": "PUBG는 9월 23일 조사 결과에서 다른 사람들과 관련된 유사한 주장을 검토한 결과 더 이상의 제재 가능한 위반을 발견하지 못했다고 밝혔습니다. 이 통지문에는 Soopi의 이름이 명시되어 있지 않습니다."
+  },
+  "App switcher · origin and timing unverified": {
+    "th": "ตัวสลับแอป · ต้นทางและเวลาไม่ได้รับการยืนยัน",
+    "ko": "앱 전환기 · 출발지 및 확인되지 않은 시간"
+  },
+  "User-supplied livestream page still": {
+    "th": "หน้าไลฟ์สตรีมที่ผู้ใช้จัดหาให้ยังคงอยู่",
+    "ko": "사용자가 제공한 라이브 방송 페이지 정지"
+  },
+  "Stream page · still does not prove use": {
+    "th": "หน้าสตรีม · ยังไม่พิสูจน์การใช้งาน",
+    "ko": "스트림 페이지 · 여전히 사용이 증명되지 않음"
+  },
+  "GAME ACCOUNTS": {
+    "ko": "게임 계정",
+    "th": "บัญชีเกม"
+  },
+  "Permanent bans": {
+    "ko": "영구 금지",
+    "th": "แบนถาวร"
+  },
+  "OFFICIAL ESPORTS": {
+    "th": "ESPORTS อย่างเป็นทางการ",
+    "ko": "공식 e스포츠"
+  },
+  "VIETNAM PARTNER · 20 SEP": {
+    "th": "พาร์ทเนอร์เวียดนาม · 20 ก.ย.",
+    "ko": "베트남 파트너 · 9월 20일"
+  },
+  "Permanent ineligibility": {
+    "th": "ขาดคุณสมบัติถาวร",
+    "ko": "영구적 부적격"
+  },
+  "PUBG states that the players may use its esports response process. This site has no verified appeal outcome or team statement to cite.": {
+    "th": "PUBG ระบุว่าผู้เล่นอาจใช้กระบวนการตอบสนองอีสปอร์ตเว็บไซต์นี้ไม่มีผลการอุทธรณ์ที่ได้รับการยืนยันหรือคำแถลงของทีมที่จะอ้างถึง",
+    "ko": "PUBG는 플레이어가 e스포츠 응답 프로세스를 사용할 수 있다고 명시합니다. 이 사이트에는 검증된 이의 제기 결과나 인용할 팀 진술이 없습니다."
+  },
+  "Status revoked": {
+    "th": "สถานะถูกเพิกถอนแล้ว",
+    "ko": "상태 취소됨"
+  },
+  "Response / argument:": {
+    "th": "การตอบสนอง/การโต้แย้ง:",
+    "ko": "응답/주장:"
+  },
+  "Context:": {
+    "th": "บริบท:",
+    "ko": "문맥 :"
+  },
+  "Main navigation": {
+    "th": "การนำทางหลัก",
+    "ko": "메인 내비게이션"
+  },
+  "LEGAL": {
+    "th": "กฎหมาย",
+    "ko": "법률"
+  },
+  "PLAYERS": {
+    "ko": "순위표",
+    "th": "ผู้เล่น"
+  },
+  "User-supplied black-and-white campaign visual of two esports players": {
+    "th": "ภาพแคมเปญขาวดำของผู้ใช้ที่มีผู้เล่นอีสปอร์ตสองคน",
+    "ko": "두 e스포츠 선수의 사용자 제공 흑백 캠페인 비주얼"
+  },
+  "en-US": {
+    "th": "en-US",
+    "ko": "ko-KR"
+  },
+  "RULES & GUIDANCE": {
+    "ko": "규칙 및 지침",
+    "th": "กฎและคำแนะนำ"
+  },
+  "The rulebook contains anti-cheating duties and requires participants to follow Discord notices. PUBG later acknowledged that its fairness standards were not specific enough.": {
+    "th": "กฎระเบียบนี้มีหน้าที่ต่อต้านการโกงและกำหนดให้ผู้เข้าร่วมต้องปฏิบัติตามประกาศของ Discord ต่อมา PUBG ยอมรับว่ามาตรฐานความเป็นธรรมยังไม่เฉพาะเจาะจงพอ",
+    "ko": "규칙서에는 부정 행위 방지 의무가 포함되어 있으며, 참가자는 Discord 알림을 따라야 합니다. PUBG는 나중에 공정성 기준이 충분히 구체적이지 않다는 것을 인정했습니다."
+  },
+  "Read the rulebook · §3.7": {
+    "th": "อ่านกฎระเบียบ · § 3.7",
+    "ko": "규칙서 읽기 · § 3.7"
+  },
+  "Translation: Players who stream personally are encouraged to set a reasonable delay to prevent information exposure. Pre-event Discord guidance is not archived here.": {
+    "th": "คำแปล: ผู้เล่นที่สตรีมส่วนตัวได้รับการสนับสนุนให้ตั้งค่าความล่าช้าที่เหมาะสมเพื่อป้องกันการเปิดเผยข้อมูลคำแนะนำก่อนเหตุการณ์ Discord ไม่ได้ถูกจัดเก็บไว้ที่นี่",
+    "ko": "번역: 개인적으로 스트리밍하는 플레이어는 정보 노출을 방지하기 위해 합리적인 지연을 설정하는 것이 좋습니다. 이벤트 전 Discord 지침은 여기에 보관되지 않습니다."
+  },
+  "FINDINGS & EVIDENCE": {
+    "th": "ผลการวิจัยและหลักฐาน",
+    "ko": "조사 결과 및 증거"
+  },
+  "The 20 September notice left questions about viewing another stream and using its information open. The 23 September findings superseded that status.": {
+    "th": "การแจ้งเตือนเมื่อวันที่ 20 กันยายนทำให้เกิดคำถามเกี่ยวกับการดูสตรีมอื่นและการใช้ข้อมูลเปิดการค้นพบในวันที่ 23 กันยายนแทนที่สถานะดังกล่าว",
+    "ko": "9월 20일 공지는 다른 스트림을 보고 정보를 공개하는 것에 대한 질문을 남겼습니다. 9월 23일 조사 결과가 그 지위를 대체했습니다."
+  },
+  "Read PUBG's findings": {
+    "th": "อ่านผลการวิจัยของ PUBG",
+    "ko": "PUBG의 조사 결과 읽기"
+  },
+  "under review": {
+    "th": "อยู่ระหว่างการตรวจทาน",
+    "ko": "작성완료"
+  },
+  "PUBG published findings": {
+    "th": "ผลการวิจัยที่เผยแพร่โดย PUBG",
+    "ko": "PUBG가 조사 결과를 발표했습니다."
+  },
+  "View provenance for the Soopi-related livestream image": {
+    "th": "ดูการพิสูจน์สำหรับภาพไลฟ์สตรีมที่เกี่ยวข้องกับ Soopi",
+    "ko": "Soopi 관련 라이브 스트림 이미지에 대한 출처 보기"
+  },
+  "User-supplied still of a SOOP livestream page in Soopi-related footage": {
+    "th": "ผู้ใช้ยังคงจัดหาหน้าไลฟ์สตรีม SOOP ในฟุตเทจที่เกี่ยวข้องกับ Soopi",
+    "ko": "사용자가 Soopi 관련 영상에서 SOOP 라이브 스트림 페이지의 스틸을 제공함"
+  },
+  "View provenance for the Soopi-related app-switcher image": {
+    "th": "ดูการพิสูจน์สำหรับภาพตัวสลับแอปที่เกี่ยวข้องกับ Soopi",
+    "ko": "Soopi 관련 앱 전환기 이미지에 대한 출처 보기"
+  },
+  "User-supplied app-switcher still in Soopi-related footage": {
+    "th": "ตัวสลับแอปที่ผู้ใช้จัดหาให้ยังคงอยู่ในฟุตเทจที่เกี่ยวข้องกับ Soopi",
+    "ko": "사용자가 제공한 앱 스위처가 아직 Soopi 관련 영상에 있음"
+  },
+  "User-supplied Soopi-related stills show a stream page and an app switcher. Their timing, context and any use of information are not independently established. They do not replace PUBG's investigation findings.": {
+    "th": "ภาพนิ่งที่เกี่ยวข้องกับ Soopi ที่ผู้ใช้จัดหามาจะแสดงหน้าสตรีมและตัวสลับแอปเวลาบริบทและการใช้ข้อมูลใดๆของพวกเขาไม่ได้ถูกกำหนดขึ้นอย่างอิสระพวกเขาไม่ได้แทนที่ผลการตรวจสอบของ PUBG",
+    "ko": "사용자가 제공한 Soopi 관련 스틸에는 스트림 페이지와 앱 전환기가 표시됩니다. 그들의 타이밍, 맥락 및 정보 사용은 독립적으로 확립되지 않습니다. PUBG의 조사 결과를 대체하지 않습니다."
+  },
+  "SANCTIONS & RIGHT TO RESPOND": {
+    "th": "การคว่ำบาตรและสิทธิในการตอบกลับ",
+    "ko": "제재 및 대응 권리"
+  },
+  "PUBG announced permanent game-account bans and permanent ineligibility for official esports events. Its notice also describes an esports response process.": {
+    "th": "PUBG ประกาศแบนบัญชีเกมถาวรและไม่มีสิทธิ์เข้าร่วมกิจกรรมอีสปอร์ตอย่างเป็นทางการประกาศของบริษัทยังอธิบายถึงกระบวนการตอบสนองของอีสปอร์ต",
+    "ko": "PUBG는 공식 e스포츠 이벤트에 대한 영구적인 게임 계정 금지 및 영구적인 부적격을 발표했습니다. 알림은 또한 e스포츠 응답 프로세스를 설명합니다."
+  },
+  "GAME ACCOUNT": {
+    "ko": "게임 계정 ID",
+    "th": "บัญชีเกม"
+  },
+  "Permanent ban": {
+    "th": "การแบนถาวร",
+    "ko": "영구 금지"
+  },
+  "Jump to milestone": {
+    "th": "ข้ามไปยังเหตุการณ์สำคัญ",
+    "ko": "마일스톤으로 이동"
+  },
+  "This milestone draws on the linked source. Open the explanation for context and limits.": {
+    "th": "เหตุการณ์สำคัญนี้นำมาจากแหล่งที่มาที่เชื่อมโยงกันเปิดคำอธิบายสำหรับบริบทและข้อจำกัด",
+    "ko": "이 마일스톤은 링크된 출처를 기반으로 합니다. 맥락과 한계에 대한 설명을 엽니다."
+  },
+  "TIMELINE": {
+    "th": "ไทม์ไลน์",
+    "ko": "타임라인"
+  },
+  "Investigation findings and sanctions · 23 Sep 2026": {
+    "th": "ผลการสอบสวนและการคว่ำบาตร · 23 ก.ย. 2026",
+    "ko": "조사 결과 및 제재 · 2026년 9월 23일"
+  },
+  "Primary source for the investigation findings, sanctions and KRAFTON's acknowledgement of responsibility.": {
+    "ko": "조사 결과, 제재 및 KRAFTON의 책임 인정에 대한 주요 출처.",
+    "th": "แหล่งข้อมูลหลักสำหรับผลการตรวจสอบการลงโทษและการรับทราบความรับผิดชอบของ KRAFTON"
+  },
+  "Investigation findings · Korean · 23 Sep 2026": {
+    "th": "ผลการวิจัย · เกาหลี · 23 ก.ย. 2026",
+    "ko": "조사 결과 · 한국어 · 2026년 9월 23일"
+  },
+  "Korean version of the investigation notice for comparison with the Vietnamese notice.": {
+    "th": "ประกาศการสอบสวนฉบับภาษาเกาหลีเพื่อเปรียบเทียบกับประกาศเวียดนาม",
+    "ko": "베트남 통지서와 비교하기 위한 한국어 버전의 조사 통지서."
+  },
+  "Initial notice · 19 Sep 2026": {
+    "th": "การแจ้งเตือนครั้งแรก · 19 ก.ย. 2026",
+    "ko": "최초 고지 · 2026년 9월 19일"
+  },
+  "Kakao PUBG identifies this as a KRAFTON notice. The local copy contains captured visible article text because direct HTML retrieval returned HTTP 403.": {
+    "th": "Kakao PUBG ระบุว่านี่เป็นประกาศของ KRAFTON สำเนาในเครื่องมีข้อความบทความที่มองเห็นได้เนื่องจากการดึง HTML โดยตรงส่งกลับ HTTP 403",
+    "ko": "카카오 PUBG는 이를 KRAFTON 고지 사항으로 식별합니다. 직접 HTML 검색이 HTTP 403을 반환했기 때문에 로컬 복사본에는 캡처된 가시적인 기사 텍스트가 포함되어 있습니다."
+  },
+  "Additional notice and Day 3 cancellation · 20 Sep 2026": {
+    "th": "การแจ้งเตือนเพิ่มเติมและการยกเลิกวันที่ 3 · 20 ก.ย. 2026",
+    "ko": "추가 공지 및 3일차 취소 · 2026년 9월 20일"
+  },
+  "The link comes from the original HTML. The local copy contains captured visible article text because direct HTML retrieval returned HTTP 403.": {
+    "th": "ลิงก์มาจาก HTML ต้นฉบับสำเนาในเครื่องมีข้อความบทความที่มองเห็นได้เนื่องจากการดึง HTML โดยตรงส่งกลับ HTTP 403",
+    "ko": "링크는 원래 HTML에서 가져옵니다. 직접 HTML 검색이 HTTP 403을 반환했기 때문에 로컬 복사본에는 캡처된 가시적인 기사 텍스트가 포함되어 있습니다."
+  },
+  "Original event schedule · 11 Sep 2026": {
+    "th": "กำหนดการกิจกรรมเดิม · 11 ก.ย. 2026",
+    "ko": "기존 이벤트 일정 · 2026년 9월 11일"
+  },
+  "Source for checking the Day 1–3 schedule; it is not a source for the investigation findings.": {
+    "th": "แหล่งที่มาสำหรับการตรวจสอบตารางวันที่ 1 -3; มันไม่ได้เป็นแหล่งที่มาสำหรับผลการตรวจสอบ",
+    "ko": "1 ~ 3일차 일정을 확인하기 위한 출처. 조사 결과에 대한 출처가 아닙니다."
+  },
+  "PUBG Asia Stars 2026 Rulebook": {
+    "th": "หนังสือกฎ PUBG Asia Stars 2026",
+    "ko": "PUBG Asia Stars 2026 룰북"
+  },
+  "This is a public mirror, not a PUBG site. The two supplied PDFs are linked in the excerpt section below; their match with the mirror has not been verified.": {
+    "th": "นี่เป็นกระจกสาธารณะไม่ใช่เว็บไซต์ PUBG ไฟล์ PDF ที่ให้มาทั้งสองไฟล์เชื่อมโยงกันในส่วนที่ตัดตอนมาด้านล่างการจับคู่กับมิเรอร์ยังไม่ได้รับการยืนยัน",
+    "ko": "이것은 PUBG 사이트가 아닌 공용 미러입니다. 제공된 두 개의 PDF는 아래 발췌 섹션에 링크되어 있습니다. 미러와의 일치 여부는 확인되지 않았습니다."
+  },
+  "Official Web Event Rules": {
+    "th": "กฎกิจกรรมบนเว็บอย่างเป็นทางการ",
+    "ko": "공식 웹 이벤트 규칙"
+  },
+  "This PDF governs the web event and rewards. It is not the tournament rulebook.": {
+    "th": "PDF นี้ควบคุมกิจกรรมและรางวัลบนเว็บนี่ไม่ใช่กฎของทัวร์นาเมนต์"
+  }
+}
