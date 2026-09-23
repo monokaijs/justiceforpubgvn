@@ -296,6 +296,7 @@ const entries: [string, string, string][] = [
   ["PUBG investigation results · 23 Sep (Korean)", "ผลสอบสวน PUBG · 23 ก.ย. (เกาหลี)", "PUBG 조사 결과 · 9월 23일 (한국어)"],
   ["Application switcher in Soopi-related footage; capture context is unverified.", "หน้าสลับแอปในวิดีโอที่เกี่ยวข้องกับ Soopi ยังไม่ยืนยันบริบทของภาพ", "Soopi 관련 영상의 앱 전환 화면이며 촬영 맥락은 확인되지 않았습니다."],
   ["A livestream page visible in footage; a still alone does not establish intent or misconduct.", "หน้าสตรีมที่ปรากฏในวิดีโอ ภาพนิ่งเพียงภาพเดียวไม่ยืนยันเจตนาหรือการกระทำผิด", "영상에 방송 페이지가 보이지만 정지 화면만으로 의도나 위반을 입증할 수 없습니다."],
+  ["IMAGE FILE MANIFEST ↗", "รายการไฟล์ภาพ ↗", "이미지 파일 목록 ↗"],
 ];
 
 if (zhEntries.length !== entries.length) {
