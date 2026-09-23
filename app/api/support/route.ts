@@ -20,7 +20,9 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   const origin = request.headers.get("origin");
-  if (origin && origin !== request.nextUrl.origin) {
+  const host = request.headers.get("host");
+  const protocol = request.headers.get("x-forwarded-proto")?.split(",")[0]?.trim() ?? request.nextUrl.protocol.slice(0, -1);
+  if (origin && (!host || origin !== `${protocol}://${host}`)) {
     return NextResponse.json({ error: "Invalid origin" }, { status: 403 });
   }
 

@@ -146,6 +146,15 @@ function ArrowIcon({ diagonal = false }: { diagonal?: boolean }) {
   );
 }
 
+
+function SupportIcon({ supported }: { supported: boolean }) {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill={supported ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M20.8 8.6c0 4.1-4.8 7.9-8.8 11-4-3.1-8.8-6.9-8.8-11a4.8 4.8 0 0 1 8.8-2.5 4.8 4.8 0 0 1 8.8 2.5Z" />
+    </svg>
+  );
+}
+
 function SourceLink({ sourceKey, label }: { sourceKey: SourceKey; label: string }) {
   return (
     <a className="source-link" href={`/sources#${sourceKey}`}>
@@ -371,7 +380,7 @@ export default function TimelineExperience() {
                     <p className="hero-description">{t.heroDescription}</p>
                     <div className="hero-support">
                       <button type="button" className="hero-support-button" onClick={standWithThem} disabled={supportPending || support?.supported} aria-pressed={support?.supported ?? false}>
-                        <span aria-hidden="true">{support?.supported ? "✓" : "+"}</span>{support?.supported ? t.supportedButton : t.supportButton}
+                        <SupportIcon supported={support?.supported ?? false} />{support?.supported ? t.supportedButton : t.supportButton}
                       </button>
                       <div className="hero-support-count" aria-live="polite"><strong>{support ? new Intl.NumberFormat({ vi: "vi-VN", th: "th-TH", en: "en-US", ko: "ko-KR" }[language]).format(support.count) : "—"}</strong><span>{t.supportCount}</span></div>
                     </div>
