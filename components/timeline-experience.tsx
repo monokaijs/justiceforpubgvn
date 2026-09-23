@@ -6,6 +6,7 @@ import { Language, sources, timeline, type SourceKey } from "@/data/timeline";
 import { useLanguage } from "@/components/language-provider";
 import LanguageSelector from "@/components/language-selector";
 import LocalizedAnchor from "@/components/localized-anchor";
+import ShareButton from "@/components/share-button";
 import { loc, localized } from "@/lib/i18n";
 
 const copy = {
@@ -155,6 +156,18 @@ function SupportIcon({ supported }: { supported: boolean }) {
   );
 }
 
+function scrollToHeroSlide(index: number) {
+  const section = document.querySelector<HTMLElement>(".campaign-hero");
+  const pin = section?.querySelector<HTMLElement>(".campaign-hero-pin");
+  if (!section || !pin) return;
+  const stageDistance = (section.offsetHeight - pin.offsetHeight) / 3;
+  const top = section.getBoundingClientRect().top + window.scrollY;
+  window.scrollTo({
+    top: index >= 4 ? top + section.offsetHeight : top + Math.max(0, stageDistance) * index,
+    behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+  });
+}
+
 function SourceLink({ sourceKey, label }: { sourceKey: SourceKey; label: string }) {
   return (
     <LocalizedAnchor className="source-link" href={`/sources#${sourceKey}`}>
@@ -276,6 +289,22 @@ export default function TimelineExperience() {
       setActiveIndex((previous) => previous === nearest ? previous : nearest);
     };
     const onScroll = () => { if (!frame) frame = window.requestAnimationFrame(update); };
+    let touchStart: { x: number; y: number } | null = null;
+    const onHeroTouchStart = (event: TouchEvent) => {
+      if (!window.matchMedia("(pointer: coarse), (max-width: 600px)").matches || event.touches.length !== 1) return;
+      if ((event.target as HTMLElement).closest("a, button, input, select, textarea")) return;
+      touchStart = { x: event.touches[0].clientX, y: event.touches[0].clientY };
+    };
+    const onHeroTouchEnd = (event: TouchEvent) => {
+      if (!touchStart || !heroSection) return;
+      const deltaX = event.changedTouches[0].clientX - touchStart.x;
+      const deltaY = event.changedTouches[0].clientY - touchStart.y;
+      touchStart = null;
+      if (Math.abs(deltaX) < 55 || Math.abs(deltaX) < Math.abs(deltaY) * 1.3) return;
+      const stageDistance = (heroSection.offsetHeight - (heroSection.querySelector<HTMLElement>(".campaign-hero-pin")?.offsetHeight ?? window.innerHeight)) / 3;
+      const current = Math.max(0, Math.min(3, Math.round(-heroSection.getBoundingClientRect().top / Math.max(1, stageDistance))));
+      scrollToHeroSlide(Math.max(0, Math.min(4, current + (deltaX < 0 ? 1 : -1))));
+    };
     let wheelLocked = false;
     let wheelTotal = 0;
     let wheelTimer = 0;
@@ -312,10 +341,14 @@ export default function TimelineExperience() {
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     heroSection?.addEventListener("wheel", onHeroWheel, { passive: false });
+    heroSection?.addEventListener("touchstart", onHeroTouchStart, { passive: true });
+    heroSection?.addEventListener("touchend", onHeroTouchEnd, { passive: true });
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
       heroSection?.removeEventListener("wheel", onHeroWheel);
+      heroSection?.removeEventListener("touchstart", onHeroTouchStart);
+      heroSection?.removeEventListener("touchend", onHeroTouchEnd);
       window.clearTimeout(wheelTimer);
       if (frame) window.cancelAnimationFrame(frame);
       observer?.disconnect();
@@ -440,7 +473,12 @@ export default function TimelineExperience() {
                 </div>
               </article>
             </div>
-            <div className="campaign-hero-footer">{heroActiveIndex < 3 && <span className="campaign-scroll-cue">{t.heroScroll} <span aria-hidden="true">↓</span></span>}<LocalizedAnchor className="campaign-skip" href="#timeline" onClick={skipToTimeline}>{t.heroSkip} ↗</LocalizedAnchor></div>
+            <nav className="campaign-slide-nav" aria-label={loc(language, "Chuyển trang mở đầu", "Introduction slides")}>
+              <button type="button" onClick={() => scrollToHeroSlide(heroActiveIndex - 1)} disabled={heroActiveIndex === 0} aria-label={loc(language, "Trang trước", "Previous slide")}>‹</button>
+              <span aria-live="polite">{String(heroActiveIndex + 1).padStart(2, "0")} / 04</span>
+              <button type="button" onClick={() => scrollToHeroSlide(heroActiveIndex + 1)} disabled={heroActiveIndex === 3} aria-label={loc(language, "Trang tiếp", "Next slide")}>›</button>
+            </nav>
+            <div className="campaign-hero-footer"><span className="campaign-scroll-cue"><span className="desktop-scroll-cue">{t.heroScroll} <span aria-hidden="true">↓</span></span><span className="mobile-swipe-cue">{loc(language, "Vuốt để xem tiếp", "Swipe to continue")} <span aria-hidden="true">→</span></span></span><ShareButton className="campaign-share" /><LocalizedAnchor className="campaign-skip" href="#timeline" onClick={skipToTimeline}>{t.heroSkip} ↗</LocalizedAnchor></div>
             <div className="campaign-hero-progress" aria-hidden="true"><span /></div>
           </div>
           <div className="campaign-hero-markers" aria-hidden="true">{[0, 1, 2, 3].map((marker) => <div className="campaign-hero-marker" key={marker} />)}</div>
@@ -486,7 +524,7 @@ export default function TimelineExperience() {
 
       </main>
 
-      <footer className="site-footer"><div className="page-width footer-inner"><div className="footer-brand">JUSTICE<span>FORPUBGVN</span><small>{t.brandSub}</small></div><p>{t.footerNote}</p><div className="home-footer-links"><LocalizedAnchor href="/players">{loc(language, "TUYỂN THỦ", "PLAYERS")} ↗</LocalizedAnchor><LocalizedAnchor href="/sources">{t.navSources} ↗</LocalizedAnchor><LocalizedAnchor href="/legal">{loc(language, "PHÁP LÝ", "LEGAL")} ↗</LocalizedAnchor></div></div></footer>
+      <footer className="site-footer"><div className="page-width footer-inner"><div className="footer-brand">JUSTICE<span>FORPUBGVN</span><small>{t.brandSub}</small></div><p>{t.footerNote}</p><div className="home-footer-links"><LocalizedAnchor href="/players">{loc(language, "TUYỂN THỦ", "PLAYERS")} ↗</LocalizedAnchor><LocalizedAnchor href="/sources">{t.navSources} ↗</LocalizedAnchor><LocalizedAnchor href="/legal">{loc(language, "PHÁP LÝ", "LEGAL")} ↗</LocalizedAnchor><ShareButton /></div></div></footer>
     </div>
   );
 }
