@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import DualLanguage from "@/components/dual-language";
 import InteriorHeader from "@/components/interior-header";
+import LocalizedAnchor from "@/components/localized-anchor";
+import { isLanguage } from "@/lib/language";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Thông tin pháp lý | Justice for PUBG VN",
-  description: "Thông tin về tính độc lập, nguồn tư liệu, quyền hình ảnh và quyền riêng tư của Justice for PUBG VN.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await params;
+  if (!isLanguage(lang)) notFound();
+  return pageMetadata(lang, "legal");
+}
 
 const sections = [
   {
@@ -32,7 +37,7 @@ const sections = [
   {
     id: "privacy", number: "04", title: { vi: "Quyền riêng tư", en: "Privacy" },
     paragraphs: [
-      { vi: "Nút “Đồng hành cùng họ” lưu một cookie trong trình duyệt trong tối đa một năm để hạn chế đếm lặp. Máy chủ lưu tổng số lượt ủng hộ, không lưu tên hoặc địa chỉ email qua tính năng này. Lựa chọn ngôn ngữ được lưu trong localStorage của trình duyệt.", en: "The “Stand with them” button sets a browser cookie for up to one year to limit repeat counts. The server stores the aggregate support count, not names or email addresses through this feature. Language preference is saved in browser localStorage." },
+      { vi: "Nút “Đồng hành cùng họ” lưu một cookie trong trình duyệt trong tối đa một năm để hạn chế đếm lặp. Máy chủ lưu tổng số lượt ủng hộ, không lưu tên hoặc địa chỉ email qua tính năng này. Ở lần truy cập đầu, trang chọn ngôn ngữ theo mã quốc gia dựa trên IP do Cloudflare cung cấp. Lựa chọn thủ công được lưu trong cookie của trình duyệt.", en: "The “Stand with them” button sets a browser cookie for up to one year to limit repeat counts. The server stores the aggregate support count, not names or email addresses through this feature. On a first visit, the site selects a language using Cloudflare's IP-based country code. A manual choice is saved in a browser cookie." },
       { vi: "Trang không tích hợp công cụ phân tích hành vi trong mã nguồn hiện tại. Khi mở liên kết ngoài, chính sách quyền riêng tư của trang đích sẽ áp dụng. Hạ tầng lưu trữ có thể xử lý nhật ký kết nối theo cấu hình của nhà cung cấp dịch vụ.", en: "The current site code does not include an analytics tool. External sites apply their own privacy policies when opened. Hosting infrastructure may process connection logs according to its provider configuration." },
     ],
   },
@@ -50,8 +55,8 @@ export default function LegalPage() {
     <InteriorHeader section="LEGAL / ABOUT" />
     <main>
       <section className="legal-hero"><div className="page-width"><p className="interior-kicker"><DualLanguage vi="MINH BẠCH" en="TRANSPARENCY" /> / 24.09.2026</p><h1><DualLanguage vi="THÔNG TIN PHÁP LÝ" en="LEGAL INFORMATION" /><span>.</span></h1><p><DualLanguage vi="Cách trang này sử dụng nguồn, hình ảnh và dữ liệu; cùng những giới hạn cần biết khi đọc hồ sơ vụ việc." en="How this site uses sources, images, and data, and the limits to keep in mind when reading the case file." /></p></div></section>
-      <div className="legal-layout page-width"><aside className="legal-toc"><span><DualLanguage vi="TRÊN TRANG NÀY" en="ON THIS PAGE" /></span>{sections.map((section) => <a href={`#${section.id}`} key={section.id}><small>{section.number}</small><DualLanguage {...section.title} /></a>)}<a className="legal-source-link" href="/sources"><DualLanguage vi="KHO TÀI LIỆU ↗" en="SOURCE ARCHIVE ↗" /></a></aside><div className="legal-content">{sections.map((section) => <section id={section.id} className="legal-section" key={section.id}><span className="legal-section-number">{section.number} / 05</span><h2><DualLanguage {...section.title} /></h2>{section.paragraphs.map((paragraph, index) => <p key={index}><DualLanguage {...paragraph} /></p>)}</section>)}</div></div>
-      <div className="legal-end page-width"><span>JUSTICE FOR PUBG VN / <DualLanguage vi="HỒ SƠ ĐỘC LẬP" en="INDEPENDENT CASE FILE" /></span><a href="/"><DualLanguage vi="← VỀ DÒNG THỜI GIAN" en="← BACK TO TIMELINE" /></a></div>
+      <div className="legal-layout page-width"><aside className="legal-toc"><span><DualLanguage vi="TRÊN TRANG NÀY" en="ON THIS PAGE" /></span>{sections.map((section) => <LocalizedAnchor href={`#${section.id}`} key={section.id}><small>{section.number}</small><DualLanguage {...section.title} /></LocalizedAnchor>)}<LocalizedAnchor className="legal-source-link" href="/sources"><DualLanguage vi="KHO TÀI LIỆU ↗" en="SOURCE ARCHIVE ↗" /></LocalizedAnchor></aside><div className="legal-content">{sections.map((section) => <section id={section.id} className="legal-section" key={section.id}><span className="legal-section-number">{section.number} / 05</span><h2><DualLanguage {...section.title} /></h2>{section.paragraphs.map((paragraph, index) => <p key={index}><DualLanguage {...paragraph} /></p>)}</section>)}</div></div>
+      <div className="legal-end page-width"><span>JUSTICE FOR PUBG VN / <DualLanguage vi="HỒ SƠ ĐỘC LẬP" en="INDEPENDENT CASE FILE" /></span><LocalizedAnchor href="/"><DualLanguage vi="← VỀ DÒNG THỜI GIAN" en="← BACK TO TIMELINE" /></LocalizedAnchor></div>
     </main>
   </div>;
 }

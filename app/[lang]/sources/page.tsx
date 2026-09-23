@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
@@ -6,18 +7,22 @@ import manifest from "@/public/attachments/manifest.json";
 import evidenceManifest from "@/public/attachments/evidence-manifest.json";
 import visualManifest from "@/public/attachments/visual-manifest.json";
 import { sources } from "@/data/timeline";
-import ArchiveLanguageSwitch from "@/components/archive-language-switch";
+import LanguageSelector from "@/components/language-selector";
 import DualLanguage from "@/components/dual-language";
 import TranslatedQuote from "@/components/translated-quote";
+import LocalizedAnchor from "@/components/localized-anchor";
+import { isLanguage } from "@/lib/language";
+import { pageMetadata } from "@/lib/seo";
 
 function L({ vi, en }: { vi: string; en: string }) {
   return <DualLanguage vi={vi} en={en} />;
 }
 
-export const metadata: Metadata = {
-  title: "Source Archive | Justice for PUBG VN",
-  description: "Original PUBG source links, locally archived copies, retrieval dates, and SHA-256 checksums for the case timeline.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await params;
+  if (!isLanguage(lang)) notFound();
+  return pageMetadata(lang, "sources");
+}
 
 type Archived = (typeof manifest)[number];
 
@@ -34,7 +39,7 @@ const records = [
   },
   {
     id: "findingsKo",
-    title: "조사 결과 및 조치 안내 · 23/09/2026",
+    title: "Kết quả điều tra và biện pháp xử lý · bản tiếng Hàn · 23/09/2026",
     titleEn: "Investigation findings · Korean · 23 Sep 2026",
     subtitle: "Official PUBG notice · Korean",
     source: sources.findingsKo.url,
@@ -74,7 +79,7 @@ const records = [
   },
   {
     id: "rulebook",
-    title: "PUBG Asia Stars 2026 Rulebook",
+    title: "Điều lệ PUBG Asia Stars 2026",
     titleEn: "PUBG Asia Stars 2026 Rulebook",
     subtitle: "Public mirror · Liquipedia",
     source: sources.rulebook.url,
@@ -84,7 +89,7 @@ const records = [
   },
   {
     id: "webEventRules",
-    title: "Official Web Event Rules",
+    title: "Quy định chính thức của Web Event",
     titleEn: "Official Web Event Rules",
     subtitle: "Official PUBG PDF · web event",
     source: "https://www.pubg.com/static/guide-pubgasiastars/event/PUBG_ASIASTARS_Event_Official_Rules_en.pdf",
@@ -103,18 +108,18 @@ export default function SourcesPage() {
   return (
     <div className="archive-page">
       <header className="archive-header">
-        <a className="wordmark" href="/" aria-label="Justice for PUBG VN timeline">
+        <LocalizedAnchor className="wordmark" href="/" aria-label="Justice for PUBG VN timeline">
           <span className="wordmark-main">JUSTICE<span>FORPUBGVN</span></span>
           <span className="wordmark-sub"><L vi="KHO TÀI LIỆU" en="SOURCE ARCHIVE" /></span>
-        </a>
-        <div className="archive-header-actions"><a href="/" className="archive-back"><L vi="← DÒNG THỜI GIAN" en="← TIMELINE" /></a><a href="/players" className="archive-back"><L vi="TUYỂN THỦ" en="PLAYERS" /></a><a href="/legal" className="archive-back"><L vi="PHÁP LÝ" en="LEGAL" /></a><ArchiveLanguageSwitch /></div>
+        </LocalizedAnchor>
+        <div className="archive-header-actions"><LocalizedAnchor href="/" className="archive-back"><L vi="← DÒNG THỜI GIAN" en="← TIMELINE" /></LocalizedAnchor><LocalizedAnchor href="/players" className="archive-back"><L vi="TUYỂN THỦ" en="PLAYERS" /></LocalizedAnchor><LocalizedAnchor href="/legal" className="archive-back"><L vi="PHÁP LÝ" en="LEGAL" /></LocalizedAnchor><LanguageSelector /></div>
       </header>
 
       <main className="archive-main page-width">
         <p className="eyebrow dark-eyebrow">02 / <L vi="KHO TÀI LIỆU" en="SOURCE ARCHIVE" /></p>
         <h1><L vi="KHO TÀI LIỆU" en="SOURCE ARCHIVE" /><span> / <L vi="NGUỒN" en="SOURCES" /></span></h1>
         <p className="archive-intro"><L vi="Mỗi mục cho biết địa chỉ gốc, nơi xuất bản và bản lưu cục bộ khi có. Trang PUBG được lưu dưới dạng HTML thô; hai thông báo Kakao được lưu dưới dạng văn bản bài viết từ trang hiển thị vì tải trực tiếp trả HTTP 403. SHA-256 giúp kiểm tra bản lưu có thay đổi hay không." en="Each record identifies the original URL, publisher and local copy when available. PUBG pages are archived as raw HTML; two Kakao notices contain captured visible article text because direct HTML retrieval returned HTTP 403. SHA-256 hashes help verify the local files." /></p>
-        <div className="archive-meta"><span>{records.length} <L vi="NGUỒN" en="SOURCES" /></span><span>{manifest.length + 2} <L vi="TỆP TÀI LIỆU CỤC BỘ" en="LOCAL DOCUMENT FILES" /></span><a href="/attachments/manifest.json" target="_blank" rel="noopener noreferrer"><L vi="TẢI MANIFEST NGUỒN ↗" en="SOURCE MANIFEST ↗" /></a></div>
+        <div className="archive-meta"><span>{records.length} <L vi="NGUỒN" en="SOURCES" /></span><span>{manifest.length + 2} <L vi="TỆP TÀI LIỆU CỤC BỘ" en="LOCAL DOCUMENT FILES" /></span><LocalizedAnchor href="/attachments/manifest.json" target="_blank" rel="noopener noreferrer"><L vi="TẢI MANIFEST NGUỒN ↗" en="SOURCE MANIFEST ↗" /></LocalizedAnchor></div>
 
         <div className="archive-list">
           {records.map((record, index) => {
@@ -127,8 +132,8 @@ export default function SourcesPage() {
                   <h2><L vi={record.title} en={record.titleEn} /></h2>
                   <p><L vi={record.note} en={record.noteEn} /></p>
                   <div className="archive-links">
-                    <a href={record.source} target="_blank" rel="noopener noreferrer"><L vi="NGUỒN GỐC ↗" en="ORIGINAL SOURCE ↗" /></a>
-                    {archived ? <a href={`/attachments/${archived.filename}`} download><L vi="TẢI BẢN LƯU ↓" en="LOCAL COPY ↓" /></a> : record.id === "rulebook" ? <a href="#rulebook-vi-3-7"><L vi="XEM PDF ĐÍNH KÈM ↓" en="VIEW SUPPLIED PDF ↓" /></a> : <span><L vi="CHƯA CÓ BẢN LƯU" en="LOCAL COPY UNAVAILABLE" /></span>}
+                    <LocalizedAnchor href={record.source} target="_blank" rel="noopener noreferrer"><L vi="NGUỒN GỐC ↗" en="ORIGINAL SOURCE ↗" /></LocalizedAnchor>
+                    {archived ? <LocalizedAnchor href={`/attachments/${archived.filename}`} download><L vi="TẢI BẢN LƯU ↓" en="LOCAL COPY ↓" /></LocalizedAnchor> : record.id === "rulebook" ? <LocalizedAnchor href="#rulebook-vi-3-7"><L vi="XEM PDF ĐÍNH KÈM ↓" en="VIEW SUPPLIED PDF ↓" /></LocalizedAnchor> : <span><L vi="CHƯA CÓ BẢN LƯU" en="LOCAL COPY UNAVAILABLE" /></span>}
                   </div>
                   {archived && <div className="archive-checksum"><span><L vi="LƯU LÚC" en="CAPTURED" /> {archived.retrieved_at_utc.replace("T", " ").replace("+00:00", " UTC")}</span><span>{archived.capture_method}</span><span>SHA-256 {archived.sha256}</span></div>}
                   <div className="archive-url">{record.source}</div>
@@ -143,25 +148,25 @@ export default function SourcesPage() {
           <h2 id="rulebook-source-title"><L vi="ĐIỀU LỆ GIẢI ĐẤU" en="TOURNAMENT RULEBOOK" /></h2>
           <p><L vi="Hai bản PDF tiếng Việt và tiếng Anh có trong tệp đính kèm của dự án. Bìa ghi phiên bản 14.09.2026 (VI) và 2026.09.14 (EN). Liên kết Liquipedia ở mục trên là một bản mirror công khai; chúng tôi chưa xác minh được hai tệp cục bộ có được tải từ mirror đó hay được PUBG phát hành tại một URL cụ thể." en="The project attachments contain Vietnamese and English PDFs. Their covers show versions 14.09.2026 (VI) and 2026.09.14 (EN). The Liquipedia link above is a public mirror; we have not verified whether these supplied files came from that mirror or a specific PUBG URL." /></p>
           <div className="rulebook-files">
-            <a href={`/attachments/${rulebookVi}#page=16`} target="_blank" rel="noopener noreferrer"><L vi="MỞ BẢN VI · TRANG 16 ↗" en="OPEN VI · PAGE 16 ↗" /></a>
-            <a href={`/attachments/${rulebookEn}#page=18`} target="_blank" rel="noopener noreferrer"><L vi="MỞ BẢN EN · TRANG 18 ↗" en="OPEN EN · PAGE 18 ↗" /></a>
+            <LocalizedAnchor href={`/attachments/${rulebookVi}#page=16`} target="_blank" rel="noopener noreferrer"><L vi="MỞ BẢN VI · TRANG 16 ↗" en="OPEN VI · PAGE 16 ↗" /></LocalizedAnchor>
+            <LocalizedAnchor href={`/attachments/${rulebookEn}#page=18`} target="_blank" rel="noopener noreferrer"><L vi="MỞ BẢN EN · TRANG 18 ↗" en="OPEN EN · PAGE 18 ↗" /></LocalizedAnchor>
           </div>
           <div className="rulebook-checksums"><span>VI SHA-256 {rulebookHash(rulebookVi)}</span><span>EN SHA-256 {rulebookHash(rulebookEn)}</span></div>
           <article className="rulebook-excerpt" id="rulebook-vi-3-7">
             <span><L vi="ĐIỀU LỆ VI" en="VI RULEBOOK" /> · §3.7 · <L vi="TRANG 16/17" en="PAGE 16/17" /> · 14.09.2026</span>
             <h3><L vi="Biện pháp chống gian lận" en="Anti-cheating measures" /></h3>
-            <blockquote>“Khuyến nghị tất cả người chơi livestream cá nhân phải cài đặt độ trễ hợp lý để tránh bị lộ thông tin.”</blockquote>
+            <blockquote lang="vi">“Khuyến nghị tất cả người chơi livestream cá nhân phải cài đặt độ trễ hợp lý để tránh bị lộ thông tin.”</blockquote>
             <TranslatedQuote quote="delay" />
             <p><L vi="Điều khoản cũng nói người chơi tự chịu rủi ro do livestream cá nhân và phải hợp tác khi ban tổ chức yêu cầu kiểm tra bổ sung. Trích đoạn trên chỉ nói về độ trễ stream cá nhân; không tự giải quyết câu hỏi sử dụng thông tin từ stream của người khác." en="The section also makes players responsible for risks from personal streams and requires cooperation with additional organizer checks. This excerpt concerns personal stream delay; it does not by itself settle use of information from someone else's stream." /></p>
-            <a href={`/attachments/${rulebookVi}#page=16`} target="_blank" rel="noopener noreferrer"><L vi="ĐỌC NGUYÊN TRANG PDF ↗" en="READ FULL PDF PAGE ↗" /></a>
+            <LocalizedAnchor href={`/attachments/${rulebookVi}#page=16`} target="_blank" rel="noopener noreferrer"><L vi="ĐỌC NGUYÊN TRANG PDF ↗" en="READ FULL PDF PAGE ↗" /></LocalizedAnchor>
           </article>
           <article className="rulebook-excerpt" id="rulebook-vi-4-1">
             <span><L vi="ĐIỀU LỆ VI" en="VI RULEBOOK" /> · §4.1 · <L vi="TRANG 16/17" en="PAGE 16/17" /> · 14.09.2026</span>
             <h3><L vi="Quy tắc ứng xử và nghĩa vụ chung" en="Conduct and general duties" /></h3>
-            <blockquote>“Tất cả Người tham gia có nghĩa vụ tự tìm hiểu, ghi nhớ bộ quy tắc này và mọi thông báo chính thức được đăng trên kênh Discord của giải đấu.”</blockquote>
+            <blockquote lang="vi">“Tất cả Người tham gia có nghĩa vụ tự tìm hiểu, ghi nhớ bộ quy tắc này và mọi thông báo chính thức được đăng trên kênh Discord của giải đấu.”</blockquote>
             <TranslatedQuote quote="notices" />
             <p><L vi="§4.1 còn quy định thông báo bổ sung của ban tổ chức có giá trị tương đương điều khoản trong luật. Trang này chưa có bản lưu thông báo hoặc hướng dẫn Discord trước sự việc, nên chưa thể đối chiếu chính xác nội dung người tham gia đã nhận." en="§4.1 also says additional organizer announcements carry the same force as rulebook provisions. This site has no archive of the pre-event Discord notices or guidance, so their exact contents cannot be checked here." /></p>
-            <a href={`/attachments/${rulebookVi}#page=16`} target="_blank" rel="noopener noreferrer"><L vi="ĐỌC NGUYÊN TRANG PDF ↗" en="READ FULL PDF PAGE ↗" /></a>
+            <LocalizedAnchor href={`/attachments/${rulebookVi}#page=16`} target="_blank" rel="noopener noreferrer"><L vi="ĐỌC NGUYÊN TRANG PDF ↗" en="READ FULL PDF PAGE ↗" /></LocalizedAnchor>
           </article>
         </section>
 
@@ -171,7 +176,7 @@ export default function SourcesPage() {
           <blockquote className="reported-source-quote"><L vi="một số nguồn tin từ các cá nhân tham gia giải đấu từ đội tuyển việt nam đã thông tin về việc ban đầu btc đã đưa ra lệnh ban từ trước đó, tuy nhiên ban đầu là 1 năm, sau đó giảm xuống 6 tháng sau khi Himass và Tanvuu lên bài xin lỗi. Tuy nhiên sau đó lại đổi thành ban vĩnh viễn." en="Several sources among Vietnam team members who participated in the tournament said the organizers had initially issued a ban of one year, then reduced it to six months after Himass and Tanvuu posted apologies. It was later changed to a permanent ban." /></blockquote>
           <p><L vi="Đoạn trên là thông tin do người yêu cầu trang cung cấp. Trang này chưa có bản chụp, đường dẫn gốc hoặc văn bản quyết định xác nhận các mức phạt trước đó và thời điểm thay đổi." en="The account above was supplied by the site requester. We do not have original posts, screenshots or decision records confirming the earlier sanction lengths or when they changed." /></p>
           <p><L vi="Các thông báo chính thức được lưu ở đây xác nhận án cấm vĩnh viễn nhưng không ghi nhận những thay đổi trước đó. Ban tổ chức cần giải thích căn cứ và quy trình của từng lần thay đổi nếu trình tự này được xác nhận." en="The official notices archived here confirm the permanent bans but do not document the earlier changes. If this sequence is confirmed, organizers should explain the basis and process for each change." /></p>
-          <a href="#findingsVi"><L vi="ĐỐI CHIẾU THÔNG BÁO CHÍNH THỨC · 23/09 ↗" en="CHECK THE OFFICIAL 23 SEP NOTICE ↗" /></a>
+          <LocalizedAnchor href="#findingsVi"><L vi="ĐỐI CHIẾU THÔNG BÁO CHÍNH THỨC · 23/09 ↗" en="CHECK THE OFFICIAL 23 SEP NOTICE ↗" /></LocalizedAnchor>
         </section>
 
         <section id="evidence" className="evidence-archive" aria-labelledby="evidence-title">
@@ -181,18 +186,18 @@ export default function SourcesPage() {
           <div className="evidence-archive-grid">
             {evidenceManifest.map((item, index) => (
               <article className="evidence-archive-card" id={index === 0 ? "evidence-soopi-alt-tab" : "evidence-soopi-watching-livestream"} key={item.filename}>
-                <a href={item.path} target="_blank" rel="noopener noreferrer"><img src={item.path} alt={index === 0 ? "Application switcher over a PUBG lobby in Soopi footage" : "SOOP livestream page visible in footage"} /></a>
+                <LocalizedAnchor href={item.path} target="_blank" rel="noopener noreferrer"><img src={item.path} alt={index === 0 ? "Application switcher over a PUBG lobby in Soopi footage" : "SOOP livestream page visible in footage"} /></LocalizedAnchor>
                 <div className="evidence-archive-card-body">
                   <span><L vi="ẢNH DO NGƯỜI DÙNG CUNG CẤP" en="USER-SUPPLIED IMAGE" /> / {String(index + 1).padStart(2, "0")}</span>
                   <h3>{item.filename}</h3>
                   <p><L vi={index === 0 ? "Màn hình chuyển ứng dụng trong video Soopi; bối cảnh chụp chưa được xác minh độc lập." : "Trang livestream xuất hiện trong video; ảnh tĩnh không tự chứng minh mục đích hoặc vi phạm."} en={index === 0 ? "Application switcher in Soopi-related footage; capture context is unverified." : "A livestream page visible in footage; a still alone does not establish intent or misconduct."} /></p>
-                  <a href={item.path} download><L vi="TẢI PNG GỐC ↓" en="DOWNLOAD ORIGINAL PNG ↓" /></a>
+                  <LocalizedAnchor href={item.path} download><L vi="TẢI PNG GỐC ↓" en="DOWNLOAD ORIGINAL PNG ↓" /></LocalizedAnchor>
                   <div className="archive-checksum">SHA-256 {item.sha256}</div>
                 </div>
               </article>
             ))}
           </div>
-          <a className="evidence-manifest-link" href="/attachments/evidence-manifest.json" target="_blank" rel="noopener noreferrer">IMAGE FILE MANIFEST ↗</a>
+          <LocalizedAnchor className="evidence-manifest-link" href="/attachments/evidence-manifest.json" target="_blank" rel="noopener noreferrer">IMAGE FILE MANIFEST ↗</LocalizedAnchor>
         </section>
 
         <section id="campaign-image" className="evidence-archive" aria-labelledby="campaign-image-title">
@@ -200,19 +205,19 @@ export default function SourcesPage() {
           <h2 id="campaign-image-title"><L vi="HÌNH MINH HỌA" en="CAMPAIGN VISUAL" /></h2>
           <p className="evidence-archive-intro"><L vi="Ảnh đen trắng dùng ở phần mở đầu do người dùng cung cấp. Đây là hình minh họa cho chiến dịch, không phải chứng cứ điều tra hoặc ảnh do PUBG xác nhận." en="The user supplied the black-and-white hero image. It is campaign artwork, not investigation evidence or a PUBG-verified image." /></p>
           <article className="evidence-archive-card campaign-archive-card">
-            <a href={visualManifest.path} target="_blank" rel="noopener noreferrer"><img src={visualManifest.path} alt="Hình minh họa đen trắng của hai tuyển thủ" /></a>
+            <LocalizedAnchor href={visualManifest.path} target="_blank" rel="noopener noreferrer"><img src={visualManifest.path} alt="Hình minh họa đen trắng của hai tuyển thủ" /></LocalizedAnchor>
             <div className="evidence-archive-card-body">
               <span><L vi="HÌNH MINH HỌA DO NGƯỜI DÙNG CUNG CẤP" en="USER-SUPPLIED CAMPAIGN VISUAL" /></span>
               <h3>{visualManifest.filename}</h3>
               <p><L vi="Bản lưu cục bộ nguyên file. Nguồn ảnh gốc và danh tính trong ảnh chưa được xác minh độc lập." en="The local original is preserved. Its source and the identities depicted have not been independently verified." /></p>
-              <a href={visualManifest.path} download><L vi="TẢI PNG GỐC ↓" en="DOWNLOAD ORIGINAL PNG ↓" /></a>
+              <LocalizedAnchor href={visualManifest.path} download><L vi="TẢI PNG GỐC ↓" en="DOWNLOAD ORIGINAL PNG ↓" /></LocalizedAnchor>
               <div className="archive-checksum">SHA-256 {visualManifest.sha256}</div>
             </div>
           </article>
-          <a className="evidence-manifest-link" href="/attachments/visual-manifest.json" target="_blank" rel="noopener noreferrer">VISUAL FILE MANIFEST ↗</a>
+          <LocalizedAnchor className="evidence-manifest-link" href="/attachments/visual-manifest.json" target="_blank" rel="noopener noreferrer">VISUAL FILE MANIFEST ↗</LocalizedAnchor>
         </section>
       </main>
-      <footer className="site-footer"><div className="page-width archive-footer"><L vi="Kho tư liệu độc lập cho dòng thời gian Justice for PUBG VN." en="Independent source archive for the Justice for PUBG VN timeline." /> <a href="/"><L vi="← DÒNG THỜI GIAN" en="← TIMELINE" /></a></div></footer>
+      <footer className="site-footer"><div className="page-width archive-footer"><L vi="Kho tư liệu độc lập cho dòng thời gian Justice for PUBG VN." en="Independent source archive for the Justice for PUBG VN timeline." /> <LocalizedAnchor href="/"><L vi="← DÒNG THỜI GIAN" en="← TIMELINE" /></LocalizedAnchor></div></footer>
     </div>
   );
 }

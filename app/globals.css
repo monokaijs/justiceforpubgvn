@@ -28,6 +28,7 @@ button { font: inherit; }
 a { color: inherit; text-decoration: none; }
 svg { display: block; width: 18px; height: 18px; }
 ::selection { background: var(--accent); color: var(--black); }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
 .site-shell { overflow: clip; }
 .page-width { width: min(100% - 80px, 1376px); margin-inline: auto; }
@@ -47,10 +48,7 @@ svg { display: block; width: 18px; height: 18px; }
 .main-nav a::after { content: ""; position: absolute; bottom: -1px; left: 0; right: 0; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .2s; }
 .main-nav a:hover { color: var(--accent); }
 .main-nav a:hover::after { transform: scaleX(1); }
-.language-switch { justify-self: end; display: flex; border: 1px solid #52575c; padding: 3px; }
-.language-switch button { border: 0; color: #a6aaae; background: transparent; min-width: 38px; height: 28px; cursor: pointer; font-size: 10px; font-weight: 800; letter-spacing: .06em; }
-.language-switch button.active { color: #0e0e0d; background: var(--accent); }
-.language-switch button:focus-visible, .filter-button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.filter-button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
 .hero { min-height: calc(100svh - 76px); background: #11110f; color: #f6f4ea; position: relative; isolation: isolate; scroll-snap-align: start; scroll-margin-top: 76px; }
 .hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(ellipse at 75% 44%, rgba(204,208,213,.13), transparent 34%), linear-gradient(145deg, transparent 53%, rgba(255,255,255,.025) 53.1%, transparent 53.3%); }
@@ -679,7 +677,7 @@ html:has(.story-section) { scroll-snap-type: y proximity; }
 .archive-intro { font-size: 15px; }
 .archive-url, .archive-checksum, .rulebook-checksums { font-size: 11px; }
 .wordmark-sub, .footer-brand small, .evidence-archive-card-body > span { font-size: 12px; }
-.language-switch button, .eyebrow, .archive-meta, .rulebook-excerpt > span,
+.eyebrow, .archive-meta, .rulebook-excerpt > span,
 .rulebook-files a, .rulebook-excerpt a, .evidence-archive-card-body > a,
 .evidence-manifest-link { font-size: 12px; }
 .primary-cta { font-size: 13px; }

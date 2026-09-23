@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Language, sources, timeline, type SourceKey } from "@/data/timeline";
 import { useLanguage } from "@/components/language-provider";
 import LanguageSelector from "@/components/language-selector";
+import LocalizedAnchor from "@/components/localized-anchor";
 import { loc, localized } from "@/lib/i18n";
 
 const copy = {
@@ -12,11 +13,11 @@ const copy = {
     brandSub: "DÒNG THỜI GIAN",
     navTimeline: "DIỄN BIẾN VỤ VIỆC",
     navSources: "NGUỒN TÀI LIỆU",
-    heroEyebrow: "JUSTICE FOR PUBG VN  /  17 — 23.09.2026",
+    heroEyebrow: "JUSTICE FOR PUBG VN  /  17–23.09.2026",
     heroLineOne: "Công bằng cho",
     heroLineTwo: "Himass & TanVuu.",
     heroStatement: "Không bênh vực gian lận. Yêu cầu điều tra minh bạch và xử phạt tương xứng.",
-    heroDescription: "Showmatch không miễn trách nhiệm thi đấu công bằng. Nhưng khi điều lệ thiếu cụ thể và hướng dẫn chưa nhất quán, một án cấm vĩnh viễn ảnh hưởng cả sự nghiệp cần được giải thích thuyết phục — không chỉ bằng một thông báo kết luận.",
+    heroDescription: "Showmatch không miễn trách nhiệm thi đấu công bằng. Nhưng khi điều lệ thiếu cụ thể và hướng dẫn chưa nhất quán, một án cấm vĩnh viễn ảnh hưởng cả sự nghiệp cần được giải thích thuyết phục, không chỉ bằng một thông báo kết luận.",
     heroLabel: "MỞ ĐẦU",
     heroButton: "Xem diễn biến & tài liệu",
     heroSkip: "Đến dòng thời gian",
@@ -48,7 +49,7 @@ const copy = {
     brandSub: "CASE TIMELINE",
     navTimeline: "CASE TIMELINE",
     navSources: "SOURCES",
-    heroEyebrow: "JUSTICE FOR PUBG VN  /  17 — 23.09.2026",
+    heroEyebrow: "JUSTICE FOR PUBG VN  /  17–23.09.2026",
     heroLineOne: "Fair treatment for",
     heroLineTwo: "Himass & TanVuu.",
     heroStatement: "Not a defense of cheating. A call for clear rules, transparent investigation, and proportionate sanctions.",
@@ -146,7 +147,6 @@ function ArrowIcon({ diagonal = false }: { diagonal?: boolean }) {
   );
 }
 
-
 function SupportIcon({ supported }: { supported: boolean }) {
   return (
     <svg aria-hidden="true" viewBox="0 0 24 24" fill={supported ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -157,10 +157,10 @@ function SupportIcon({ supported }: { supported: boolean }) {
 
 function SourceLink({ sourceKey, label }: { sourceKey: SourceKey; label: string }) {
   return (
-    <a className="source-link" href={`/sources#${sourceKey}`}>
+    <LocalizedAnchor className="source-link" href={`/sources#${sourceKey}`}>
       <span>{label}</span>
       <ArrowIcon diagonal />
-    </a>
+    </LocalizedAnchor>
   );
 }
 
@@ -171,7 +171,7 @@ function ReportedSanctionChanges({ language, compact = false }: { language: Lang
       <strong>{loc(language, "1 năm", "1 year")}</strong><span aria-hidden="true">→</span><strong>{loc(language, "6 tháng", "6 months")}</strong><span aria-hidden="true">→</span><strong>{loc(language, "vĩnh viễn", "permanent")}</strong>
     </div>
     <p>{loc(language, "một số nguồn tin từ các cá nhân tham gia giải đấu từ đội tuyển việt nam đã thông tin về việc ban đầu btc đã đưa ra lệnh ban từ trước đó, tuy nhiên ban đầu là 1 năm, sau đó giảm xuống 6 tháng sau khi Himass và Tanvuu lên bài xin lỗi. Tuy nhiên sau đó lại đổi thành ban vĩnh viễn.", "Several sources among Vietnam team members who participated in the tournament said the organizers had initially issued a ban of one year, then reduced it to six months after Himass and Tanvuu posted apologies. It was later changed to a permanent ban.")}</p>
-    <a href="/sources#reported-sanction-changes">{loc(language, "Xem nguồn gốc và giới hạn thông tin", "Read provenance and limits")} ↗</a>
+    <LocalizedAnchor href="/sources#reported-sanction-changes">{loc(language, "Xem nguồn gốc và giới hạn thông tin", "Read provenance and limits")} ↗</LocalizedAnchor>
   </aside>;
 }
 
@@ -183,7 +183,7 @@ function CaseModule({ id, language, response, explanation }: { id: keyof typeof 
     <span className="case-module-eyebrow">{loc(language, "LẬP LUẬN CỦA TRANG", "THIS SITE'S ARGUMENT")}</span>
     <h3>{title}</h3>
     <p className="case-module-lead">{body}</p>
-    {id === "rulebook" && <div className="module-document"><span>VI RULEBOOK · §3.7 · 14.09.2026 · P.16/17</span><blockquote>“Khuyến nghị tất cả người chơi livestream cá nhân phải cài đặt độ trễ hợp lý để tránh bị lộ thông tin.”</blockquote><p>{loc(language, "Trích nguyên văn điều lệ tiếng Việt. §4.1 quy định nghĩa vụ đọc thông báo chính thức trên Discord; bản lưu hướng dẫn trước sự việc chưa có trên trang.", "Exact excerpt from the Vietnamese rulebook. §4.1 also requires participants to read official Discord notices; this site has no archived pre-event guidance.")}</p></div>}
+    {id === "rulebook" && <div className="module-document"><span>{loc(language, "ĐIỀU LỆ VI", "VI RULEBOOK")} · §3.7 · 14.09.2026 · P.16/17</span><blockquote lang="vi">“Khuyến nghị tất cả người chơi livestream cá nhân phải cài đặt độ trễ hợp lý để tránh bị lộ thông tin.”</blockquote><p>{loc(language, "Trích nguyên văn điều lệ tiếng Việt. §4.1 quy định nghĩa vụ đọc thông báo chính thức trên Discord; bản lưu hướng dẫn trước sự việc chưa có trên trang.", "Exact excerpt from the Vietnamese rulebook. §4.1 also requires participants to read official Discord notices; this site has no archived pre-event guidance.")}</p></div>}
     {id === "findings-september-23" && <div className="module-chain" aria-label={loc(language, "Cáo buộc, chứng cứ, kết luận", "Claim, evidence, finding")}>
       <div><span>{loc(language, "CÁO BUỘC", "CLAIM")}</span><p>{loc(language, "Himass và TanVuu xem và dùng thông tin ngoài game.", "Himass and TanVuu viewed and used out-of-game information.")}</p></div>
       <div><span>{loc(language, "CHỨNG CỨ PUBG NÊU", "EVIDENCE PUBG CITES")}</span><p>{loc(language, "Livestream, video người tham gia, dữ liệu trong game và replay; hồ sơ cá nhân đầy đủ chưa được công khai tại các nguồn lưu ở đây.", "Broadcasts, participant footage, in-game data and replays; the complete player-specific record is not public in the sources archived here.")}</p></div>
@@ -203,12 +203,12 @@ function CaseModule({ id, language, response, explanation }: { id: keyof typeof 
         ].map((label, fieldIndex) => <div key={label}><dt>{label}</dt><dd>{person.values[fieldIndex]}</dd></div>)}</dl></section>)}
       </div>
       <p>{loc(language, "Trong kết luận ngày 23/09, PUBG nói đã xem xét nghi vấn tương tự với người khác và không thấy thêm vi phạm cần chế tài; thông báo không nêu tên Soopi trong kết luận này.", "In its later 23 Sep findings, PUBG says it reviewed similar allegations involving others and found no further sanctionable violation; the notice does not name Soopi in that finding.")}</p>
-      <div className="module-stills"><a href="/sources#evidence-soopi-alt-tab"><Image src="/attachments/evidences/soopi-alt-tab.png" alt={loc(language, "Ảnh do người dùng cung cấp: màn hình chuyển ứng dụng", "User-supplied app switcher still")} width={360} height={203} unoptimized /><span>{loc(language, "Ảnh chuyển ứng dụng · nguồn và thời điểm chưa xác minh", "App switcher · origin and timing unverified")}</span></a><a href="/sources#evidence-soopi-watching-livestream"><Image src="/attachments/evidences/soopi-watching-livestream.png" alt={loc(language, "Ảnh do người dùng cung cấp: trang livestream", "User-supplied livestream page still")} width={360} height={203} unoptimized /><span>{loc(language, "Trang stream · ảnh tĩnh không chứng minh việc sử dụng", "Stream page · still does not prove use")}</span></a></div>
+      <div className="module-stills"><LocalizedAnchor href="/sources#evidence-soopi-alt-tab"><Image src="/attachments/evidences/soopi-alt-tab.png" alt={loc(language, "Ảnh do người dùng cung cấp: màn hình chuyển ứng dụng", "User-supplied app switcher still")} width={360} height={203} unoptimized /><span>{loc(language, "Ảnh chuyển ứng dụng · nguồn và thời điểm chưa xác minh", "App switcher · origin and timing unverified")}</span></LocalizedAnchor><LocalizedAnchor href="/sources#evidence-soopi-watching-livestream"><Image src="/attachments/evidences/soopi-watching-livestream.png" alt={loc(language, "Ảnh do người dùng cung cấp: trang livestream", "User-supplied livestream page still")} width={360} height={203} unoptimized /><span>{loc(language, "Trang stream · ảnh tĩnh không chứng minh việc sử dụng", "Stream page · still does not prove use")}</span></LocalizedAnchor></div>
     </div>}
     {id === "sanctions-september-23" && <div className="module-sanctions"><div><span>{loc(language, "TÀI KHOẢN GAME", "GAME ACCOUNTS")}</span><strong>{loc(language, "Khóa vĩnh viễn", "Permanent bans")}</strong></div><div><span>{loc(language, "GIẢI ESPORTS CHÍNH THỨC", "OFFICIAL ESPORTS")}</span><strong>{loc(language, "Tước quyền thi đấu vĩnh viễn", "Permanent ineligibility")}</strong></div><div><span>{loc(language, "VIETNAM PARTNER · 20/09", "VIETNAM PARTNER · 20 SEP")}</span><strong>{loc(language, "Thu hồi tư cách", "Status revoked")}</strong></div></div>}
     {id === "sanctions-september-23" && <ReportedSanctionChanges language={language} />}
     {id === "sanctions-september-23" && <p className="module-limits">{loc(language, "PUBG nêu quyền giải trình qua thủ tục Esports. Trang này chưa có kết quả khiếu nại hoặc tuyên bố đội tuyển được xác thực để dẫn nguồn.", "PUBG states that the players may use its esports response process. This site has no verified appeal outcome or team statement to cite.")}</p>}
-    <div className="module-links"><span>{loc(language, "KIỂM TRA BỐI CẢNH", "CHECK THE CONTEXT")}</span><div>{module.links.map((link) => <a key={link.href} href={link.href}>{localized(link, language)} ↗</a>)}</div></div>
+    <div className="module-links"><span>{loc(language, "KIỂM TRA BỐI CẢNH", "CHECK THE CONTEXT")}</span><div>{module.links.map((link) => <LocalizedAnchor key={link.href} href={link.href}>{localized(link, language)} ↗</LocalizedAnchor>)}</div></div>
     <details className="case-read-more"><summary>{loc(language, "Đọc thêm", "Read more")}<span aria-hidden="true">+</span></summary><div><p><strong>{loc(language, "Phản hồi / lập luận:", "Response / argument:")}</strong> {response}</p><p><strong>{loc(language, "Bối cảnh:", "Context:")}</strong> {explanation}</p></div></details>
   </aside>;
 }
@@ -290,19 +290,21 @@ export default function TimelineExperience() {
           : slide.scrollTop > 2;
         if (canScrollInside) return;
       }
+      const stageDistance = (rect.height - window.innerHeight) / 3;
+      const position = stageDistance > 0 ? -rect.top / stageDistance : 0;
+      const current = Math.max(0, Math.min(3, Math.round(position)));
+      if (event.deltaY < 0 && current === 0) return;
       event.preventDefault();
       if (wheelLocked) return;
       wheelTotal += event.deltaY * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? window.innerHeight : 1);
       if (Math.abs(wheelTotal) < 32) return;
       const direction = Math.sign(wheelTotal);
       wheelTotal = 0;
-      const position = -rect.top / window.innerHeight;
-      const current = Math.max(0, Math.min(3, direction > 0 ? Math.floor(position) : Math.ceil(position)));
       const next = Math.max(0, Math.min(3, current + direction));
       if (next === current && direction < 0) return;
       wheelLocked = true;
       const sectionTop = rect.top + window.scrollY;
-      window.scrollTo({ top: next === current ? sectionTop + heroSection.offsetHeight : sectionTop + next * window.innerHeight, behavior: reducedMotion.matches ? "auto" : "smooth" });
+      window.scrollTo({ top: next === current ? sectionTop + heroSection.offsetHeight : sectionTop + next * stageDistance, behavior: reducedMotion.matches ? "auto" : "smooth" });
       window.clearTimeout(wheelTimer);
       wheelTimer = window.setTimeout(() => { wheelLocked = false; }, 780);
     };
@@ -354,14 +356,14 @@ export default function TimelineExperience() {
   return (
     <div id="top" className="site-shell">
       <header className="site-header">
-        <a className="wordmark" href="#top" aria-label="Justice for PUBG VN">
+        <LocalizedAnchor className="wordmark" href="#top" aria-label="Justice for PUBG VN">
           <span className="wordmark-main">JUSTICE<span>FORPUBGVN</span></span>
           <span className="wordmark-sub">{t.brandSub}</span>
-        </a>
+        </LocalizedAnchor>
         <nav className="home-header-nav" aria-label={loc(language, "Điều hướng chính", "Main navigation")}>
-          <a href="/players">{loc(language, "TUYỂN THỦ", "PLAYERS")}</a>
-          <a href="/sources">{t.navSources}</a>
-          <a href="/legal">{loc(language, "PHÁP LÝ", "LEGAL")}</a>
+          <LocalizedAnchor href="/players">{loc(language, "TUYỂN THỦ", "PLAYERS")}</LocalizedAnchor>
+          <LocalizedAnchor href="/sources">{t.navSources}</LocalizedAnchor>
+          <LocalizedAnchor href="/legal">{loc(language, "PHÁP LÝ", "LEGAL")}</LocalizedAnchor>
         </nav>
         <LanguageSelector />
       </header>
@@ -382,7 +384,7 @@ export default function TimelineExperience() {
                       <button type="button" className="hero-support-button" onClick={standWithThem} disabled={supportPending || support?.supported} aria-pressed={support?.supported ?? false}>
                         <SupportIcon supported={support?.supported ?? false} />{support?.supported ? t.supportedButton : t.supportButton}
                       </button>
-                      <div className="hero-support-count" aria-live="polite"><strong>{support ? new Intl.NumberFormat({ vi: "vi-VN", th: "th-TH", en: "en-US", ko: "ko-KR" }[language]).format(support.count) : "—"}</strong><span>{t.supportCount}</span></div>
+                      <div className="hero-support-count" aria-live="polite"><strong>{support ? new Intl.NumberFormat({ vi: "vi-VN", th: "th-TH", en: "en-US", ko: "ko-KR" }[language]).format(support.count) : "…"}</strong><span>{t.supportCount}</span></div>
                     </div>
                     {supportError && <p className="hero-support-error" role="alert">{t.supportError}</p>}
                     <p className="hero-intro-credit">{t.independent} · {t.heroVisualSource}</p>
@@ -397,9 +399,9 @@ export default function TimelineExperience() {
                     <h2>{translatedHeroArguments[0].title}</h2>
                     <p className="magazine-lead">{translatedHeroArguments[0].body}</p>
                     <p className="magazine-context">{loc(language, "Điều lệ có nghĩa vụ chống gian lận và yêu cầu theo dõi thông báo Discord. PUBG sau đó thừa nhận các tiêu chuẩn công bằng chưa được cụ thể hóa đủ.", "The rulebook contains anti-cheating duties and requires participants to follow Discord notices. PUBG later acknowledged that its fairness standards were not specific enough.")}</p>
-                    <a className="magazine-source" href="/sources#rulebook-vi-3-7">{loc(language, "Đọc điều lệ gốc · §3.7", "Read the rulebook · §3.7")} ↗</a>
+                    <LocalizedAnchor className="magazine-source" href="/sources#rulebook-vi-3-7">{loc(language, "Đọc điều lệ gốc · §3.7", "Read the rulebook · §3.7")} ↗</LocalizedAnchor>
                   </div>
-                  <div className="magazine-rule-excerpt"><span>{loc(language, "ĐIỀU LỆ VI", "VI RULEBOOK")} · §3.7 · 14.09.2026</span><strong>§3.7</strong><blockquote>“Khuyến nghị tất cả người chơi livestream cá nhân phải cài đặt độ trễ hợp lý để tránh bị lộ thông tin.”</blockquote><p>{loc(language, "Trích nguyên văn trang 16/17. Chưa có bản lưu hướng dẫn Discord trước sự việc để đối chiếu.", "Translation: Players who stream personally are encouraged to set a reasonable delay to prevent information exposure. Pre-event Discord guidance is not archived here.")}</p></div>
+                  <div className="magazine-rule-excerpt"><span>{loc(language, "ĐIỀU LỆ VI", "VI RULEBOOK")} · §3.7 · 14.09.2026</span><strong>§3.7</strong><blockquote lang="vi">“Khuyến nghị tất cả người chơi livestream cá nhân phải cài đặt độ trễ hợp lý để tránh bị lộ thông tin.”</blockquote><p>{loc(language, "Trích nguyên văn trang 16/17. Chưa có bản lưu hướng dẫn Discord trước sự việc để đối chiếu.", "Translation: Players who stream personally are encouraged to set a reasonable delay to prevent information exposure. Pre-event Discord guidance is not archived here.")}</p></div>
                 </div>
               </article>
 
@@ -410,15 +412,15 @@ export default function TimelineExperience() {
                     <h2>{translatedHeroArguments[1].title}</h2>
                     <p className="magazine-lead">{translatedHeroArguments[1].body}</p>
                     <p className="magazine-context">{loc(language, "Thông báo ngày 20/09 còn để ngỏ câu hỏi về việc xem stream người khác và sử dụng thông tin. Kết luận ngày 23/09 đã thay đổi trạng thái đó.", "The 20 September notice left questions about viewing another stream and using its information open. The 23 September findings superseded that status.")}</p>
-                    <a className="magazine-source" href="/sources#findingsVi">{loc(language, "Đọc kết luận của PUBG", "Read PUBG's findings")} ↗</a>
+                    <LocalizedAnchor className="magazine-source" href="/sources#findingsVi">{loc(language, "Đọc kết luận của PUBG", "Read PUBG's findings")} ↗</LocalizedAnchor>
                   </div>
                   <div className="magazine-evidence">
                     <div className="magazine-evidence-status"><span>20.09 · {loc(language, "còn điều tra", "under review")}</span><span>23.09 · {loc(language, "PUBG công bố kết luận", "PUBG published findings")}</span></div>
-                    <a className="magazine-evidence-primary" href="/sources#evidence-soopi-watching-livestream" aria-label={loc(language, "Xem nguồn ảnh trang livestream liên quan Soopi", "View provenance for the Soopi-related livestream image")}>
+                    <LocalizedAnchor className="magazine-evidence-primary" href="/sources#evidence-soopi-watching-livestream" aria-label={loc(language, "Xem nguồn ảnh trang livestream liên quan Soopi", "View provenance for the Soopi-related livestream image")}>
                       <Image src="/attachments/evidences/soopi-watching-livestream.png" alt={loc(language, "Ảnh do người dùng cung cấp: trang livestream SOOP xuất hiện trong video liên quan Soopi", "User-supplied still of a SOOP livestream page in Soopi-related footage")} fill sizes="(max-width: 800px) 90vw, 42vw" unoptimized />
-                    </a>
+                    </LocalizedAnchor>
                     <div className="magazine-evidence-bottom">
-                      <a className="magazine-evidence-secondary" href="/sources#evidence-soopi-alt-tab" aria-label={loc(language, "Xem nguồn ảnh chuyển ứng dụng liên quan Soopi", "View provenance for the Soopi-related app-switcher image")}><Image src="/attachments/evidences/soopi-alt-tab.png" alt={loc(language, "Ảnh do người dùng cung cấp: màn hình chuyển ứng dụng trong video liên quan Soopi", "User-supplied app-switcher still in Soopi-related footage")} fill sizes="(max-width: 800px) 45vw, 20vw" unoptimized /></a>
+                      <LocalizedAnchor className="magazine-evidence-secondary" href="/sources#evidence-soopi-alt-tab" aria-label={loc(language, "Xem nguồn ảnh chuyển ứng dụng liên quan Soopi", "View provenance for the Soopi-related app-switcher image")}><Image src="/attachments/evidences/soopi-alt-tab.png" alt={loc(language, "Ảnh do người dùng cung cấp: màn hình chuyển ứng dụng trong video liên quan Soopi", "User-supplied app-switcher still in Soopi-related footage")} fill sizes="(max-width: 800px) 45vw, 20vw" unoptimized /></LocalizedAnchor>
                       <p>{loc(language, "Ảnh liên quan Soopi do người dùng cung cấp. Ảnh cho thấy trang stream và thao tác chuyển ứng dụng; thời điểm, bối cảnh và việc sử dụng thông tin chưa được xác minh độc lập. Chúng không thay thế kết luận điều tra của PUBG.", "User-supplied Soopi-related stills show a stream page and an app switcher. Their timing, context and any use of information are not independently established. They do not replace PUBG's investigation findings.")}</p>
                     </div>
                   </div>
@@ -432,13 +434,13 @@ export default function TimelineExperience() {
                     <h2>{translatedHeroArguments[2].title}</h2>
                     <p className="magazine-lead">{translatedHeroArguments[2].body}</p>
                     <p className="magazine-context">{loc(language, "PUBG công bố khóa vĩnh viễn tài khoản game và tước quyền thi đấu tại các giải esports chính thức. Thông báo cũng nêu quyền giải trình theo thủ tục esports.", "PUBG announced permanent game-account bans and permanent ineligibility for official esports events. Its notice also describes an esports response process.")}</p>
-                    <a className="primary-cta" href="#timeline" onClick={skipToTimeline}><span>{t.heroButton}</span><ArrowIcon /></a>
+                    <LocalizedAnchor className="primary-cta" href="#timeline" onClick={skipToTimeline}><span>{t.heroButton}</span><ArrowIcon /></LocalizedAnchor>
                   </div>
                   <div className="magazine-sanctions"><div><span>{loc(language, "TÀI KHOẢN GAME", "GAME ACCOUNT")}</span><strong>{loc(language, "Khóa vĩnh viễn", "Permanent ban")}</strong></div><div><span>{loc(language, "GIẢI ESPORTS CHÍNH THỨC", "OFFICIAL ESPORTS")}</span><strong>{loc(language, "Tước quyền thi đấu vĩnh viễn", "Permanent ineligibility")}</strong></div><ReportedSanctionChanges language={language} compact /></div>
                 </div>
               </article>
             </div>
-            <div className="campaign-hero-footer">{heroActiveIndex < 3 && <span className="campaign-scroll-cue">{t.heroScroll} <span aria-hidden="true">↓</span></span>}<a className="campaign-skip" href="#timeline" onClick={skipToTimeline}>{t.heroSkip} ↗</a></div>
+            <div className="campaign-hero-footer">{heroActiveIndex < 3 && <span className="campaign-scroll-cue">{t.heroScroll} <span aria-hidden="true">↓</span></span>}<LocalizedAnchor className="campaign-skip" href="#timeline" onClick={skipToTimeline}>{t.heroSkip} ↗</LocalizedAnchor></div>
             <div className="campaign-hero-progress" aria-hidden="true"><span /></div>
           </div>
           <div className="campaign-hero-markers" aria-hidden="true">{[0, 1, 2, 3].map((marker) => <div className="campaign-hero-marker" key={marker} />)}</div>
@@ -449,9 +451,9 @@ export default function TimelineExperience() {
             <div className="page-width story-progress-inner">
               <span>{t.progress} <strong>{String(activeIndex + 1).padStart(2, "0")} / {String(timeline.length).padStart(2, "0")}</strong></span>
               <nav aria-label={loc(language, "Chuyển đến mốc thời gian", "Jump to milestone")}>
-                {timeline.map((event, index) => <a key={event.id} href={`#${event.id}`} className={index === activeIndex ? "current" : ""} aria-label={`${index + 1}. ${localized(event.title, language)}`} aria-current={index === activeIndex ? "step" : undefined} />)}
+                {timeline.map((event, index) => <LocalizedAnchor key={event.id} href={`#${event.id}`} className={index === activeIndex ? "current" : ""} aria-label={`${index + 1}. ${localized(event.title, language)}`} aria-current={index === activeIndex ? "step" : undefined} />)}
               </nav>
-              <a href="/sources">{t.navSources} ↗</a>
+              <LocalizedAnchor href="/sources">{t.navSources} ↗</LocalizedAnchor>
             </div>
             <div className="story-progress-fill" style={{ width: `${((activeIndex + 1) / timeline.length) * 100}%` }} />
           </div>
@@ -465,7 +467,7 @@ export default function TimelineExperience() {
                   <h2>{localized(event.title, language)}</h2>
                   <div className="story-main-point"><span>{t.whatHappened}</span><p className="story-description">{localized(event.description, language)}</p></div>
                   <div className="story-sources"><span>{event.sources.length === 1 ? t.source : t.sources}</span><div>{event.sources.map((sourceKey) => <SourceLink key={sourceKey} sourceKey={sourceKey} label={loc(language, sources[sourceKey].label, sources[sourceKey].label)} />)}</div></div>
-                  {index < timeline.length - 1 && <a className="story-next" href={`#${timeline[index + 1].id}`}>{t.next} <span>↓</span></a>}
+                  {index < timeline.length - 1 && <LocalizedAnchor className="story-next" href={`#${timeline[index + 1].id}`}>{t.next} <span>↓</span></LocalizedAnchor>}
                 </div>
                 {event.id in modules ? (
                   <CaseModule id={event.id as keyof typeof modules} language={language} response={localized(event.response, language)} explanation={localized(event.explanation, language)} />
@@ -484,7 +486,7 @@ export default function TimelineExperience() {
 
       </main>
 
-      <footer className="site-footer"><div className="page-width footer-inner"><div className="footer-brand">JUSTICE<span>FORPUBGVN</span><small>{t.brandSub}</small></div><p>{t.footerNote}</p><div className="home-footer-links"><a href="/players">{loc(language, "TUYỂN THỦ", "PLAYERS")} ↗</a><a href="/sources">{t.navSources} ↗</a><a href="/legal">{loc(language, "PHÁP LÝ", "LEGAL")} ↗</a></div></div></footer>
+      <footer className="site-footer"><div className="page-width footer-inner"><div className="footer-brand">JUSTICE<span>FORPUBGVN</span><small>{t.brandSub}</small></div><p>{t.footerNote}</p><div className="home-footer-links"><LocalizedAnchor href="/players">{loc(language, "TUYỂN THỦ", "PLAYERS")} ↗</LocalizedAnchor><LocalizedAnchor href="/sources">{t.navSources} ↗</LocalizedAnchor><LocalizedAnchor href="/legal">{loc(language, "PHÁP LÝ", "LEGAL")} ↗</LocalizedAnchor></div></div></footer>
     </div>
   );
 }
