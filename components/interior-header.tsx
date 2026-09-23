@@ -5,7 +5,7 @@ export default function InteriorHeader({ section }: { section: string }) {
   return <header className="interior-header">
     <a className="wordmark" href="/" aria-label="Justice for PUBG VN">
       <span className="wordmark-main">JUSTICE<span>FORPUBGVN</span></span>
-      <span className="wordmark-sub">{section}</span>
+      <span className="wordmark-sub"><DualLanguage vi={section} en={section} /></span>
     </a>
     <nav className="interior-nav" aria-label="Main navigation">
       <a href="/"><DualLanguage vi="DÒNG THỜI GIAN" en="TIMELINE" /></a>

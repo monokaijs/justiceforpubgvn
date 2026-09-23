@@ -713,6 +713,13 @@ html[lang="th"] .archive-main h1, html[lang="ko"] .archive-main h1,
 html[lang="th"] .interior-page h1, html[lang="ko"] .interior-page h1,
 html[lang="th"] .interior-page h2, html[lang="ko"] .interior-page h2 { font-family: inherit; line-height: 1.15; letter-spacing: 0; }
 html[lang="th"] .campaign-hero h1 span, html[lang="ko"] .campaign-hero h1 span { white-space: normal; }
+html[lang="th"] .campaign-hero h1, html[lang="ko"] .campaign-hero h1 { font-size: clamp(44px, 5.1vw, 76px); }
+html[lang="th"] .magazine-copy h2, html[lang="ko"] .magazine-copy h2 { font-size: clamp(38px, 4.6vw, 67px); }
+html[lang="th"] .story-content h2, html[lang="ko"] .story-content h2 { font-size: clamp(38px, 4.2vw, 62px); }
+html[lang="th"] .case-module h3, html[lang="ko"] .case-module h3 { font-size: clamp(30px, 3vw, 45px); }
+html[lang="th"] .archive-main h1, html[lang="ko"] .archive-main h1,
+html[lang="th"] .interior-page h1, html[lang="ko"] .interior-page h1 { font-size: clamp(46px, 6vw, 80px); }
+html[lang="th"] .interior-page h2, html[lang="ko"] .interior-page h2 { font-size: clamp(36px, 4vw, 62px); }
 @media (max-width: 600px) { .language-trigger { min-width: 108px; gap: 6px; padding-inline: 6px; font-size: 10px; } .language-flag { width: 21px; height: 14px; } }
 
 /* Interior pages */
