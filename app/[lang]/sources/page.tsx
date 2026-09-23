@@ -197,7 +197,7 @@ export default function SourcesPage() {
               </article>
             ))}
           </div>
-          <LocalizedAnchor className="evidence-manifest-link" href="/attachments/evidence-manifest.json" target="_blank" rel="noopener noreferrer">IMAGE FILE MANIFEST ↗</LocalizedAnchor>
+          <LocalizedAnchor className="evidence-manifest-link" href="/attachments/evidence-manifest.json" target="_blank" rel="noopener noreferrer"><L vi="DANH SÁCH TỆP ẢNH ↗" en="IMAGE FILE MANIFEST ↗" /></LocalizedAnchor>
         </section>
       </main>
       <footer className="site-footer"><div className="page-width archive-footer"><L vi="Kho tư liệu độc lập cho dòng thời gian Justice for PUBG VN." en="Independent source archive for the Justice for PUBG VN timeline." /> <LocalizedAnchor href="/"><L vi="← DÒNG THỜI GIAN" en="← TIMELINE" /></LocalizedAnchor></div></footer>
