@@ -2,17 +2,21 @@
   {
     "filename": "soopi-alt-tab.png",
     "path": "/attachments/evidences/soopi-alt-tab.png",
-    "origin": "user-provided; original capture source and date not independently verified",
+    "origin": "user-provided; face redacted; original capture source and date not independently verified",
     "observed_at_utc": "2026-09-23T18:28:24+00:00",
-    "bytes": 554235,
-    "sha256": "cba9c80f362aae781c1d82bc38dcbdb464a943c32117f89b522ad192bd044f15"
+    "source_sha256": "cba9c80f362aae781c1d82bc38dcbdb464a943c32117f89b522ad192bd044f15",
+    "redaction": "Soopi's face blurred; all pixels outside the face region preserved",
+    "bytes": 446562,
+    "sha256": "9d8dbf8904d6c72abf995aaa04b1e9f8c0ec5b6279e1d04dfdced16ed95801ba"
   },
   {
     "filename": "soopi-watching-livestream.png",
     "path": "/attachments/evidences/soopi-watching-livestream.png",
-    "origin": "user-provided; original capture source and date not independently verified",
+    "origin": "user-provided; face redacted; original capture source and date not independently verified",
     "observed_at_utc": "2026-09-23T18:28:24+00:00",
-    "bytes": 288270,
-    "sha256": "1f6173a7047fc92414ccb8a22c5ad265fc2d5f65b06ba3416074e8d9863a35e1"
+    "source_sha256": "1f6173a7047fc92414ccb8a22c5ad265fc2d5f65b06ba3416074e8d9863a35e1",
+    "redaction": "Soopi's face blurred; all pixels outside the face region preserved",
+    "bytes": 237988,
+    "sha256": "af03fe305be6f01f04ccc56bb65eb2e047f3826474a17bd4879e567f2070b36f"
   }
 ]
