@@ -48,6 +48,26 @@ const records = [
     noteEn: "Korean version of the investigation notice for comparison with the Vietnamese notice.",
   },
   {
+    id: "gyumin-post",
+    title: "Bài đăng về Gyumin tại PWS · 06/10/2024",
+    titleEn: "Post about Gyumin at PWS · 6 Oct 2024",
+    subtitle: "Patryk · X · contemporary allegation",
+    source: "https://x.com/pattrick_36/status/1842859847043125324",
+    filename: null,
+    note: "Bài đăng được dẫn để quy thuộc cáo buộc về cửa sổ stream bản đồ và độ trễ 10 phút. X không mở trực tiếp trong lần rà soát này; chưa kiểm tra toàn bộ bài đăng hoặc video gốc. Không dùng nguồn này để kết luận Gyumin đã sử dụng thông tin hay KRAFTON bỏ qua vi phạm.",
+    noteEn: "Cited to attribute the reported map-stream window and 10-minute delay to Patryk. X was not directly accessible in this review; the full post and original footage remain unchecked. This source does not establish in-match use or that KRAFTON overlooked misconduct.",
+  },
+  {
+    id: "gyumin-profile",
+    title: "Hồ sơ thi đấu chính thức của Gyumin",
+    titleEn: "Gyumin's official competition record",
+    subtitle: "PUBG Esports · official player profile",
+    source: "https://pubgesports.com/vi/players/566",
+    filename: null,
+    note: "Ghi nhận Gyumin thi đấu tại các giải năm 2025 và 2026, gồm PUBG Nations Cup. Việc tiếp tục thi đấu không chứng minh rằng không có điều tra hoặc xử lý trước đó.",
+    noteEn: "Records Gyumin competing in 2025 and 2026, including the PUBG Nations Cup. Later participation does not prove there was no earlier investigation or sanction.",
+  },
+  {
     id: "preliminary",
     title: "Thông báo ban đầu · 19/09/2026",
     titleEn: "Initial notice · 19 Sep 2026",
@@ -68,11 +88,61 @@ const records = [
     noteEn: "The link comes from the original HTML. The local copy contains captured visible article text because direct HTML retrieval returned HTTP 403.",
   },
   {
+    id: "apology",
+    title: "Lời xin lỗi của KRAFTON · 21/09/2026",
+    titleEn: "KRAFTON apology · 21 Sep 2026",
+    subtitle: "Kakao PUBG repost of KRAFTON notice · Korean",
+    source: sources.apology.url,
+    filename: null,
+    note: "KRAFTON nhận trách nhiệm về tiêu chí, truyền đạt đa ngôn ngữ và bảo vệ người tham gia; bản lưu cục bộ chưa có.",
+    noteEn: "KRAFTON acknowledges failures in criteria, multilingual communication and participant protection; no local copy is available.",
+  },
+  {
+    id: "dayOneReport",
+    title: "Bài tổng hợp tranh cãi ban đầu · 21/09/2026",
+    titleEn: "Report on the initial dispute · 21 Sep 2026",
+    subtitle: "Hoa Học Trò – Tiền Phong · Vietnamese press",
+    source: sources.dayOneReport.url,
+    filename: null,
+    note: "Nguồn báo chí thuật lại cáo buộc ban đầu liên quan Soopi; không phải kết luận điều tra.",
+    noteEn: "Press account of the initial Soopi-related allegation, not an investigation finding.",
+  },
+  {
+    id: "chipReport",
+    title: "Soopi nêu nghi vấn sau Day 1 · 21/09/2026",
+    titleEn: "Report on Soopi's Day 1 complaint · 21 Sep 2026",
+    subtitle: "Sforum · Vietnamese press",
+    source: sources.chipReport.url,
+    filename: null,
+    note: "Bài báo thuật lại lời Soopi về việc phá chip hồi sinh và nghi vấn stream sniping; đây là phản ánh ban đầu, không phải kết luận điều tra.",
+    noteEn: "Reports Soopi's complaint about a destroyed revive chip and suspected stream sniping; this is an initial account, not an investigation finding.",
+  },
+  {
+    id: "initialReport",
+    title: "Lời xin lỗi ban đầu của hai tuyển thủ · 19/09/2026",
+    titleEn: "Report on the players' initial apologies · 19 Sep 2026",
+    subtitle: "Inven · Korean press",
+    source: sources.initialReport.url,
+    filename: null,
+    note: "Bài báo thuật lại lời giải thích của hai tuyển thủ về chat livestream cá nhân; trang chưa lưu bản gốc lời xin lỗi.",
+    noteEn: "Reports the players' explanation about their personal livestream chats; this site has no archived original apologies.",
+  },
+  {
+    id: "teamResponse",
+    title: "Phản hồi của GAM × TE · 23/09/2026",
+    titleEn: "GAM × TE response · 23 Sep 2026",
+    subtitle: "VTC News · Vietnamese press",
+    source: sources.teamResponse.url,
+    filename: null,
+    note: "Bài báo dẫn phản hồi và đề nghị xem xét lại mức xử lý với TanVuu từ GAM × TE.",
+    noteEn: "Reports GAM × TE's response and request to review TanVuu's sanction.",
+  },
+  {
     id: "eventNotice",
     title: "Lịch sự kiện gốc · 11/09/2026",
     titleEn: "Original event schedule · 11 Sep 2026",
     subtitle: "Official PUBG event notice · Vietnamese",
-    source: "https://pubg.com/vi/events/notice/10926",
+    source: sources.eventNotice.url,
     filename: "pubg-asia-stars-event-notice-2026-09-11-vi.html.txt",
     note: "Tài liệu để đối chiếu lịch Day 1–3; không phải nguồn cho kết luận điều tra.",
     noteEn: "Source for checking the Day 1–3 schedule; it is not a source for the investigation findings.",
@@ -190,7 +260,7 @@ export default function SourcesPage() {
                 <div className="evidence-archive-card-body">
                   <span><L vi="ẢNH DO NGƯỜI DÙNG CUNG CẤP" en="USER-SUPPLIED IMAGE" /> / {String(index + 1).padStart(2, "0")}</span>
                   <h3>{item.filename}</h3>
-                  <p><L vi={index === 0 ? "Màn hình chuyển ứng dụng trong video Soopi; bối cảnh chụp chưa được xác minh độc lập." : "Trang livestream xuất hiện trong video; ảnh tĩnh không tự chứng minh mục đích hoặc vi phạm."} en={index === 0 ? "Application switcher in Soopi-related footage; capture context is unverified." : "A livestream page visible in footage; a still alone does not establish intent or misconduct."} /></p>
+                  <p><L vi={index === 0 ? "Màn hình chuyển ứng dụng trong livestream liên quan Soopi, với sảnh chờ Day 1 R4 và cửa sổ SOOP." : "Ảnh trích livestream cho thấy Soopi đã mở và xem stream giải đấu trên SOOP; ảnh không thể hiện quyết định chiến thuật trong trận."} en={index === 0 ? "App switcher in Soopi-related livestream footage, showing the Day 1 R4 lobby and a SOOP window." : "The livestream still shows Soopi opening and watching the tournament stream on SOOP; it does not show in-match tactical decisions."} /></p>
                   <LocalizedAnchor href={item.path} download><L vi="TẢI PNG ĐÃ LÀM MỜ ↓" en="DOWNLOAD REDACTED PNG ↓" /></LocalizedAnchor>
                   <div className="archive-checksum">SHA-256 {item.sha256}</div>
                 </div>
