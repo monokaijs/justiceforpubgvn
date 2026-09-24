@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
+import { UiIcon } from "@/components/ui-icon";
 import DualLanguage from "@/components/dual-language";
 import InteriorHeader from "@/components/interior-header";
 import LocalizedAnchor from "@/components/localized-anchor";
@@ -26,7 +27,7 @@ export default function PlayersPage() {
       <section className="player-index-grid page-width" aria-label="Player profiles / Hồ sơ tuyển thủ">
         {Object.values(players).map((player) => <LocalizedAnchor className={`player-index-card player-index-card-${player.slug}`} href={`/players/${player.slug}`} key={player.slug}>
           <div className="player-index-art"><span className="player-index-watermark">{player.number}</span><Image src={player.image} alt={`${player.name} portrait from PUBG Esports`} width={500} height={500} priority /></div>
-          <div className="player-index-content"><span><DualLanguage vi="VIỆT NAM" en="VIETNAM" /> / PUBG ESPORTS</span><h2>{player.name}</h2><p>{player.fullName} · {player.team}</p><strong><DualLanguage vi="XEM HỒ SƠ" en="VIEW PROFILE" /> <span aria-hidden="true">↗</span></strong></div>
+          <div className="player-index-content"><span><DualLanguage vi="VIỆT NAM" en="VIETNAM" /> / PUBG ESPORTS</span><h2>{player.name}</h2><p>{player.fullName} · {player.team}</p><strong><DualLanguage vi="XEM HỒ SƠ" en="VIEW PROFILE" /> <UiIcon name="external" /></strong></div>
         </LocalizedAnchor>)}
       </section>
       <div className="index-bottom page-width"><LocalizedAnchor href="/"><DualLanguage vi="← VỀ DÒNG THỜI GIAN" en="← BACK TO TIMELINE" /></LocalizedAnchor><LocalizedAnchor href="/legal"><DualLanguage vi="THÔNG TIN PHÁP LÝ ↗" en="LEGAL INFORMATION ↗" /></LocalizedAnchor></div>

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/components/language-provider";
 import { languageNames, languages, type Language } from "@/lib/language";
+import { UiIcon } from "@/components/ui-icon";
 
 function Flag({ language }: { language: Language }) {
   if (language === "vi") return <svg className="language-flag" viewBox="0 0 30 20" aria-hidden="true"><path fill="#da251d" d="M0 0h30v20H0z"/><path fill="#ff0" d="m15 3.2 1.59 4.9h5.15l-4.17 3.03 1.6 4.9L15 13l-4.17 3.03 1.6-4.9L8.26 8.1h5.15z"/></svg>;
@@ -32,14 +33,14 @@ export default function LanguageSelector() {
     <button className="language-trigger" type="button" aria-label={`${label}: ${languageNames[language]}`} aria-haspopup="listbox" aria-controls="site-language-options" aria-expanded={open} onClick={() => setOpen(!open)} onKeyDown={(event) => {
       if (event.key === "ArrowDown" || event.key === "ArrowUp") { event.preventDefault(); setOpen(true); window.requestAnimationFrame(() => focusOption(event.key === "ArrowDown" ? 0 : languages.length - 1)); }
     }}>
-      <Flag language={language} /><span>{languageNames[language]}</span><svg className="language-chevron" viewBox="0 0 12 8" aria-hidden="true"><path d="m1 1 5 5 5-5" fill="none" stroke="currentColor" strokeWidth="1.5"/></svg>
+      <Flag language={language} /><span>{languageNames[language]}</span><UiIcon name="down" className="language-chevron" />
     </button>
     {open && <div className="language-menu" id="site-language-options" role="listbox" aria-label={label}>
       {languages.map((option, index) => <button key={option} type="button" role="option" aria-selected={language === option} onClick={() => { chooseLanguage(option); setOpen(false); root.current?.querySelector<HTMLButtonElement>(".language-trigger")?.focus(); }} onKeyDown={(event) => {
         if (event.key === "ArrowDown" || event.key === "ArrowUp") { event.preventDefault(); focusOption((index + (event.key === "ArrowDown" ? 1 : -1) + languages.length) % languages.length); }
         if (event.key === "Home") { event.preventDefault(); focusOption(0); }
         if (event.key === "End") { event.preventDefault(); focusOption(languages.length - 1); }
-      }}><Flag language={option} /><span>{languageNames[option]}</span>{language === option && <span className="language-check" aria-hidden="true">✓</span>}</button>)}
+      }}><Flag language={option} /><span>{languageNames[option]}</span>{language === option && <UiIcon name="check" className="language-check" />}</button>)}
     </div>}
   </div>;
 }

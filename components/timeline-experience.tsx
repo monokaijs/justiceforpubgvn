@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type MouseEvent } from "react";
+import { ArrowRight, ArrowUpRight, Heart } from "lucide-react";
 import Image from "next/image";
 import { Language, sources, timeline, type SourceKey, type TimelineEvent } from "@/data/timeline";
 import { useLanguage } from "@/components/language-provider";
@@ -9,6 +10,7 @@ import LocalizedAnchor from "@/components/localized-anchor";
 import ShareButton from "@/components/share-button";
 import GyuminComparison from "@/components/gyumin-comparison";
 import { loc, localized } from "@/lib/i18n";
+import { UiIcon } from "@/components/ui-icon";
 
 const copy = {
   vi: {
@@ -44,7 +46,6 @@ const copy = {
     whatHappened: "ĐIỀU XẢY RA",
     responseLabel: "LẬP LUẬN / PHẢN HỒI",
     explanationLabel: "ĐIỀU CẦN HIỂU",
-    readMore: "Đọc thêm",
     checkContext: "KIỂM TRA BỐI CẢNH",
   },
   en: {
@@ -80,7 +81,6 @@ const copy = {
     whatHappened: "WHAT HAPPENED",
     responseLabel: "DEFENSE / RESPONSE",
     explanationLabel: "WHAT THIS MEANS",
-    readMore: "Read more",
     checkContext: "CHECK THE CONTEXT",
   },
 } as const;
@@ -221,23 +221,11 @@ const modules = {
 } as const;
 
 function ArrowIcon({ diagonal = false }: { diagonal?: boolean }) {
-  return diagonal ? (
-    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
-      <path d="M5 19 19 5M7 5h12v12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="square" />
-    </svg>
-  ) : (
-    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
-      <path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="square" />
-    </svg>
-  );
+  return diagonal ? <ArrowUpRight aria-hidden="true" /> : <ArrowRight aria-hidden="true" />;
 }
 
 function SupportIcon({ supported }: { supported: boolean }) {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" fill={supported ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M20.8 8.6c0 4.1-4.8 7.9-8.8 11-4-3.1-8.8-6.9-8.8-11a4.8 4.8 0 0 1 8.8-2.5 4.8 4.8 0 0 1 8.8 2.5Z" />
-    </svg>
-  );
+  return <Heart aria-hidden="true" fill={supported ? "currentColor" : "none"} />;
 }
 
 function SourceLink({ sourceKey, label }: { sourceKey: SourceKey; label: string }) {
@@ -253,9 +241,9 @@ function ReportedSanctionChanges({ language, compact = false }: { language: Lang
   return <aside className={`reported-sanction-changes${compact ? " reported-sanction-changes-compact" : ""}`} aria-label={loc(language, "Thông tin về các mức phạt được kể lại, chưa xác minh", "Unverified account of earlier sanction lengths")}>
     <span className="reported-sanction-label">{loc(language, "PHẢN ÁNH CHƯA ĐƯỢC XÁC MINH", "UNVERIFIED PARTICIPANT ACCOUNT")}</span>
     <div className="reported-sanction-sequence" aria-label={loc(language, "Theo lời kể: một năm, sáu tháng, rồi vĩnh viễn", "Reported: one year, six months, then permanent")}>
-      <strong>{loc(language, "1 năm", "1 year")}</strong><span aria-hidden="true">→</span><strong>{loc(language, "6 tháng", "6 months")}</strong><span aria-hidden="true">→</span><strong>{loc(language, "vĩnh viễn", "permanent")}</strong>
+      <strong>{loc(language, "1 năm", "1 year")}</strong><UiIcon name="right" /><strong>{loc(language, "6 tháng", "6 months")}</strong><UiIcon name="right" /><strong>{loc(language, "vĩnh viễn", "permanent")}</strong>
     </div>
-    <p>{loc(language, "một số nguồn tin từ các cá nhân tham gia giải đấu từ đội tuyển việt nam đã thông tin về việc ban đầu btc đã đưa ra lệnh ban từ trước đó, tuy nhiên ban đầu là 1 năm, sau đó giảm xuống 6 tháng sau khi Himass và Tanvuu lên bài xin lỗi. Tuy nhiên sau đó lại đổi thành ban vĩnh viễn.", "Several sources among Vietnam team members who participated in the tournament said the organizers had initially issued a ban of one year, then reduced it to six months after Himass and Tanvuu posted apologies. It was later changed to a permanent ban.")}</p>
+    <p>{loc(language, "Một số nguồn tin từ các cá nhân tham gia giải đấu từ đội tuyển Việt Nam đã thông tin về việc ban đầu btc đã đưa ra lệnh ban từ trước đó, tuy nhiên ban đầu là 1 năm, sau đó giảm xuống 6 tháng sau khi Himass và Tanvuu lên bài xin lỗi. Tuy nhiên sau đó lại đổi thành ban vĩnh viễn.", "Several sources among Vietnam team members who participated in the tournament said the organizers had initially issued a ban of one year, then reduced it to six months after Himass and Tanvuu posted apologies. It was later changed to a permanent ban.")}</p>
     <LocalizedAnchor href="/sources#reported-sanction-changes">{loc(language, "Xem nguồn gốc và giới hạn thông tin", "Read provenance and limits")} ↗</LocalizedAnchor>
   </aside>;
 }
@@ -298,7 +286,7 @@ function CaseModule({ id, language, response, explanation, additional }: { id: k
     {id === "sanctions-september-23" && <ReportedSanctionChanges language={language} />}
     {id === "sanctions-september-23" && <p className="module-limits">{loc(language, "PUBG nêu quyền giải trình qua thủ tục Esports. Trang này chưa có kết quả khiếu nại hoặc tuyên bố đội tuyển được xác thực để dẫn nguồn.", "PUBG states that the players may use its esports response process. This site has no verified appeal outcome or team statement to cite.")}</p>}
     <div className="module-links"><span>{loc(language, "KIỂM TRA BỐI CẢNH", "CHECK THE CONTEXT")}</span><div>{module.links.map((link) => <LocalizedAnchor key={link.href} href={link.href}>{localized(link, language)} ↗</LocalizedAnchor>)}</div></div>
-    <details className="case-read-more"><summary>{loc(language, "Đọc thêm", "Read more")}<span aria-hidden="true">+</span></summary><div><p><strong>{loc(language, "Phản hồi / lập luận:", "Response / argument:")}</strong> {response}</p><p><strong>{loc(language, "Bối cảnh:", "Context:")}</strong> {explanation}</p><TimelineAdditional items={additional} language={language} /></div></details>
+    <div className="case-read-more"><p><strong>{loc(language, "Phản hồi / lập luận:", "Response / argument:")}</strong> {response}</p><p><strong>{loc(language, "Bối cảnh:", "Context:")}</strong> {explanation}</p><TimelineAdditional items={additional} language={language} /></div>
   </aside>;
 }
 
@@ -552,7 +540,7 @@ export default function TimelineExperience() {
                 </div>
               </article>
             </div>
-            <div className="campaign-hero-footer"><span className="campaign-scroll-cue">{t.heroScroll} <span aria-hidden="true">↓</span></span><ShareButton className="campaign-share" /><LocalizedAnchor className="campaign-skip" href="#timeline" onClick={skipToTimeline}>{t.heroSkip} ↗</LocalizedAnchor></div>
+            <div className="campaign-hero-footer"><span className="campaign-scroll-cue">{t.heroScroll} <UiIcon name="down" /></span><ShareButton className="campaign-share" /><LocalizedAnchor className="campaign-skip" href="#timeline" onClick={skipToTimeline}>{t.heroSkip} ↗</LocalizedAnchor></div>
             <div className="campaign-hero-progress" aria-hidden="true"><span /></div>
           </div>
           <div className="campaign-hero-markers" aria-hidden="true">{[0, 1, 2, 3].map((marker) => <div className="campaign-hero-marker" key={marker} />)}</div>
@@ -579,15 +567,14 @@ export default function TimelineExperience() {
                   <h2>{localized(event.title, language)}</h2>
                   <div className="story-main-point"><span>{t.whatHappened}</span><p className="story-description">{localized(event.description, language)}</p></div>
                   <div className="story-sources"><span>{event.sources.length === 1 ? t.source : t.sources}</span><div>{event.sources.map((sourceKey) => <SourceLink key={sourceKey} sourceKey={sourceKey} label={loc(language, sources[sourceKey].label, sources[sourceKey].label)} />)}</div></div>
-                  {index < timeline.length - 1 && <LocalizedAnchor className="story-next" href={`#${timeline[index + 1].id}`}>{t.next} <span>↓</span></LocalizedAnchor>}
+                  {index < timeline.length - 1 && <LocalizedAnchor className="story-next" href={`#${timeline[index + 1].id}`}>{t.next} <UiIcon name="down" /></LocalizedAnchor>}
                 </div>
                 {event.id in modules ? (
                   <CaseModule id={event.id as keyof typeof modules} language={language} response={localized(event.response, language)} explanation={localized(event.explanation, language)} additional={event.additional} />
                 ) : (
                   <div className="story-explainer story-explainer-compact">
                     <span className="story-explainer-top">{loc(language, "HỒ SƠ VỤ VIỆC", "CASE FILE")} / {String(index + 1).padStart(2, "0")}</span>
-                    <p className="story-explainer-summary">{loc(language, "Diễn biến được ghi nhận từ tài liệu nguồn. Mở phần giải thích để xem lập luận và giới hạn của mốc này.", "This milestone draws on the linked source. Open the explanation for context and limits.")}</p>
-                    <details className="case-read-more"><summary>{t.readMore}<span aria-hidden="true">+</span></summary><div><p><strong>{t.responseLabel}:</strong> {localized(event.response, language)}</p><p><strong>{t.explanationLabel}:</strong> {localized(event.explanation, language)}</p><TimelineAdditional items={event.additional} language={language} /></div></details>
+                    <div className="case-read-more"><p><strong>{t.responseLabel}:</strong> {localized(event.response, language)}</p><p><strong>{t.explanationLabel}:</strong> {localized(event.explanation, language)}</p><TimelineAdditional items={event.additional} language={language} /></div>
                     <span className="story-explainer-bottom">JUSTICE FOR PUBG VN · 2026</span>
                   </div>
                 )}
@@ -601,7 +588,7 @@ export default function TimelineExperience() {
 
       <dialog ref={snipingDialogRef} className="sniping-dialog" aria-labelledby="sniping-dialog-title" onClick={(event) => { if (event.target === event.currentTarget) event.currentTarget.close(); }}>
         <div className="sniping-dialog-content">
-          <button className="sniping-dialog-close" type="button" aria-label={snipingCopy.close} onClick={() => snipingDialogRef.current?.close()}>×</button>
+          <button className="sniping-dialog-close" type="button" aria-label={snipingCopy.close} onClick={() => snipingDialogRef.current?.close()}><UiIcon name="close" /></button>
           <span className="sniping-dialog-eyebrow">{snipingCopy.eyebrow}</span>
           <h2 id="sniping-dialog-title">{snipingCopy.title}</h2>
           <div className="sniping-dialog-grid">
