@@ -3,7 +3,7 @@ import { zhEntries } from "./zh-translations";
 const entries: [string, string, string][] = [
   ["CASE TIMELINE", "ลำดับเหตุการณ์", "사건 경과"],
   ["SOURCES", "แหล่งข้อมูล", "자료 출처"],
-  ["JUSTICE FOR PUBG VN  /  17–23.09.2026", "ความเป็นธรรมเพื่อ PUBG VN / 17–23.09.2026", "PUBG VN을 위한 공정한 판단 / 2026.09.17–23"],
+  ["JUSTICE FOR HIMASS & TANVUU  /  17–23.09.2026", "ความเป็นธรรมเพื่อ Himass และ TanVuu / 17–23.09.2026", "Himass와 TanVuu를 위한 공정한 판단 / 2026.09.17–23"],
   ["Fair treatment for", "ความเป็นธรรมสำหรับ", "공정한 대우를"],
   ["Himass & TanVuu.", "Himass และ TanVuu", "Himass와 TanVuu에게."],
   ["Not a defense of cheating. A call for clear rules, transparent investigation, and proportionate sanctions.", "เราไม่ได้ปกป้องการโกง แต่เรียกร้องกติกาที่ชัดเจน การสอบสวนที่โปร่งใส และบทลงโทษที่ได้สัดส่วน", "부정행위를 옹호하지 않습니다. 명확한 규정, 투명한 조사, 위반에 상응하는 제재를 요구합니다."],
@@ -297,6 +297,15 @@ const entries: [string, string, string][] = [
   ["Application switcher in Soopi-related footage; capture context is unverified.", "หน้าสลับแอปในวิดีโอที่เกี่ยวข้องกับ Soopi ยังไม่ยืนยันบริบทของภาพ", "Soopi 관련 영상의 앱 전환 화면이며 촬영 맥락은 확인되지 않았습니다."],
   ["A livestream page visible in footage; a still alone does not establish intent or misconduct.", "หน้าสตรีมที่ปรากฏในวิดีโอ ภาพนิ่งเพียงภาพเดียวไม่ยืนยันเจตนาหรือการกระทำผิด", "영상에 방송 페이지가 보이지만 정지 화면만으로 의도나 위반을 입증할 수 없습니다."],
   ["IMAGE FILE MANIFEST ↗", "รายการไฟล์ภาพ ↗", "이미지 파일 목록 ↗"],
+  ["Stills from the livestream show Soopi opening and watching the tournament stream. They directly establish livestream viewing; the same criteria should be applied to timing and whether information informed decisions in a match.", "ภาพจากไลฟ์แสดงว่า Soopi เปิดและดูสตรีมการแข่งขัน จึงยืนยันการดูไลฟ์ได้โดยตรง ส่วนช่วงเวลาและการนำข้อมูลไปใช้ตัดสินใจในแมตช์ควรตรวจสอบด้วยเกณฑ์เดียวกัน", "방송 화면에는 Soopi가 대회 중계를 열어 시청하는 모습이 보입니다. 방송 시청 자체는 직접 확인되며, 시점과 해당 정보가 경기 판단에 반영됐는지는 같은 기준으로 살펴봐야 합니다."],
+  ["Day 1 R4 lobby visible in the still", "ภาพแสดงล็อบบี้ Day 1 R4", "화면에 Day 1 R4 대기실이 보임"],
+  ["Opened and watched the match stream on SOOP", "เปิดและดูสตรีมการแข่งขันบน SOOP", "SOOP에서 경기 중계를 열어 시청함"],
+  ["Livestream use shown; in-match tactical decisions are not shown", "เห็นการใช้ไลฟ์สตรีม แต่ภาพไม่แสดงการตัดสินใจเชิงกลยุทธ์ระหว่างแข่ง", "방송 시청은 확인되지만 경기 중 전술 판단은 화면에 드러나지 않음"],
+  ["App switcher · Day 1 R4 lobby", "หน้าสลับแอป · ล็อบบี้ Day 1 R4", "앱 전환 화면 · Day 1 R4 대기실"],
+  ["SOOP page · livestream viewing shown", "หน้า SOOP · เห็นการดูไลฟ์สตรีม", "SOOP 페이지 · 방송 시청 확인"],
+  ["Stills from Soopi-related livestream footage show her opening and watching the tournament stream on SOOP. The viewing is visible; the stills do not show whether that information informed tactical decisions in a match.", "ภาพจากไลฟ์ที่เกี่ยวข้องกับ Soopi แสดงว่าเธอเปิดและดูสตรีมการแข่งขันบน SOOP การดูสตรีมเห็นได้ชัด แต่ภาพไม่แสดงว่าข้อมูลนั้นมีผลต่อการตัดสินใจเชิงกลยุทธ์ในแมตช์หรือไม่", "Soopi 관련 방송 화면에는 그가 SOOP에서 대회 중계를 열어 시청하는 모습이 보입니다. 시청 사실은 확인되지만, 그 정보가 경기 중 전술 판단에 반영됐는지는 화면에 드러나지 않습니다."],
+  ["App switcher in Soopi-related livestream footage, showing the Day 1 R4 lobby and a SOOP window.", "หน้าสลับแอปในไลฟ์ที่เกี่ยวข้องกับ Soopi แสดงล็อบบี้ Day 1 R4 และหน้าต่าง SOOP", "Soopi 관련 방송의 앱 전환 화면에 Day 1 R4 대기실과 SOOP 창이 보입니다."],
+  ["The livestream still shows Soopi opening and watching the tournament stream on SOOP; it does not show in-match tactical decisions.", "ภาพจากไลฟ์แสดงว่า Soopi เปิดและดูสตรีมการแข่งขันบน SOOP แต่ไม่แสดงการตัดสินใจเชิงกลยุทธ์ระหว่างแข่ง", "방송 화면에는 Soopi가 SOOP에서 대회 중계를 열어 시청하는 모습이 보이지만 경기 중 전술 판단은 드러나지 않습니다."],
 ];
 
 if (zhEntries.length !== entries.length) {

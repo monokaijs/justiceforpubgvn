@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useState, type MouseEvent } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import Image from "next/image";
-import { Language, sources, timeline, type SourceKey } from "@/data/timeline";
+import { Language, sources, timeline, type SourceKey, type TimelineEvent } from "@/data/timeline";
 import { useLanguage } from "@/components/language-provider";
 import LanguageSelector from "@/components/language-selector";
 import LocalizedAnchor from "@/components/localized-anchor";
 import ShareButton from "@/components/share-button";
+import GyuminComparison from "@/components/gyumin-comparison";
 import { loc, localized } from "@/lib/i18n";
 
 const copy = {
@@ -14,7 +15,7 @@ const copy = {
     brandSub: "DÒNG THỜI GIAN",
     navTimeline: "DIỄN BIẾN VỤ VIỆC",
     navSources: "NGUỒN TÀI LIỆU",
-    heroEyebrow: "JUSTICE FOR PUBG VN  /  17–23.09.2026",
+    heroEyebrow: "JUSTICE FOR HIMASS & TANVUU  /  17–23.09.2026",
     heroLineOne: "Công bằng cho",
     heroLineTwo: "Himass & TanVuu.",
     heroStatement: "Không bênh vực gian lận. Yêu cầu điều tra minh bạch và xử phạt tương xứng.",
@@ -50,7 +51,7 @@ const copy = {
     brandSub: "CASE TIMELINE",
     navTimeline: "CASE TIMELINE",
     navSources: "SOURCES",
-    heroEyebrow: "JUSTICE FOR PUBG VN  /  17–23.09.2026",
+    heroEyebrow: "JUSTICE FOR HIMASS & TANVUU  /  17–23.09.2026",
     heroLineOne: "Fair treatment for",
     heroLineTwo: "Himass & TanVuu.",
     heroStatement: "Not a defense of cheating. A call for clear rules, transparent investigation, and proportionate sanctions.",
@@ -97,6 +98,89 @@ const heroArguments = {
   ],
 } as const;
 
+const snipingDialogCopy = {
+  vi: {
+    action: "Họ có xem stream đối thủ?",
+    eyebrow: "PHÂN BIỆT HAI HÀNH VI",
+    title: "Họ có stream sniping không?",
+    chatTitle: "Xem chat trên stream của mình",
+    chat: "Theo lời giải thích ban đầu được thuật lại, Himass và TanVuu mở chat của livestream cá nhân và thấy thông tin trận đấu từ người xem. PUBG xác nhận ngày 20/09 rằng họ đã kiểm tra thông tin ngoài game qua nội dung stream cá nhân; khi ấy việc trực tiếp xem stream người khác vẫn đang được điều tra.",
+    differenceTitle: "Điểm khác biệt",
+    difference: "Đọc thông tin do người khác gửi vào chat của mình khác với việc trực tiếp mở livestream của đối thủ để theo dõi trận đấu. Cả hai đều có thể đưa thông tin ngoài game vào trận; việc thừa nhận hành vi thứ nhất không đồng nghĩa thừa nhận hành vi thứ hai.",
+    findingTitle: "Kết luận mới nhất của PUBG",
+    finding: "Ngày 23/09, sau khi xem video, dữ liệu trong game và replay, PUBG kết luận cả hai đã sử dụng thông tin ngoài game và xem livestream của người tham gia khác để đưa ra quyết định chiến thuật. Đây là kết luận của PUBG, không phải lời thừa nhận stream sniping của hai tuyển thủ.",
+    guidance: "Một số người tham gia nói họ hiểu hướng dẫn trước giải là cho phép dùng thông tin ngoài hoặc xem stream. KRAFTON nói họ chưa từng chính thức cho phép điều đó và nhận trách nhiệm vì hướng dẫn ban đầu thiếu rõ ràng.",
+    source20: "Thông báo PUBG · 20/09",
+    source23: "Kết luận PUBG · 23/09",
+    limit: "Trang này chưa lưu bản gốc lời giải thích riêng của hai tuyển thủ, nên mô tả về chat chỉ là lời giải thích được thuật lại, không phải trích dẫn đã xác minh độc lập.",
+    close: "Đóng",
+  },
+  en: {
+    action: "Did they stream snipe?",
+    eyebrow: "TWO DISTINCT CLAIMS",
+    title: "Did they stream snipe?",
+    chatTitle: "Reading their own live chat",
+    chat: "In the players' initially reported account, Himass and TanVuu kept their own stream chats open and saw match information from viewers. On 20 September, PUBG confirmed they had checked out-of-game information through personal stream content; direct viewing of another participant's stream was still under investigation then.",
+    differenceTitle: "Why the distinction matters",
+    difference: "Reading information posted by viewers in your own chat differs from directly opening an opponent's stream to watch the match. Both can bring outside information into play. Acknowledging the first is not an admission of the second.",
+    findingTitle: "PUBG's later finding",
+    finding: "On 23 September, after reviewing footage, in-game data and replays, PUBG concluded that both players used outside information and another participant's livestream to inform tactical decisions. That is PUBG's finding, not an admission of stream sniping by the players.",
+    guidance: "Some participants said they understood earlier organizer guidance to allow outside information or stream viewing. KRAFTON says it never officially permitted either and accepts responsibility for unclear early guidance.",
+    source20: "PUBG notice · 20 Sep",
+    source23: "PUBG findings · 23 Sep",
+    limit: "This site has no archived original statements from each player. The live-chat account is reported rather than independently verified here.",
+    close: "Close",
+  },
+  th: {
+    action: "พวกเขาสตรีมสไนป์หรือไม่?",
+    eyebrow: "ข้อกล่าวอ้างสองเรื่องที่ต่างกัน",
+    title: "พวกเขาสตรีมสไนป์หรือไม่?",
+    chatTitle: "อ่านแชตไลฟ์ของตนเอง",
+    chat: "ตามคำชี้แจงแรกที่มีการรายงาน Himass และ TanVuu เปิดแชตของไลฟ์ตนเองไว้และเห็นข้อมูลการแข่งขันจากผู้ชม วันที่ 20 กันยายน PUBG ยืนยันว่าทั้งสองตรวจสอบข้อมูลนอกเกมผ่านเนื้อหาในไลฟ์ส่วนตัว ขณะนั้นประเด็นการดูไลฟ์ของผู้เข้าร่วมคนอื่นโดยตรงยังอยู่ระหว่างสอบสวน",
+    differenceTitle: "เหตุใดจึงต้องแยกแยะ",
+    difference: "การอ่านข้อความที่ผู้ชมส่งในแชตของตนเองต่างจากการเปิดไลฟ์ของคู่แข่งเพื่อดูการแข่งขันโดยตรง ทั้งสองอย่างอาจนำข้อมูลนอกเกมเข้าสู่การเล่น การยอมรับอย่างแรกจึงไม่ได้หมายถึงการยอมรับอย่างหลัง",
+    findingTitle: "ผลสอบสวนภายหลังของ PUBG",
+    finding: "วันที่ 23 กันยายน หลังตรวจสอบวิดีโอ ข้อมูลในเกม และรีเพลย์ PUBG สรุปว่าทั้งสองใช้ข้อมูลนอกเกมและไลฟ์ของผู้เข้าร่วมคนอื่นประกอบการตัดสินใจเชิงกลยุทธ์ นี่คือข้อสรุปของ PUBG ไม่ใช่คำยอมรับเรื่องสตรีมสไนป์จากผู้เล่น",
+    guidance: "ผู้เข้าร่วมบางส่วนกล่าวว่าเข้าใจคำแนะนำก่อนแข่งว่าอนุญาตให้ใช้ข้อมูลภายนอกหรือดูไลฟ์ได้ KRAFTON ระบุว่าไม่เคยอนุญาตอย่างเป็นทางการ และยอมรับความรับผิดชอบต่อคำแนะนำช่วงแรกที่ไม่ชัดเจน",
+    source20: "ประกาศ PUBG · 20 ก.ย.",
+    source23: "ผลสอบสวน PUBG · 23 ก.ย.",
+    limit: "เว็บไซต์นี้ไม่มีต้นฉบับคำชี้แจงของผู้เล่นแต่ละคนที่เก็บไว้ เรื่องการอ่านแชตจึงเป็นคำชี้แจงที่มีการรายงาน ไม่ใช่ข้อมูลที่ตรวจสอบโดยอิสระที่นี่",
+    close: "ปิด",
+  },
+  ko: {
+    action: "스트림 스나이핑을 했나?",
+    eyebrow: "구분해야 할 두 가지 주장",
+    title: "스트림 스나이핑을 했나?",
+    chatTitle: "자신의 방송 채팅 확인",
+    chat: "초기에 보도된 선수들의 설명에 따르면 Himass와 TanVuu는 자신의 방송 채팅을 열어 두고 시청자가 보낸 경기 정보를 봤습니다. PUBG는 9월 20일 두 선수가 개인 방송 내용을 통해 게임 외부 정보를 확인했다고 발표했으며, 당시 다른 참가자의 방송을 직접 봤는지는 계속 조사 중이었습니다.",
+    differenceTitle: "왜 구분해야 하나",
+    difference: "자신의 채팅에 올라온 정보를 읽는 것과 상대의 방송을 직접 열어 경기를 보는 것은 다른 행위입니다. 둘 다 외부 정보를 경기에 유입시킬 수 있습니다. 첫 번째를 인정했다고 해서 두 번째까지 인정한 것은 아닙니다.",
+    findingTitle: "PUBG의 이후 조사 결과",
+    finding: "PUBG는 9월 23일 영상, 게임 데이터, 리플레이를 검토한 뒤 두 선수가 외부 정보와 다른 참가자의 방송을 전술 판단에 활용했다고 결론 내렸습니다. 이는 PUBG의 조사 결과이며 선수들이 스트림 스나이핑을 인정했다는 뜻은 아닙니다.",
+    guidance: "일부 참가자는 사전 안내상 외부 정보 이용이나 방송 시청이 허용된 것으로 이해했다고 주장했습니다. KRAFTON은 이를 공식 허용한 적이 없다고 밝혔고 초기 안내가 불명확했던 책임을 인정했습니다.",
+    source20: "PUBG 공지 · 9월 20일",
+    source23: "PUBG 조사 결과 · 9월 23일",
+    limit: "이 사이트에는 각 선수의 원문 입장문이 보관되어 있지 않습니다. 채팅에 관한 설명은 보도된 내용이며 이곳에서 독립적으로 검증하지 못했습니다.",
+    close: "닫기",
+  },
+  zh: {
+    action: "他们是否窥屏？",
+    eyebrow: "区分两种说法",
+    title: "他们是否直播窥屏？",
+    chatTitle: "查看自己直播间的聊天",
+    chat: "据最初被报道的选手说法，Himass 和 TanVuu 开着自己直播间的聊天，看到了观众发来的比赛信息。PUBG 于 9 月 20 日确认，两人通过个人直播内容查看了游戏外信息；当时是否直接观看其他参赛者的直播仍在调查中。",
+    differenceTitle: "为何要区分",
+    difference: "阅读自己聊天区里观众发来的信息，与直接打开对手直播观看比赛，是两种不同的行为。两者都可能把外部信息带入比赛。承认前者不等于承认后者。",
+    findingTitle: "PUBG 后续调查结论",
+    finding: "9 月 23 日，PUBG 在审查影像、游戏数据和回放后认定，两人将游戏外信息及其他参赛者的直播用于战术判断。这是 PUBG 的调查结论，并非选手承认直播窥屏。",
+    guidance: "部分参赛者称，他们理解赛前指引允许使用外部信息或观看直播。KRAFTON 表示从未正式允许这些行为，并承认早期指引不清的责任。",
+    source20: "PUBG 公告 · 9 月 20 日",
+    source23: "PUBG 调查结果 · 9 月 23 日",
+    limit: "本站未存档两位选手各自的原始声明。因此，关于聊天的说法是转述，本站未独立核实。",
+    close: "关闭",
+  },
+} as const;
+
 const modules = {
   rulebook: {
     vi: { title: "Luật rõ ràng. Trách nhiệm chung.", body: "Không có điều khoản cụ thể không mặc nhiên cho phép thi đấu thiếu công bằng. Nhưng sự nhập nhằng của điều lệ hoặc hướng dẫn từ ban tổ chức phải được cân nhắc khi xác định trách nhiệm và mức phạt." },
@@ -117,8 +201,8 @@ const modules = {
     ],
   },
   "follow-up": {
-    vi: { title: "Một tiêu chuẩn cho tất cả.", body: "Việc mở một trang stream tự nó chưa chứng minh đã khai thác thông tin. Cần hỏi như nhau về thời điểm, tư cách tham gia, việc chia sẻ thông tin và việc dùng thông tin trong trận đấu." },
-    en: { title: "One standard for everyone.", body: "Opening a stream is not, by itself, proof of exploiting it. The same questions about timing, participation status, information sharing, and in-game use should be applied to every participant." },
+    vi: { title: "Một tiêu chuẩn cho tất cả.", body: "Ảnh trích livestream cho thấy Soopi đã mở và xem stream giải đấu. Đây là bằng chứng trực quan về việc sử dụng livestream; cần áp dụng cùng tiêu chí để đánh giá thời điểm và việc đưa thông tin vào quyết định trong trận." },
+    en: { title: "One standard for everyone.", body: "Stills from the livestream show Soopi opening and watching the tournament stream. They directly establish livestream viewing; the same criteria should be applied to timing and whether information informed decisions in a match." },
     links: [
       { vi: "Ảnh Soopi · chuyển ứng dụng", en: "Soopi still · app switcher", href: "/sources#evidence-soopi-alt-tab" },
       { vi: "Ảnh Soopi · trang stream", en: "Soopi still · stream page", href: "/sources#evidence-soopi-watching-livestream" },
@@ -156,18 +240,6 @@ function SupportIcon({ supported }: { supported: boolean }) {
   );
 }
 
-function scrollToHeroSlide(index: number) {
-  const section = document.querySelector<HTMLElement>(".campaign-hero");
-  const pin = section?.querySelector<HTMLElement>(".campaign-hero-pin");
-  if (!section || !pin) return;
-  const stageDistance = (section.offsetHeight - pin.offsetHeight) / 3;
-  const top = section.getBoundingClientRect().top + window.scrollY;
-  window.scrollTo({
-    top: index >= 4 ? top + section.offsetHeight : top + Math.max(0, stageDistance) * index,
-    behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
-  });
-}
-
 function SourceLink({ sourceKey, label }: { sourceKey: SourceKey; label: string }) {
   return (
     <LocalizedAnchor className="source-link" href={`/sources#${sourceKey}`}>
@@ -188,7 +260,11 @@ function ReportedSanctionChanges({ language, compact = false }: { language: Lang
   </aside>;
 }
 
-function CaseModule({ id, language, response, explanation }: { id: keyof typeof modules; language: Language; response: string; explanation: string }) {
+function TimelineAdditional({ items, language }: { items?: TimelineEvent["additional"]; language: Language }) {
+  return items?.map((item) => <section className="timeline-additional" key={item.heading.en}><h4>{localized(item.heading, language)}</h4><p>{localized(item.text, language)}</p></section>);
+}
+
+function CaseModule({ id, language, response, explanation, additional }: { id: keyof typeof modules; language: Language; response: string; explanation: string; additional?: TimelineEvent["additional"] }) {
   const module = modules[id];
   const title = loc(language, module.vi.title, module.en.title);
   const body = loc(language, module.vi.body, module.en.body);
@@ -208,7 +284,7 @@ function CaseModule({ id, language, response, explanation }: { id: keyof typeof 
       <div className="comparison-cases">
         {[
           { name: "HIMASS & TANVUU", values: [loc(language, "PUBG gắn sự việc với Day 1", "PUBG dates conduct to Day 1"), loc(language, "PUBG nói đã xem stream người khác", "PUBG says another stream was viewed"), loc(language, "PUBG kết luận có áp dụng vào chiến thuật", "PUBG found strategic use")] },
-          { name: loc(language, "ẢNH LIÊN QUAN SOOPI", "SOOPI-RELATED STILLS"), values: [loc(language, "Chưa được xác lập công khai", "Not publicly established"), loc(language, "Ảnh chỉ cho thấy giao diện; chưa xác lập nội dung đã chia sẻ", "Stills show an interface; sharing is not established"), loc(language, "Chưa được xác lập công khai", "Not publicly established")] },
+          { name: loc(language, "ẢNH LIÊN QUAN SOOPI", "SOOPI-RELATED STILLS"), values: [loc(language, "Giao diện sảnh chờ Day 1 R4 hiện trong ảnh", "Day 1 R4 lobby visible in the still"), loc(language, "Đã mở và xem livestream trận đấu trên SOOP", "Opened and watched the match stream on SOOP"), loc(language, "Đã sử dụng livestream; ảnh không cho thấy quyết định chiến thuật trong trận", "Livestream use shown; in-match tactical decisions are not shown")] },
         ].map((person) => <section className="comparison-case" key={person.name}><h4>{person.name}</h4><dl>{[
           loc(language, "Thời điểm / tư cách", "Timing / status"),
           loc(language, "Nội dung xem / chia sẻ", "Viewed / shared content"),
@@ -216,13 +292,13 @@ function CaseModule({ id, language, response, explanation }: { id: keyof typeof 
         ].map((label, fieldIndex) => <div key={label}><dt>{label}</dt><dd>{person.values[fieldIndex]}</dd></div>)}</dl></section>)}
       </div>
       <p>{loc(language, "Trong kết luận ngày 23/09, PUBG nói đã xem xét nghi vấn tương tự với người khác và không thấy thêm vi phạm cần chế tài; thông báo không nêu tên Soopi trong kết luận này.", "In its later 23 Sep findings, PUBG says it reviewed similar allegations involving others and found no further sanctionable violation; the notice does not name Soopi in that finding.")}</p>
-      <div className="module-stills"><LocalizedAnchor href="/sources#evidence-soopi-alt-tab"><Image src="/attachments/evidences/soopi-alt-tab.png" alt={loc(language, "Ảnh do người dùng cung cấp: màn hình chuyển ứng dụng", "User-supplied app switcher still")} width={360} height={203} unoptimized /><span>{loc(language, "Ảnh chuyển ứng dụng · nguồn và thời điểm chưa xác minh", "App switcher · origin and timing unverified")}</span></LocalizedAnchor><LocalizedAnchor href="/sources#evidence-soopi-watching-livestream"><Image src="/attachments/evidences/soopi-watching-livestream.png" alt={loc(language, "Ảnh do người dùng cung cấp: trang livestream", "User-supplied livestream page still")} width={360} height={203} unoptimized /><span>{loc(language, "Trang stream · ảnh tĩnh không chứng minh việc sử dụng", "Stream page · still does not prove use")}</span></LocalizedAnchor></div>
+      <div className="module-stills"><LocalizedAnchor href="/sources#evidence-soopi-alt-tab"><Image src="/attachments/evidences/soopi-alt-tab.png" alt={loc(language, "Ảnh do người dùng cung cấp: màn hình chuyển ứng dụng", "User-supplied app switcher still")} width={360} height={203} unoptimized /><span>{loc(language, "Ảnh chuyển ứng dụng · sảnh chờ Day 1 R4", "App switcher · Day 1 R4 lobby")}</span></LocalizedAnchor><LocalizedAnchor href="/sources#evidence-soopi-watching-livestream"><Image src="/attachments/evidences/soopi-watching-livestream.png" alt={loc(language, "Ảnh do người dùng cung cấp: trang livestream", "User-supplied livestream page still")} width={360} height={203} unoptimized /><span>{loc(language, "Trang SOOP · xác nhận đã xem livestream", "SOOP page · livestream viewing shown")}</span></LocalizedAnchor></div>
     </div>}
     {id === "sanctions-september-23" && <div className="module-sanctions"><div><span>{loc(language, "TÀI KHOẢN GAME", "GAME ACCOUNTS")}</span><strong>{loc(language, "Khóa vĩnh viễn", "Permanent bans")}</strong></div><div><span>{loc(language, "GIẢI ESPORTS CHÍNH THỨC", "OFFICIAL ESPORTS")}</span><strong>{loc(language, "Tước quyền thi đấu vĩnh viễn", "Permanent ineligibility")}</strong></div><div><span>{loc(language, "VIETNAM PARTNER · 20/09", "VIETNAM PARTNER · 20 SEP")}</span><strong>{loc(language, "Thu hồi tư cách", "Status revoked")}</strong></div></div>}
     {id === "sanctions-september-23" && <ReportedSanctionChanges language={language} />}
     {id === "sanctions-september-23" && <p className="module-limits">{loc(language, "PUBG nêu quyền giải trình qua thủ tục Esports. Trang này chưa có kết quả khiếu nại hoặc tuyên bố đội tuyển được xác thực để dẫn nguồn.", "PUBG states that the players may use its esports response process. This site has no verified appeal outcome or team statement to cite.")}</p>}
     <div className="module-links"><span>{loc(language, "KIỂM TRA BỐI CẢNH", "CHECK THE CONTEXT")}</span><div>{module.links.map((link) => <LocalizedAnchor key={link.href} href={link.href}>{localized(link, language)} ↗</LocalizedAnchor>)}</div></div>
-    <details className="case-read-more"><summary>{loc(language, "Đọc thêm", "Read more")}<span aria-hidden="true">+</span></summary><div><p><strong>{loc(language, "Phản hồi / lập luận:", "Response / argument:")}</strong> {response}</p><p><strong>{loc(language, "Bối cảnh:", "Context:")}</strong> {explanation}</p></div></details>
+    <details className="case-read-more"><summary>{loc(language, "Đọc thêm", "Read more")}<span aria-hidden="true">+</span></summary><div><p><strong>{loc(language, "Phản hồi / lập luận:", "Response / argument:")}</strong> {response}</p><p><strong>{loc(language, "Bối cảnh:", "Context:")}</strong> {explanation}</p><TimelineAdditional items={additional} language={language} /></div></details>
   </aside>;
 }
 
@@ -230,9 +306,19 @@ export default function TimelineExperience() {
   const { language } = useLanguage();
   const [activeIndex, setActiveIndex] = useState(0);
   const [heroActiveIndex, setHeroActiveIndex] = useState(0);
+  const [verticalHero, setVerticalHero] = useState(false);
   const [support, setSupport] = useState<{ count: number; supported: boolean } | null>(null);
   const [supportPending, setSupportPending] = useState(false);
   const [supportError, setSupportError] = useState(false);
+  const snipingDialogRef = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    const mobile = window.matchMedia("(max-width: 600px)");
+    const sync = () => setVerticalHero(mobile.matches);
+    sync();
+    mobile.addEventListener("change", sync);
+    return () => mobile.removeEventListener("change", sync);
+  }, []);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -250,6 +336,7 @@ export default function TimelineExperience() {
     const panels = Array.from(document.querySelectorAll<HTMLElement>(".story-panel"));
     const heroSection = document.querySelector<HTMLElement>(".campaign-hero");
     const heroTrack = document.querySelector<HTMLElement>(".campaign-hero-track");
+    const heroSlides = Array.from(document.querySelectorAll<HTMLElement>(".campaign-slide"));
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const storySection = document.querySelector<HTMLElement>(".story-section");
     let observer: IntersectionObserver | undefined;
@@ -278,38 +365,29 @@ export default function TimelineExperience() {
       });
       if (heroSection && heroTrack) {
         const rect = heroSection.getBoundingClientRect();
-        const travel = Math.max(1, rect.height - window.innerHeight);
-        const rawProgress = Math.max(0, Math.min(3, (-rect.top / travel) * 3));
-        const progress = reducedMotion.matches ? Math.round(rawProgress) : rawProgress;
-        heroTrack.style.transform = `translate3d(${-progress * 100}vw, 0, 0)`;
-        heroSection.style.setProperty("--hero-progress", `${(rawProgress / 3) * 100}%`);
-        const current = Math.round(rawProgress);
+        const mobile = window.matchMedia("(max-width: 600px)").matches;
+        let current: number;
+        if (mobile) {
+          heroTrack.style.removeProperty("transform");
+          current = Math.max(0, heroSlides.findLastIndex((slide) => slide.getBoundingClientRect().top <= middle));
+        } else {
+          const travel = Math.max(1, rect.height - window.innerHeight);
+          const rawProgress = Math.max(0, Math.min(3, (-rect.top / travel) * 3));
+          const progress = reducedMotion.matches ? Math.round(rawProgress) : rawProgress;
+          heroTrack.style.transform = `translate3d(${-progress * 100}vw, 0, 0)`;
+          heroSection.style.setProperty("--hero-progress", `${(rawProgress / 3) * 100}%`);
+          current = Math.round(rawProgress);
+        }
         setHeroActiveIndex((previous) => previous === current ? previous : current);
       }
       setActiveIndex((previous) => previous === nearest ? previous : nearest);
     };
     const onScroll = () => { if (!frame) frame = window.requestAnimationFrame(update); };
-    let touchStart: { x: number; y: number } | null = null;
-    const onHeroTouchStart = (event: TouchEvent) => {
-      if (!window.matchMedia("(max-width: 600px)").matches || event.touches.length !== 1) return;
-      if ((event.target as HTMLElement).closest("a, button, input, select, textarea")) return;
-      touchStart = { x: event.touches[0].clientX, y: event.touches[0].clientY };
-    };
-    const onHeroTouchEnd = (event: TouchEvent) => {
-      if (!touchStart || !heroSection) return;
-      const deltaX = event.changedTouches[0].clientX - touchStart.x;
-      const deltaY = event.changedTouches[0].clientY - touchStart.y;
-      touchStart = null;
-      if (Math.abs(deltaX) < 55 || Math.abs(deltaX) < Math.abs(deltaY) * 1.3) return;
-      const stageDistance = (heroSection.offsetHeight - (heroSection.querySelector<HTMLElement>(".campaign-hero-pin")?.offsetHeight ?? window.innerHeight)) / 3;
-      const current = Math.max(0, Math.min(3, Math.round(-heroSection.getBoundingClientRect().top / Math.max(1, stageDistance))));
-      scrollToHeroSlide(Math.max(0, Math.min(4, current + (deltaX < 0 ? 1 : -1))));
-    };
     let wheelLocked = false;
     let wheelTotal = 0;
     let wheelTimer = 0;
     const onHeroWheel = (event: WheelEvent) => {
-      if (!heroSection || event.ctrlKey || event.metaKey || Math.abs(event.deltaX) >= Math.abs(event.deltaY)) return;
+      if (!heroSection || window.matchMedia("(max-width: 600px)").matches || event.ctrlKey || event.metaKey || Math.abs(event.deltaX) >= Math.abs(event.deltaY)) return;
       const rect = heroSection.getBoundingClientRect();
       if (rect.top > 1 || rect.bottom <= 0) return;
       const slide = (event.target as HTMLElement).closest<HTMLElement>(".campaign-slide");
@@ -341,14 +419,10 @@ export default function TimelineExperience() {
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     heroSection?.addEventListener("wheel", onHeroWheel, { passive: false });
-    heroSection?.addEventListener("touchstart", onHeroTouchStart, { passive: true });
-    heroSection?.addEventListener("touchend", onHeroTouchEnd, { passive: true });
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
       heroSection?.removeEventListener("wheel", onHeroWheel);
-      heroSection?.removeEventListener("touchstart", onHeroTouchStart);
-      heroSection?.removeEventListener("touchend", onHeroTouchEnd);
       window.clearTimeout(wheelTimer);
       if (frame) window.cancelAnimationFrame(frame);
       observer?.disconnect();
@@ -358,6 +432,7 @@ export default function TimelineExperience() {
 
   const t = language === "vi" ? copy.vi : Object.fromEntries(Object.entries(copy.en).map(([key, value]) => [key, loc(language, value, value)])) as unknown as typeof copy.vi;
   const translatedHeroArguments = language === "vi" ? heroArguments.vi : heroArguments.en.map((item) => ({ title: loc(language, item.title, item.title), body: loc(language, item.body, item.body) }));
+  const snipingCopy = snipingDialogCopy[language];
 
   const standWithThem = async () => {
     if (supportPending || support?.supported) return;
@@ -405,7 +480,7 @@ export default function TimelineExperience() {
         <section className={`campaign-hero campaign-hero-stage-${heroActiveIndex}`} aria-label={t.heroLabel}>
           <div className="campaign-hero-pin">
             <div className="campaign-hero-track">
-              <article className="campaign-slide campaign-slide-intro" aria-hidden={heroActiveIndex !== 0} inert={heroActiveIndex !== 0}>
+              <article className="campaign-slide campaign-slide-intro" aria-hidden={!verticalHero && heroActiveIndex !== 0} inert={!verticalHero && heroActiveIndex !== 0}>
                 <div className="campaign-hero-photo"><Image src="/attachments/himass-tanvuu.png" alt={loc(language, "Hình minh họa đen trắng của hai tuyển thủ do người dùng cung cấp", "User-supplied black-and-white campaign visual of two esports players")} fill sizes="100vw" unoptimized priority /></div>
                 <div className="page-width campaign-slide-inner">
                   <div className="campaign-hero-copy">
@@ -421,24 +496,28 @@ export default function TimelineExperience() {
                     </div>
                     {supportError && <p className="hero-support-error" role="alert">{t.supportError}</p>}
                     <p className="hero-intro-credit">{t.independent} · {t.heroVisualSource}</p>
+                    <LocalizedAnchor className="campaign-mobile-skip" href="#timeline" onClick={skipToTimeline}>{t.heroSkip} ↗</LocalizedAnchor>
                   </div>
                 </div>
               </article>
 
-              <article className="campaign-slide campaign-slide-rule" aria-hidden={heroActiveIndex !== 1} inert={heroActiveIndex !== 1}>
+              <article className="campaign-slide campaign-slide-rule" aria-hidden={!verticalHero && heroActiveIndex !== 1} inert={!verticalHero && heroActiveIndex !== 1}>
                 <div className="page-width campaign-slide-inner magazine-layout">
                   <div className="magazine-copy">
                     <p className="magazine-kicker">{loc(language, "ĐIỀU LỆ & HƯỚNG DẪN", "RULES & GUIDANCE")}</p>
                     <h2>{translatedHeroArguments[0].title}</h2>
                     <p className="magazine-lead">{translatedHeroArguments[0].body}</p>
                     <p className="magazine-context">{loc(language, "Điều lệ có nghĩa vụ chống gian lận và yêu cầu theo dõi thông báo Discord. PUBG sau đó thừa nhận các tiêu chuẩn công bằng chưa được cụ thể hóa đủ.", "The rulebook contains anti-cheating duties and requires participants to follow Discord notices. PUBG later acknowledged that its fairness standards were not specific enough.")}</p>
-                    <LocalizedAnchor className="magazine-source" href="/sources#rulebook-vi-3-7">{loc(language, "Đọc điều lệ gốc · §3.7", "Read the rulebook · §3.7")} ↗</LocalizedAnchor>
+                    <div className="magazine-rule-actions">
+                      <button className="primary-cta" type="button" onClick={() => snipingDialogRef.current?.showModal()}><span>{snipingCopy.action}</span><ArrowIcon /></button>
+                      <LocalizedAnchor className="magazine-source" href="/sources#rulebook-vi-3-7">{loc(language, "Đọc điều lệ gốc · §3.7", "Read the rulebook · §3.7")} ↗</LocalizedAnchor>
+                    </div>
                   </div>
                   <div className="magazine-rule-excerpt"><span>{loc(language, "ĐIỀU LỆ VI", "VI RULEBOOK")} · §3.7 · 14.09.2026</span><strong>§3.7</strong><blockquote lang="vi">“Khuyến nghị tất cả người chơi livestream cá nhân phải cài đặt độ trễ hợp lý để tránh bị lộ thông tin.”</blockquote><p>{loc(language, "Trích nguyên văn trang 16/17. Chưa có bản lưu hướng dẫn Discord trước sự việc để đối chiếu.", "Translation: Players who stream personally are encouraged to set a reasonable delay to prevent information exposure. Pre-event Discord guidance is not archived here.")}</p></div>
                 </div>
               </article>
 
-              <article className="campaign-slide campaign-slide-investigation" aria-hidden={heroActiveIndex !== 2} inert={heroActiveIndex !== 2}>
+              <article className="campaign-slide campaign-slide-investigation" aria-hidden={!verticalHero && heroActiveIndex !== 2} inert={!verticalHero && heroActiveIndex !== 2}>
                 <div className="page-width campaign-slide-inner magazine-layout">
                   <div className="magazine-copy">
                     <p className="magazine-kicker">{loc(language, "KẾT LUẬN & CHỨNG CỨ", "FINDINGS & EVIDENCE")}</p>
@@ -454,13 +533,13 @@ export default function TimelineExperience() {
                     </LocalizedAnchor>
                     <div className="magazine-evidence-bottom">
                       <LocalizedAnchor className="magazine-evidence-secondary" href="/sources#evidence-soopi-alt-tab" aria-label={loc(language, "Xem nguồn ảnh chuyển ứng dụng liên quan Soopi", "View provenance for the Soopi-related app-switcher image")}><Image src="/attachments/evidences/soopi-alt-tab.png" alt={loc(language, "Ảnh do người dùng cung cấp: màn hình chuyển ứng dụng trong video liên quan Soopi", "User-supplied app-switcher still in Soopi-related footage")} fill sizes="(max-width: 800px) 45vw, 20vw" unoptimized /></LocalizedAnchor>
-                      <p>{loc(language, "Ảnh liên quan Soopi do người dùng cung cấp. Ảnh cho thấy trang stream và thao tác chuyển ứng dụng; thời điểm, bối cảnh và việc sử dụng thông tin chưa được xác minh độc lập. Chúng không thay thế kết luận điều tra của PUBG.", "User-supplied Soopi-related stills show a stream page and an app switcher. Their timing, context and any use of information are not independently established. They do not replace PUBG's investigation findings.")}</p>
+                      <p>{loc(language, "Ảnh trích livestream liên quan Soopi cho thấy cô đã mở và xem stream giải đấu trên SOOP. Việc xem stream thể hiện rõ trong ảnh; ảnh không cho thấy thông tin đó có được dùng để ra quyết định chiến thuật trong trận hay không.", "Stills from Soopi-related livestream footage show her opening and watching the tournament stream on SOOP. The viewing is visible; the stills do not show whether that information informed tactical decisions in a match.")}</p>
                     </div>
                   </div>
                 </div>
               </article>
 
-              <article className="campaign-slide campaign-slide-sanctions" aria-hidden={heroActiveIndex !== 3} inert={heroActiveIndex !== 3}>
+              <article className="campaign-slide campaign-slide-sanctions" aria-hidden={!verticalHero && heroActiveIndex !== 3} inert={!verticalHero && heroActiveIndex !== 3}>
                 <div className="page-width campaign-slide-inner magazine-layout">
                   <div className="magazine-copy">
                     <p className="magazine-kicker">{loc(language, "CHẾ TÀI & QUYỀN GIẢI TRÌNH", "SANCTIONS & RIGHT TO RESPOND")}</p>
@@ -473,12 +552,7 @@ export default function TimelineExperience() {
                 </div>
               </article>
             </div>
-            <nav className="campaign-slide-nav" aria-label={loc(language, "Chuyển trang mở đầu", "Introduction slides")}>
-              <button type="button" onClick={() => scrollToHeroSlide(heroActiveIndex - 1)} disabled={heroActiveIndex === 0} aria-label={loc(language, "Trang trước", "Previous slide")}>‹</button>
-              <span aria-live="polite">{String(heroActiveIndex + 1).padStart(2, "0")} / 04</span>
-              <button type="button" onClick={() => scrollToHeroSlide(heroActiveIndex + 1)} disabled={heroActiveIndex === 3} aria-label={loc(language, "Trang tiếp", "Next slide")}>›</button>
-            </nav>
-            <div className="campaign-hero-footer"><span className="campaign-scroll-cue"><span className="desktop-scroll-cue">{t.heroScroll} <span aria-hidden="true">↓</span></span><span className="mobile-swipe-cue">{loc(language, "Vuốt để xem tiếp", "Swipe to continue")} <span aria-hidden="true">→</span></span></span><ShareButton className="campaign-share" /><LocalizedAnchor className="campaign-skip" href="#timeline" onClick={skipToTimeline}>{t.heroSkip} ↗</LocalizedAnchor></div>
+            <div className="campaign-hero-footer"><span className="campaign-scroll-cue">{t.heroScroll} <span aria-hidden="true">↓</span></span><ShareButton className="campaign-share" /><LocalizedAnchor className="campaign-skip" href="#timeline" onClick={skipToTimeline}>{t.heroSkip} ↗</LocalizedAnchor></div>
             <div className="campaign-hero-progress" aria-hidden="true"><span /></div>
           </div>
           <div className="campaign-hero-markers" aria-hidden="true">{[0, 1, 2, 3].map((marker) => <div className="campaign-hero-marker" key={marker} />)}</div>
@@ -508,12 +582,12 @@ export default function TimelineExperience() {
                   {index < timeline.length - 1 && <LocalizedAnchor className="story-next" href={`#${timeline[index + 1].id}`}>{t.next} <span>↓</span></LocalizedAnchor>}
                 </div>
                 {event.id in modules ? (
-                  <CaseModule id={event.id as keyof typeof modules} language={language} response={localized(event.response, language)} explanation={localized(event.explanation, language)} />
+                  <CaseModule id={event.id as keyof typeof modules} language={language} response={localized(event.response, language)} explanation={localized(event.explanation, language)} additional={event.additional} />
                 ) : (
                   <div className="story-explainer story-explainer-compact">
                     <span className="story-explainer-top">{loc(language, "HỒ SƠ VỤ VIỆC", "CASE FILE")} / {String(index + 1).padStart(2, "0")}</span>
                     <p className="story-explainer-summary">{loc(language, "Diễn biến được ghi nhận từ tài liệu nguồn. Mở phần giải thích để xem lập luận và giới hạn của mốc này.", "This milestone draws on the linked source. Open the explanation for context and limits.")}</p>
-                    <details className="case-read-more"><summary>{t.readMore}<span aria-hidden="true">+</span></summary><div><p><strong>{t.responseLabel}:</strong> {localized(event.response, language)}</p><p><strong>{t.explanationLabel}:</strong> {localized(event.explanation, language)}</p></div></details>
+                    <details className="case-read-more"><summary>{t.readMore}<span aria-hidden="true">+</span></summary><div><p><strong>{t.responseLabel}:</strong> {localized(event.response, language)}</p><p><strong>{t.explanationLabel}:</strong> {localized(event.explanation, language)}</p><TimelineAdditional items={event.additional} language={language} /></div></details>
                     <span className="story-explainer-bottom">JUSTICE FOR PUBG VN · 2026</span>
                   </div>
                 )}
@@ -522,7 +596,24 @@ export default function TimelineExperience() {
           ))}
         </section>
 
+        <GyuminComparison />
       </main>
+
+      <dialog ref={snipingDialogRef} className="sniping-dialog" aria-labelledby="sniping-dialog-title" onClick={(event) => { if (event.target === event.currentTarget) event.currentTarget.close(); }}>
+        <div className="sniping-dialog-content">
+          <button className="sniping-dialog-close" type="button" aria-label={snipingCopy.close} onClick={() => snipingDialogRef.current?.close()}>×</button>
+          <span className="sniping-dialog-eyebrow">{snipingCopy.eyebrow}</span>
+          <h2 id="sniping-dialog-title">{snipingCopy.title}</h2>
+          <div className="sniping-dialog-grid">
+            <section><h3>{snipingCopy.chatTitle}</h3><p>{snipingCopy.chat}</p></section>
+            <section><h3>{snipingCopy.differenceTitle}</h3><p>{snipingCopy.difference}</p></section>
+            <section className="sniping-dialog-finding"><h3>{snipingCopy.findingTitle}</h3><p>{snipingCopy.finding}</p></section>
+          </div>
+          <p className="sniping-dialog-guidance">{snipingCopy.guidance}</p>
+          <p className="sniping-dialog-limit">{snipingCopy.limit}</p>
+          <div className="sniping-dialog-sources"><LocalizedAnchor href="/sources#additional">{snipingCopy.source20} ↗</LocalizedAnchor><LocalizedAnchor href="/sources#findingsVi">{snipingCopy.source23} ↗</LocalizedAnchor></div>
+        </div>
+      </dialog>
 
       <footer className="site-footer"><div className="page-width footer-inner"><div className="footer-brand">JUSTICE<span>FORPUBGVN</span><small>{t.brandSub}</small></div><p>{t.footerNote}</p><div className="home-footer-links"><LocalizedAnchor href="/players">{loc(language, "TUYỂN THỦ", "PLAYERS")} ↗</LocalizedAnchor><LocalizedAnchor href="/sources">{t.navSources} ↗</LocalizedAnchor><LocalizedAnchor href="/legal">{loc(language, "PHÁP LÝ", "LEGAL")} ↗</LocalizedAnchor><ShareButton /></div></div></footer>
     </div>
