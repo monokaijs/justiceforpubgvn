@@ -1,4 +1,4 @@
-export const languages = ["vi", "th", "en", "ko", "zh"] as const;
+export const languages = ["vi", "th", "en", "ko", "zh", "ja", "ru", "id", "es", "tl"] as const;
 export type Language = (typeof languages)[number];
 
 export function isLanguage(value: string): value is Language {
@@ -11,4 +11,9 @@ export const languageNames: Record<Language, string> = {
   en: "English",
   ko: "한국어",
   zh: "简体中文",
+  ja: "日本語",
+  ru: "Русский",
+  id: "Bahasa Indonesia",
+  es: "Español",
+  tl: "Filipino",
 };

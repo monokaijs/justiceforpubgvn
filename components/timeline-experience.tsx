@@ -11,6 +11,7 @@ import ShareButton from "@/components/share-button";
 import GyuminComparison from "@/components/gyumin-comparison";
 import { loc, localized } from "@/lib/i18n";
 import { UiIcon } from "@/components/ui-icon";
+import { rulebookQuote37 } from "@/data/rulebook-quotes";
 
 const copy = {
   vi: {
@@ -179,7 +180,87 @@ const snipingDialogCopy = {
     limit: "本站未存档两位选手各自的原始声明。因此，关于聊天的说法是转述，本站未独立核实。",
     close: "关闭",
   },
-} as const;
+  ja: {
+    action: "彼らはゴースティング（スナイプ）をしたのか？",
+    eyebrow: "区別すべき2つの行為",
+    title: "彼らはゴースティング（スナイプ）をしたのか？",
+    chatTitle: "自身の配信チャットを確認すること",
+    chat: "初期の報道による選手側の説明では、Himass と TanVuu は自身の配信チャットを開いており、視聴者からの試合情報を見ていました。PUBG は9月20日、両名が個人配信の内容を通じてゲーム外の情報を確認したことを確認しましたが、当時、他参加者の配信を直接視聴していたかは調査中でした。",
+    differenceTitle: "区別が重要な理由",
+    difference: "自身のチャットで視聴者が投稿した情報を読むことと、相手の配信を直接開いて試合を監視することは異なります。どちらも外部情報を試合に持ち込む可能性がありますが、前者を認めたからといって後者を認めたことにはなりません。",
+    findingTitle: "PUBG によるその後の調査結果",
+    finding: "9月23日、映像、ゲーム内データ、リプレイを検証した結果、PUBG は両名が外部情報および他参加者の配信を戦術判断に利用したと結論付けました。これは PUBG の調査結論であり、選手自身がゴースティング（スナイプ）を認めたわけではありません。",
+    guidance: "一部の参加者は、事前の案内で外部情報の利用や配信視聴が認められていると理解していたと主張しました。KRAFTON は公式に認めたことは一度もないとし、初期の案内が不明瞭であった責任を認めました。",
+    source20: "PUBG 告知 · 9月20日",
+    source23: "PUBG 調査結果 · 9月23日",
+    limit: "当サイトには各選手の公式声明の原本は保管されていません。チャットに関する記述は報道された内容であり、当サイトで独自に検証されたものではありません。",
+    close: "閉じる",
+  },
+  ru: {
+    action: "Был ли стримснайпинг?",
+    eyebrow: "РАЗГРАНИЧЕНИЕ ДВУХ ДЕЙСТВИЙ",
+    title: "Был ли стримснайпинг?",
+    chatTitle: "Чтение чата собственной трансляции",
+    chat: "Согласно первоначальным сообщениям со слов игроков, Himass и TanVuu держали открытым чат своего стрима и видели информацию о матче от зрителей. 20 сентября PUBG подтвердила, что они проверяли внешнюю информацию через контент личной трансляции; на тот момент прямой просмотр трансляции другого участника все еще расследовался.",
+    differenceTitle: "Почему различие имеет значение",
+    difference: "Чтение сообщений зрителей в собственном чате отличается от прямого открытия чужого стрима для наблюдения за соперниками. Оба действия могут занести внешнюю информацию в игру. Признание первого не означает признание второго.",
+    findingTitle: "Итоговые выводы PUBG",
+    finding: "23 сентября после изучения видеозаписей, игровых данных и реплеев PUBG заключила, что оба игрока использовали внешнюю информацию и трансляцию другого участника для принятия тактических решений. Это вывод расследования PUBG, а не признание игроками стримснайпинга.",
+    guidance: "Некоторые участники заявили, что поняли ранние указания организаторов как допускающие использование внешней информации или просмотр стрима. KRAFTON заявила, что никогда официально этого не разрешала, и признала ответственность за неясность ранних инструкций.",
+    source20: "Уведомление PUBG · 20 сен",
+    source23: "Выводы PUBG · 23 сен",
+    limit: "На этом сайте нет сохраненных оригинальных заявлений каждого игрока. Информация о чате приводится со слов участников и не проверялась независимо.",
+    close: "Закрыть",
+  },
+  id: {
+    action: "Apakah mereka melakukan stream sniping?",
+    eyebrow: "MEMBEDAKAN DUA TINDAKAN",
+    title: "Apakah mereka melakukan stream sniping?",
+    chatTitle: "Membaca obrolan live stream sendiri",
+    chat: "Menurut klarifikasi awal yang dilaporkan, Himass dan TanVuu membiarkan obrolan live stream mereka terbuka dan melihat informasi pertandingan dari penonton. Pada 20 September, PUBG mengonfirmasi bahwa mereka memeriksa informasi di luar game melalui konten streaming pribadi; saat itu pemeriksaan apakah mereka menonton langsung stream peserta lain masih berlangsung.",
+    differenceTitle: "Mengapa perbedaan ini penting",
+    difference: "Membaca informasi yang dikirim penonton di ruang obrolan sendiri berbeda dengan langsung membuka stream lawan untuk memantau pertandingan. Keduanya dapat memasukkan informasi luar ke dalam permainan. Mengakui yang pertama bukan berarti mengakui yang kedua.",
+    findingTitle: "Hasil investigasi lanjutan PUBG",
+    finding: "Pada 23 September, setelah meninjau rekaman, data dalam game, dan replay, PUBG menyimpulkan bahwa kedua pemain menggunakan informasi luar dan live stream peserta lain untuk keputusan taktis. Ini adalah kesimpulan investigasi PUBG, bukan pengakuan stream sniping oleh para pemain.",
+    guidance: "Sejumlah peserta menyatakan mereka memahami panduan awal penyelenggara mengizinkan penggunaan informasi luar atau menonton streaming. KRAFTON menegaskan tidak pernah secara resmi mengizinkan keduanya dan menerima tanggung jawab atas panduan awal yang kurang jelas.",
+    source20: "Pengumuman PUBG · 20 Sep",
+    source23: "Hasil investigasi PUBG · 23 Sep",
+    limit: "Situs ini tidak menyimpan pernyataan asli dari masing-masing pemain. Uraian tentang live chat didasarkan pada laporan yang beredar dan belum diverifikasi secara independen.",
+    close: "Tutup",
+  },
+  es: {
+    action: "¿Hicieron stream sniping?",
+    eyebrow: "DISTINCIÓN ENTRE DOS ACTOS",
+    title: "¿Hicieron stream sniping?",
+    chatTitle: "Lectura del chat de su propia transmisión",
+    chat: "Según las explicaciones iniciales reportadas, Himass y TanVuu mantuvieron abierto el chat de su propia transmisión y vieron información del combate enviada por espectadores. El 20 de septiembre, PUBG confirmó que revisaron información externa a través de su streaming personal; en ese momento, la visualización directa del stream de otro participante aún estaba bajo investigación.",
+    differenceTitle: "Por qué importa la distinción",
+    difference: "Leer información publicada por espectadores en el propio chat es distinto de abrir directamente la transmisión de un rival para espiar la partida. Ambos actos pueden introducir información externa en el juego. Reconocer lo primero no equivale a admitir lo segundo.",
+    findingTitle: "Conclusiones posteriores de PUBG",
+    finding: "El 23 de septiembre, tras revisar grabaciones, datos del juego y repeticiones, PUBG concluyó que ambos jugadores utilizaron información externa y la transmisión de otro participante para tomar decisiones tácticas. Esta es la conclusión de PUBG, no una admisión de stream sniping por parte de los jugadores.",
+    guidance: "Algunos participantes señalaron haber entendido que las pautas previas del organizador permitían el uso de información externa o ver transmisiones. KRAFTON afirmó que nunca lo autorizó oficialmente y asumió la responsabilidad por la falta de claridad en las instrucciones iniciales.",
+    source20: "Aviso de PUBG · 20 sep",
+    source23: "Conclusiones de PUBG · 23 sep",
+    limit: "Este sitio no conserva las declaraciones originales de cada jugador. La referencia al chat se basa en relatos reportados y no ha sido verificada de forma independiente aquí.",
+    close: "Cerrar",
+  },
+  tl: {
+    action: "Nag-stream snipe ba sila?",
+    eyebrow: "PAGKAKAIBA NG DALAWANG KILOS",
+    title: "Nag-stream snipe ba sila?",
+    chatTitle: "Pagbabasa ng chat sa sariling stream",
+    chat: "Ayon sa naunang naiulat na paliwanag ng mga manlalaro, binuksan nina Himass at TanVuu ang chat ng kanilang personal na livestream at nakakita ng impormasyon ng laban mula sa mga manonood. Noong Setyembre 20, kinumpirma ng PUBG na sinuri nila ang impormasyon sa labas ng laro sa pamamagitan ng personal na stream; iniimbestigahan pa noon kung direktang pinanood ang stream ng ibang kalahok.",
+    differenceTitle: "Bakit mahalaga ang pagkakaiba",
+    difference: "Iba ang pagbabasa ng impormasyong ipinadala ng mga manonood sa sariling chat kaysa sa direktang pagbubukas ng stream ng katunggali upang panoorin ang laban. Parehong maaaring magdala ng panlabas na impormasyon sa laro; ang pag-amin sa una ay hindi pag-amin sa ikalawa.",
+    findingTitle: "Kinalabasang pagsusuri ng PUBG",
+    finding: "Noong Setyembre 23, matapos suriin ang mga footage, in-game data, at replay, napagpasyahan ng PUBG na ginamit ng dalawang manlalaro ang panlabas na impormasyon at livestream ng isa pang kalahok para sa mga desisyong taktikal. Ito ay resulta ng imbestigasyon ng PUBG, hindi pag-amin ng stream sniping ng mga manlalaro.",
+    guidance: "Sinabi ng ilang kalahok na naintindihan nilang pinapayagan sa paunang gabay ang paggamit ng panlabas na impormasyon o panonood ng stream. Sinabi ng KRAFTON na hindi nito opisyal na pinahintulutan ang alinman at inako ang pananagutan sa malabong paunang gabay.",
+    source20: "Paunawa ng PUBG · 20 Set",
+    source23: "Mga natuklasan ng PUBG · 23 Set",
+    limit: "Walang naka-archive na orihinal na pahayag ng bawat manlalaro sa site na ito. Ang ulat tungkol sa live chat ay batay sa naiulat na salaysay at hindi independyenteng napatunayan dito.",
+    close: "Isara",
+  },
+};
 
 const modules = {
   rulebook: {
@@ -260,7 +341,7 @@ function CaseModule({ id, language, response, explanation, additional }: { id: k
     <span className="case-module-eyebrow">{loc(language, "LẬP LUẬN CỦA TRANG", "THIS SITE'S ARGUMENT")}</span>
     <h3>{title}</h3>
     <p className="case-module-lead">{body}</p>
-    {id === "rulebook" && <div className="module-document"><span>{loc(language, "ĐIỀU LỆ VI", "VI RULEBOOK")} · §3.7 · 14.09.2026 · P.16/17</span><blockquote lang="vi">“Khuyến nghị tất cả người chơi livestream cá nhân phải cài đặt độ trễ hợp lý để tránh bị lộ thông tin.”</blockquote><p>{loc(language, "Trích nguyên văn điều lệ tiếng Việt. §4.1 quy định nghĩa vụ đọc thông báo chính thức trên Discord; bản lưu hướng dẫn trước sự việc chưa có trên trang.", "Exact excerpt from the Vietnamese rulebook. §4.1 also requires participants to read official Discord notices; this site has no archived pre-event guidance.")}</p></div>}
+    {id === "rulebook" && <div className="module-document"><span>{loc(language, "ĐIỀU LỆ VI", "VI RULEBOOK")} · §3.7 · 14.09.2026 · P.16/17</span><blockquote lang={language}>{rulebookQuote37[language]}</blockquote><p>{loc(language, "Trích nguyên văn điều lệ tiếng Việt. §4.1 quy định nghĩa vụ đọc thông báo chính thức trên Discord; bản lưu hướng dẫn trước sự việc chưa có trên trang.", "Exact excerpt from the Vietnamese rulebook. §4.1 also requires participants to read official Discord notices; this site has no archived pre-event guidance.")}</p></div>}
     {id === "findings-september-23" && <div className="module-chain" aria-label={loc(language, "Cáo buộc, chứng cứ, kết luận", "Claim, evidence, finding")}>
       <div><span>{loc(language, "CÁO BUỘC", "CLAIM")}</span><p>{loc(language, "Himass và TanVuu xem và dùng thông tin ngoài game.", "Himass and TanVuu viewed and used out-of-game information.")}</p></div>
       <div><span>{loc(language, "CHỨNG CỨ PUBG NÊU", "EVIDENCE PUBG CITES")}</span><p>{loc(language, "Livestream, video người tham gia, dữ liệu trong game và replay; hồ sơ cá nhân đầy đủ chưa được công khai tại các nguồn lưu ở đây.", "Broadcasts, participant footage, in-game data and replays; the complete player-specific record is not public in the sources archived here.")}</p></div>
@@ -480,7 +561,7 @@ export default function TimelineExperience() {
                       <button type="button" className="hero-support-button" onClick={standWithThem} disabled={supportPending || support?.supported} aria-pressed={support?.supported ?? false}>
                         <SupportIcon supported={support?.supported ?? false} />{support?.supported ? t.supportedButton : t.supportButton}
                       </button>
-                      <div className="hero-support-count" aria-live="polite"><strong>{support ? new Intl.NumberFormat({ vi: "vi-VN", th: "th-TH", en: "en-US", ko: "ko-KR", zh: "zh-CN" }[language]).format(support.count) : "…"}</strong><span>{t.supportCount}</span></div>
+                      <div className="hero-support-count" aria-live="polite"><strong>{support ? new Intl.NumberFormat({ vi: "vi-VN", th: "th-TH", en: "en-US", ko: "ko-KR", zh: "zh-CN", ja: "ja-JP", ru: "ru-RU", id: "id-ID", es: "es-ES", tl: "tl-PH" }[language]).format(support.count) : "…"}</strong><span>{t.supportCount}</span></div>
                     </div>
                     {supportError && <p className="hero-support-error" role="alert">{t.supportError}</p>}
                     <p className="hero-intro-credit">{t.independent} · {t.heroVisualSource}</p>
@@ -501,7 +582,7 @@ export default function TimelineExperience() {
                       <LocalizedAnchor className="magazine-source" href="/sources#rulebook-vi-3-7">{loc(language, "Đọc điều lệ gốc · §3.7", "Read the rulebook · §3.7")} ↗</LocalizedAnchor>
                     </div>
                   </div>
-                  <div className="magazine-rule-excerpt"><span>{loc(language, "ĐIỀU LỆ VI", "VI RULEBOOK")} · §3.7 · 14.09.2026</span><strong>§3.7</strong><blockquote lang="vi">“Khuyến nghị tất cả người chơi livestream cá nhân phải cài đặt độ trễ hợp lý để tránh bị lộ thông tin.”</blockquote><p>{loc(language, "Trích nguyên văn trang 16/17. Chưa có bản lưu hướng dẫn Discord trước sự việc để đối chiếu.", "Translation: Players who stream personally are encouraged to set a reasonable delay to prevent information exposure. Pre-event Discord guidance is not archived here.")}</p></div>
+                  <div className="magazine-rule-excerpt"><span>{loc(language, "ĐIỀU LỆ VI", "VI RULEBOOK")} · §3.7 · 14.09.2026</span><strong>§3.7</strong><blockquote lang={language}>{rulebookQuote37[language]}</blockquote><p>{loc(language, "Trích nguyên văn điều lệ tiếng Việt. §4.1 quy định nghĩa vụ đọc thông báo chính thức trên Discord; bản lưu hướng dẫn trước sự việc chưa có trên trang.", "Exact excerpt from the Vietnamese rulebook. §4.1 also requires participants to read official Discord notices; this site has no archived pre-event guidance.")}</p></div>
                 </div>
               </article>
 
@@ -563,7 +644,7 @@ export default function TimelineExperience() {
               <div className="page-width story-inner">
                 <div className="story-content">
                   <div className="story-kicker"><span>{String(index + 1).padStart(2, "0")} / {String(timeline.length).padStart(2, "0")}</span><span>{localized(event.label, language)}</span></div>
-                  <div className="story-date"><strong>{event.day}</strong><span>{{ vi: "THG 9", th: "ก.ย.", en: event.month, ko: "9월", zh: "9月" }[language]}<br />2026</span></div>
+                  <div className="story-date"><strong>{event.day}</strong><span>{{ vi: "THG 9", th: "ก.ย.", en: event.month, ko: "9월", zh: "9月", ja: "9月", ru: "сент.", id: "Sep", es: "sept.", tl: "Set" }[language]}<br />2026</span></div>
                   <h2>{localized(event.title, language)}</h2>
                   <div className="story-main-point"><span>{t.whatHappened}</span><p className="story-description">{localized(event.description, language)}</p></div>
                   <div className="story-sources"><span>{event.sources.length === 1 ? t.source : t.sources}</span><div>{event.sources.map((sourceKey) => <SourceLink key={sourceKey} sourceKey={sourceKey} label={loc(language, sources[sourceKey].label, sources[sourceKey].label)} />)}</div></div>

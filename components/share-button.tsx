@@ -4,13 +4,20 @@ import { useState } from "react";
 import { useLanguage } from "@/components/language-provider";
 import { Share } from "lucide-react";
 
-const labels = {
+import type { Language } from "@/lib/language";
+
+const labels: Record<Language, { share: string; copied: string; error: string }> = {
   vi: { share: "Chia sẻ", copied: "Đã sao chép liên kết", error: "Không thể sao chép liên kết" },
   th: { share: "แชร์", copied: "คัดลอกลิงก์แล้ว", error: "คัดลอกลิงก์ไม่ได้" },
   en: { share: "Share", copied: "Link copied", error: "Could not copy link" },
   ko: { share: "공유", copied: "링크 복사됨", error: "링크를 복사할 수 없습니다" },
   zh: { share: "分享", copied: "链接已复制", error: "无法复制链接" },
-} as const;
+  ja: { share: "共有", copied: "リンクをコピーしました", error: "リンクをコピーできませんでした" },
+  ru: { share: "Поделиться", copied: "Ссылка скопирована", error: "Не удалось скопировать ссылку" },
+  id: { share: "Bagikan", copied: "Tautan disalin", error: "Tidak dapat menyalin tautan" },
+  es: { share: "Compartir", copied: "Enlace copiado", error: "No se pudo copiar el enlace" },
+  tl: { share: "Ibahagi", copied: "Nakopya ang link", error: "Hindi makopya ang link" },
+};
 
 export default function ShareButton({ className = "" }: { className?: string }) {
   const { language } = useLanguage();

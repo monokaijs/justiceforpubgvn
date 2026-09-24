@@ -1,9 +1,11 @@
 "use client";
 
 import { createContext, useContext, type ReactNode } from "react";
-import { type Language } from "@/lib/language";
+import { languages, type Language } from "@/lib/language";
 
 const languageCookie = "pas_timeline_lang";
+const languagePattern = new RegExp(`^/(${languages.join("|")})(?=/|$)`);
+
 const LanguageContext = createContext<{ language: Language; chooseLanguage: (next: Language) => void }>({
   language: "vi",
   chooseLanguage: () => {},
@@ -12,7 +14,7 @@ const LanguageContext = createContext<{ language: Language; chooseLanguage: (nex
 export function LanguageProvider({ children, initialLanguage }: { children: ReactNode; initialLanguage: Language }) {
   const chooseLanguage = (next: Language) => {
     document.cookie = `${languageCookie}=${next}; Path=/; Max-Age=31536000; SameSite=Lax${location.protocol === "https:" ? "; Secure" : ""}`;
-    const path = location.pathname.replace(/^\/(vi|th|en|ko|zh)(?=\/|$)/, "");
+    const path = location.pathname.replace(languagePattern, "");
     location.assign(`/${next}${path === "/" ? "" : path}${location.search}${location.hash}`);
   };
 

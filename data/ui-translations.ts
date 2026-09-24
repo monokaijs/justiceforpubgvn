@@ -1,5 +1,11 @@
-// Thai, Korean, and Simplified Chinese editorial copy, keyed by the existing English text.
+// Thai, Korean, Simplified Chinese, Japanese, Russian, Indonesian, Spanish, and Filipino editorial copy, keyed by the existing English text.
 import { zhEntries } from "./zh-translations";
+import { jaEntries } from "./ja-translations";
+import { ruEntries } from "./ru-translations";
+import { idEntries } from "./id-translations";
+import { esEntries } from "./es-translations";
+import { tlEntries } from "./tl-translations";
+
 const entries: [string, string, string][] = [
   ["CASE TIMELINE", "ลำดับเหตุการณ์", "사건 경과"],
   ["SOURCES", "แหล่งข้อมูล", "자료 출처"],
@@ -311,7 +317,34 @@ const entries: [string, string, string][] = [
 if (zhEntries.length !== entries.length) {
   throw new Error("Chinese translation count does not match UI copy");
 }
+if (jaEntries.length !== entries.length) {
+  throw new Error("Japanese translation count does not match UI copy");
+}
+if (ruEntries.length !== entries.length) {
+  throw new Error("Russian translation count does not match UI copy");
+}
+if (idEntries.length !== entries.length) {
+  throw new Error("Indonesian translation count does not match UI copy");
+}
+if (esEntries.length !== entries.length) {
+  throw new Error("Spanish translation count does not match UI copy");
+}
+if (tlEntries.length !== entries.length) {
+  throw new Error("Filipino translation count does not match UI copy");
+}
 
-export const translations: Record<string, { th: string; ko: string; zh: string }> = Object.fromEntries(
-  entries.map(([en, th, ko], index) => [en, { th, ko, zh: zhEntries[index] }]),
+export const translations: Record<string, { th: string; ko: string; zh: string; ja: string; ru: string; id: string; es: string; tl: string }> = Object.fromEntries(
+  entries.map(([en, th, ko], index) => [
+    en,
+    {
+      th,
+      ko,
+      zh: zhEntries[index],
+      ja: jaEntries[index],
+      ru: ruEntries[index],
+      id: idEntries[index],
+      es: esEntries[index],
+      tl: tlEntries[index],
+    },
+  ]),
 );
