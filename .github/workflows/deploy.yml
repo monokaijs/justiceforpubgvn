@@ -47,25 +47,34 @@ jobs:
       - name: Prepare SSH
         env:
           DEPLOY_SSH_KEY_B64: ${{ secrets.DEPLOY_SSH_KEY_B64 }}
+          DEPLOY_SSH_HOST: ${{ secrets.DEPLOY_SSH_HOST }}
+          DEPLOY_SSH_KNOWN_HOSTS: ${{ secrets.DEPLOY_SSH_KNOWN_HOSTS }}
         run: |
           test -n "$DEPLOY_SSH_KEY_B64"
+          test -n "$DEPLOY_SSH_HOST"
+          test -n "$DEPLOY_SSH_KNOWN_HOSTS"
           install -d -m 700 "$HOME/.ssh"
           printf '%s' "$DEPLOY_SSH_KEY_B64" | base64 --decode > "$HOME/.ssh/id_ed25519"
           chmod 600 "$HOME/.ssh/id_ed25519"
-          cp .github/known_hosts "$HOME/.ssh/known_hosts"
+          printf '%s\n' "$DEPLOY_SSH_KNOWN_HOSTS" > "$HOME/.ssh/known_hosts"
           chmod 600 "$HOME/.ssh/known_hosts"
 
       - name: Copy Compose file to server
-        run: scp -o BatchMode=yes -o StrictHostKeyChecking=yes deploy/compose.yaml ubuntu@REDACTED_DEPLOY_HOST:/opt/justiceforpubgvn/compose.yaml.next
+        env:
+          DEPLOY_SSH_HOST: ${{ secrets.DEPLOY_SSH_HOST }}
+        run: scp -o BatchMode=yes -o StrictHostKeyChecking=yes deploy/compose.yaml "ubuntu@${DEPLOY_SSH_HOST}:/opt/justiceforpubgvn/compose.yaml.next"
 
       - name: Authenticate server to GHCR
         env:
           GHCR_TOKEN: ${{ github.token }}
-        run: printf '%s' "$GHCR_TOKEN" | ssh -o BatchMode=yes -o StrictHostKeyChecking=yes ubuntu@REDACTED_DEPLOY_HOST 'docker login ghcr.io -u monokaijs --password-stdin'
+          DEPLOY_SSH_HOST: ${{ secrets.DEPLOY_SSH_HOST }}
+        run: printf '%s' "$GHCR_TOKEN" | ssh -o BatchMode=yes -o StrictHostKeyChecking=yes "ubuntu@$DEPLOY_SSH_HOST" 'docker login ghcr.io -u monokaijs --password-stdin'
 
       - name: Deploy image and check health
+        env:
+          DEPLOY_SSH_HOST: ${{ secrets.DEPLOY_SSH_HOST }}
         run: |
-          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes ubuntu@REDACTED_DEPLOY_HOST 'bash -se' <<'REMOTE'
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes "ubuntu@$DEPLOY_SSH_HOST" 'bash -se' <<'REMOTE'
           set -eu
           cd /opt/justiceforpubgvn
           trap 'docker logout ghcr.io >/dev/null 2>&1 || true' EXIT
