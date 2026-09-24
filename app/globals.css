@@ -453,9 +453,12 @@ html:has(.story-section) { scroll-snap-type: y proximity; }
 .hero-support-button:disabled { cursor: default; opacity: .75; }
 .hero-support-button svg { width: 21px; height: 21px; flex: none; }
 .hero-support-challenge { width: min(100%, 320px); }
-.hero-support-count { display: flex; align-items: center; gap: 10px; min-height: 56px; padding: 8px 15px; border: 1px solid #6d6d6d; background: rgba(0,0,0,.55); }
+.hero-support-count { position: relative; display: flex; align-items: center; gap: 10px; min-height: 56px; padding: 8px 40px 8px 15px; border: 1px solid #6d6d6d; background: rgba(0,0,0,.55); }
 .hero-support-count strong { font-family: "Barlow Condensed", Impact, sans-serif; font-size: 31px; line-height: 1; }
 .hero-support-count span { white-space: nowrap; color: #ccc; font-size: 11px; font-weight: 700; line-height: 1.25; text-transform: uppercase; letter-spacing: .07em; }
+.hero-support-help { position: absolute; top: 5px; right: 5px; display: grid; place-items: center; width: 24px; height: 24px; padding: 0; border: 1px solid #aaa; border-radius: 50%; color: #eee; background: #222; font-size: 13px; font-weight: 800; line-height: 1; cursor: pointer; }
+.hero-support-help:hover { color: #111; background: #eee; }
+.hero-support-help:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
 .hero-support-error { margin: 9px 0 0; color: #ffb5b5; font-size: 12px; }
 .campaign-hero .hero-intro-credit { margin-top: 23px; color: #aaa; font-size: 12px; line-height: 1.5; }
 .campaign-slide-rule { color: #171717; background: #eae9e6; }
@@ -493,6 +496,8 @@ html:has(.story-section) { scroll-snap-type: y proximity; }
 .sniping-dialog-sources { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 23px; }
 .sniping-dialog-sources a { color: var(--accent); border-bottom: 1px solid currentColor; font-size: 12px; font-weight: 800; }
 .sniping-dialog :is(button, a):focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.support-info-dialog { width: min(460px, calc(100vw - 32px)); }
+.support-info-dialog h2 { font-size: clamp(34px, 6vw, 46px); line-height: 1; }
 @media (max-width: 600px) {
   .sniping-dialog-grid { grid-template-columns: 1fr; }
   .sniping-dialog-grid .sniping-dialog-finding { grid-column: auto; }
@@ -665,7 +670,7 @@ html:has(.story-section) { scroll-snap-type: y proximity; }
   .hero-support { display: grid; grid-template-columns: 1fr; margin-top: 19px; gap: 8px; }
   .hero-support-button, .hero-support-count { min-height: 50px; width: 100%; }
   .hero-support-button { padding: 10px 13px; font-size: 12px; }
-  .hero-support-count { justify-content: center; padding: 7px 10px; }
+  .hero-support-count { justify-content: center; padding: 7px 38px; }
   .hero-support-count strong { font-size: 26px; }
   .hero-support-count span { font-size: 9px; }
   .campaign-hero .hero-intro-credit { margin-top: 18px; font-size: 11px; }

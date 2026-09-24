@@ -308,6 +308,9 @@ const entries: [string, string, string][] = [
   ["The livestream still shows Soopi opening and watching the tournament stream on SOOP; it does not show in-match tactical decisions.", "ภาพจากไลฟ์แสดงว่า Soopi เปิดและดูสตรีมการแข่งขันบน SOOP แต่ไม่แสดงการตัดสินใจเชิงกลยุทธ์ระหว่างแข่ง", "방송 화면에는 Soopi가 SOOP에서 대회 중계를 열어 시청하는 모습이 보이지만 경기 중 전술 판단은 드러나지 않습니다."],
   ["Verifying…", "กำลังตรวจสอบ…", "확인 중…"],
   ["Cloudflare Turnstile checks new support submissions for automated traffic. The server verifies the resulting token with Cloudflare and does not store it.", "Cloudflare Turnstile ตรวจสอบการกดสนับสนุนใหม่เพื่อป้องกันบอต เซิร์ฟเวอร์ตรวจสอบโทเค็นกับ Cloudflare และไม่จัดเก็บโทเค็นนั้น", "Cloudflare Turnstile은 새로운 지지 참여에서 자동화된 트래픽을 확인합니다. 서버는 Cloudflare에서 확인 토큰을 검증하며 이를 저장하지 않습니다."],
+  ["About this count", "เกี่ยวกับยอดสนับสนุน", "지지 수에 관하여"],
+  ["About the support count", "เกี่ยวกับจำนวนผู้สนับสนุน", "지지 수 안내"],
+  ["Cloudflare Turnstile checks new support requests to help block bots and abusive traffic. The check runs in the background. A browser cookie limits repeat counts, and the site stores only the total.", "Cloudflare Turnstile ตรวจสอบการกดสนับสนุนใหม่เพื่อช่วยบล็อกบอตและการเข้าชมที่ไม่เหมาะสม การตรวจสอบทำงานเบื้องหลัง คุกกี้ในเบราว์เซอร์ช่วยจำกัดการนับซ้ำ และเว็บไซต์เก็บเพียงยอดรวม", "Cloudflare Turnstile은 새 지지 요청을 확인해 봇과 악의적인 트래픽을 차단합니다. 확인은 백그라운드에서 진행됩니다. 브라우저 쿠키로 중복 집계를 줄이며 사이트에는 총합만 저장합니다."],
 ];
 
 if (zhEntries.length !== entries.length) {

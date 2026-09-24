@@ -31,6 +31,9 @@ const copy = {
     supportButton: "Đồng hành cùng họ",
     supportedButton: "Đã đồng hành",
     supportCount: "người ủng hộ",
+    supportInfoLabel: "Thông tin về lượt ủng hộ",
+    supportInfoTitle: "Về số lượt ủng hộ",
+    supportInfoBody: "Cloudflare Turnstile kiểm tra lượt ủng hộ mới để hạn chế bot và lưu lượng truy cập xấu. Việc kiểm tra diễn ra ngầm. Cookie giúp hạn chế đếm lặp; trang chỉ lưu tổng số lượt ủng hộ.",
     supportChecking: "Đang xác minh…",
     supportError: "Chưa thể cập nhật. Vui lòng thử lại.",
     independent: "Trang tổng hợp độc lập · không thuộc PUBG hoặc KRAFTON",
@@ -67,6 +70,9 @@ const copy = {
     supportButton: "Stand with them",
     supportedButton: "You stand with them",
     supportCount: "supporters",
+    supportInfoLabel: "About this count",
+    supportInfoTitle: "About the support count",
+    supportInfoBody: "Cloudflare Turnstile checks new support requests to help block bots and abusive traffic. The check runs in the background. A browser cookie limits repeat counts, and the site stores only the total.",
     supportChecking: "Verifying…",
     supportError: "Could not update. Please try again.",
     independent: "Independent summary · not affiliated with PUBG or KRAFTON",
@@ -326,6 +332,7 @@ export default function TimelineExperience() {
   const [supportError, setSupportError] = useState(false);
   const turnstileContainerRef = useRef<HTMLDivElement>(null);
   const turnstileWidgetRef = useRef<string | null>(null);
+  const supportInfoDialogRef = useRef<HTMLDialogElement>(null);
   const snipingDialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
@@ -543,7 +550,7 @@ export default function TimelineExperience() {
                       <button type="button" className="hero-support-button" onClick={standWithThem} disabled={supportPending || support?.supported || !turnstileToken} aria-pressed={support?.supported ?? false}>
                         <SupportIcon supported={support?.supported ?? false} />{support?.supported ? t.supportedButton : (supportPending || (!turnstileToken && !!siteKey)) ? t.supportChecking : t.supportButton}
                       </button>
-                      <div className="hero-support-count" aria-live="polite"><strong>{support ? new Intl.NumberFormat({ vi: "vi-VN", th: "th-TH", en: "en-US", ko: "ko-KR", zh: "zh-CN" }[language]).format(support.count) : "…"}</strong><span>{t.supportCount}</span></div>
+                      <div className="hero-support-count"><strong aria-live="polite">{support ? new Intl.NumberFormat({ vi: "vi-VN", th: "th-TH", en: "en-US", ko: "ko-KR", zh: "zh-CN" }[language]).format(support.count) : "…"}</strong><span>{t.supportCount}</span><button type="button" className="hero-support-help" aria-label={t.supportInfoLabel} aria-haspopup="dialog" title={t.supportInfoLabel} onClick={() => supportInfoDialogRef.current?.showModal()}>?</button></div>
                     </div>
                     {siteKey && !support?.supported && <>
                       <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" strategy="afterInteractive" onReady={() => setTurnstileReady(true)} onError={() => setSupportError(true)} />
@@ -652,6 +659,14 @@ export default function TimelineExperience() {
 
         <GyuminComparison />
       </main>
+
+      <dialog ref={supportInfoDialogRef} className="sniping-dialog support-info-dialog" aria-labelledby="support-info-dialog-title" onClick={(event) => { if (event.target === event.currentTarget) event.currentTarget.close(); }}>
+        <div className="sniping-dialog-content">
+          <button className="sniping-dialog-close" type="button" aria-label={snipingCopy.close} onClick={() => supportInfoDialogRef.current?.close()}><UiIcon name="close" /></button>
+          <h2 id="support-info-dialog-title">{t.supportInfoTitle}</h2>
+          <p>{t.supportInfoBody}</p>
+        </div>
+      </dialog>
 
       <dialog ref={snipingDialogRef} className="sniping-dialog" aria-labelledby="sniping-dialog-title" onClick={(event) => { if (event.target === event.currentTarget) event.currentTarget.close(); }}>
         <div className="sniping-dialog-content">

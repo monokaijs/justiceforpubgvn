@@ -307,4 +307,7 @@ export const zhEntries = [
   "直播截图显示 Soopi 在 SOOP 打开并观看了赛事直播；截图未显示比赛中的战术决策。",
   "正在验证…",
   "Cloudflare Turnstile 会检查新增的支持提交，以防止自动化流量。服务器向 Cloudflare 验证生成的令牌，且不会存储该令牌。",
+  "关于支持人数",
+  "关于支持人数统计",
+  "Cloudflare Turnstile 会在后台检查新增的支持请求，帮助阻止机器人和恶意流量。浏览器 Cookie 用于减少重复计数，本站仅存储支持总数。",
 ] as const;
