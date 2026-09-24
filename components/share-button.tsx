@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useLanguage } from "@/components/language-provider";
+import { Share } from "lucide-react";
 
 const labels = {
   vi: { share: "Chia sẻ", copied: "Đã sao chép liên kết", error: "Không thể sao chép liên kết" },
@@ -54,7 +55,7 @@ export default function ShareButton({ className = "" }: { className?: string }) 
 
   return <div className={`share-control ${className}`}>
     <button className="share-button" type="button" onClick={share} aria-label={label.share}>
-      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 16V3m0 0L7.5 7.5M12 3l4.5 4.5M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
+      <Share aria-hidden="true" />
       <span>{label.share}</span>
     </button>
     <span className="share-status" role="status" aria-live="polite">{status === "copied" ? label.copied : status === "error" ? label.error : ""}</span>
