@@ -293,14 +293,14 @@ function CaseModule({ id, language, response, explanation, additional }: { id: k
     {id === "findings-september-23" && <div className="module-chain" aria-label={loc(language, "Cáo buộc, chứng cứ, kết luận", "Claim, evidence, finding")}>
       <div><span>{loc(language, "CÁO BUỘC", "CLAIM")}</span><p>{loc(language, "Himass và TanVuu xem và dùng thông tin ngoài game.", "Himass and TanVuu viewed and used out-of-game information.")}</p></div>
       <div><span>{loc(language, "CHỨNG CỨ PUBG NÊU", "EVIDENCE PUBG CITES")}</span><p>{loc(language, "Livestream, video người tham gia, dữ liệu trong game và replay; hồ sơ cá nhân đầy đủ chưa được công khai tại các nguồn lưu ở đây.", "Broadcasts, participant footage, in-game data and replays; the complete player-specific record is not public in the sources archived here.")}</p></div>
-      <div><span>{loc(language, "KẾT LUẬN", "FINDING")}</span><p>{loc(language, "PUBG kết luận thông tin đã được áp dụng vào chiến thuật. Đây là kết luận được dẫn nguồn, không phải kết quả xác minh độc lập của trang.", "PUBG concluded the information informed play. This is an attributed finding, not this site's independent verification.")}</p></div>
+      <div><span>{loc(language, "KẾT LUẬN", "FINDING")}</span><p>{loc(language, "PUBG kết luận thông tin đã được áp dụng vào chiến thuật. Đây là kết luận được dẫn nguồn, không phải kết quả xác minh độc lập của trang.", "PUBG concluded that the players used outside information to make decisions during play. This is PUBG's finding, not this site's independent verification.")}</p></div>
     </div>}
     {id === "findings-september-23" && <p className="module-limits">{loc(language, "Trang này chưa có bản lưu chứng cứ theo từng tuyển thủ hoặc phản hồi xác thực riêng của từng người; vì vậy chưa thể đối chiếu độc lập các bước suy luận.", "This site has no archived player-specific evidence file or verified individual responses, so it cannot independently check each step of the reasoning.")}</p>}
     {id === "follow-up" && <div className="module-comparison">
       <span className="comparison-intro">{loc(language, "CÙNG BA CÂU HỎI CHO MỖI TRƯỜNG HỢP", "THE SAME THREE QUESTIONS FOR EACH CASE")}</span>
       <div className="comparison-cases">
         {[
-          { name: "HIMASS & TANVUU", values: [loc(language, "PUBG gắn sự việc với Day 1", "PUBG dates conduct to Day 1"), loc(language, "PUBG nói đã xem stream người khác", "PUBG says another stream was viewed"), loc(language, "PUBG kết luận có áp dụng vào chiến thuật", "PUBG found strategic use")] },
+          { name: "HIMASS & TANVUU", values: [loc(language, "PUBG gắn sự việc với Day 1", "PUBG says the conduct occurred on Day 1"), loc(language, "PUBG nói đã xem stream người khác", "PUBG says another stream was viewed"), loc(language, "PUBG kết luận có áp dụng vào chiến thuật", "PUBG found strategic use")] },
           { name: loc(language, "ẢNH LIÊN QUAN SOOPI", "SOOPI-RELATED STILLS"), values: [loc(language, "Giao diện sảnh chờ Day 1 R4 hiện trong ảnh", "Day 1 R4 lobby visible in the still"), loc(language, "Đã mở và xem livestream trận đấu trên SOOP", "Opened and watched the match stream on SOOP"), loc(language, "Đã sử dụng livestream; ảnh không cho thấy quyết định chiến thuật trong trận", "Livestream use shown; in-match tactical decisions are not shown")] },
         ].map((person) => <section className="comparison-case" key={person.name}><h4>{person.name}</h4><dl>{[
           loc(language, "Thời điểm / tư cách", "Timing / status"),
@@ -483,7 +483,9 @@ export default function TimelineExperience() {
 
   const t = language === "vi" ? copy.vi : Object.fromEntries(Object.entries(copy.en).map(([key, value]) => [key, loc(language, value, value)])) as unknown as typeof copy.vi;
   const translatedHeroArguments = language === "vi" ? heroArguments.vi : heroArguments.en.map((item) => ({ title: loc(language, item.title, item.title), body: loc(language, item.body, item.body) }));
-  const snipingCopy = snipingDialogCopy[language];
+  const snipingCopy = language in snipingDialogCopy
+    ? snipingDialogCopy[language as keyof typeof snipingDialogCopy]
+    : Object.fromEntries(Object.entries(snipingDialogCopy.en).map(([key, value]) => [key, loc(language, value, value)])) as typeof snipingDialogCopy.en;
 
   const standWithThem = async () => {
     if (supportPending || support?.supported || !turnstileToken) return;
@@ -550,7 +552,7 @@ export default function TimelineExperience() {
                       <button type="button" className="hero-support-button" onClick={standWithThem} disabled={supportPending || support?.supported || !turnstileToken} aria-pressed={support?.supported ?? false}>
                         <SupportIcon supported={support?.supported ?? false} />{support?.supported ? t.supportedButton : (supportPending || (!turnstileToken && !!siteKey)) ? t.supportChecking : t.supportButton}
                       </button>
-                      <div className="hero-support-count"><strong aria-live="polite">{support ? new Intl.NumberFormat({ vi: "vi-VN", th: "th-TH", en: "en-US", ko: "ko-KR", zh: "zh-CN" }[language]).format(support.count) : "…"}</strong><span>{t.supportCount}</span><button type="button" className="hero-support-help" aria-label={t.supportInfoLabel} aria-haspopup="dialog" title={t.supportInfoLabel} onClick={() => supportInfoDialogRef.current?.showModal()}>?</button></div>
+                      <div className="hero-support-count"><strong aria-live="polite">{support ? new Intl.NumberFormat(language === "zh" ? "zh-CN" : language).format(support.count) : "…"}</strong><span>{t.supportCount}</span><button type="button" className="hero-support-help" aria-label={t.supportInfoLabel} aria-haspopup="dialog" title={t.supportInfoLabel} onClick={() => supportInfoDialogRef.current?.showModal()}>?</button></div>
                     </div>
                     {siteKey && !support?.supported && <>
                       <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" strategy="afterInteractive" onReady={() => setTurnstileReady(true)} onError={() => setSupportError(true)} />
@@ -637,7 +639,7 @@ export default function TimelineExperience() {
               <div className="page-width story-inner">
                 <div className="story-content">
                   <div className="story-kicker"><span>{String(index + 1).padStart(2, "0")} / {String(timeline.length).padStart(2, "0")}</span><span>{localized(event.label, language)}</span></div>
-                  <div className="story-date"><strong>{event.day}</strong><span>{{ vi: "THG 9", th: "ก.ย.", en: event.month, ko: "9월", zh: "9月" }[language]}<br />2026</span></div>
+                  <div className="story-date"><strong>{event.day}</strong><span>{{ vi: "THG 9", th: "ก.ย.", en: event.month, ko: "9월", zh: "9月", ja: "9月", de: "SEP", ms: "SEP", fil: "SET", ru: "СЕН" }[language]}<br />2026</span></div>
                   <h2>{localized(event.title, language)}</h2>
                   <div className="story-main-point"><span>{t.whatHappened}</span><p className="story-description">{localized(event.description, language)}</p></div>
                   <div className="story-sources"><span>{event.sources.length === 1 ? t.source : t.sources}</span><div>{event.sources.map((sourceKey) => <SourceLink key={sourceKey} sourceKey={sourceKey} label={loc(language, sources[sourceKey].label, sources[sourceKey].label)} />)}</div></div>

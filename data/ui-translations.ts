@@ -1,5 +1,12 @@
-// Thai, Korean, and Simplified Chinese editorial copy, keyed by the existing English text.
+// Editorial copy keyed by the English text used at call sites.
 import { zhEntries } from "./zh-translations";
+import jaTranslations from "./ja-translations.json";
+import deTranslations from "./de-translations.json";
+import msTranslations from "./ms-translations.json";
+import filTranslations from "./fil-translations.json";
+import ruTranslations from "./ru-translations.json";
+import supplementalTranslations from "./supplemental-translations.json";
+import type { Language } from "@/lib/language";
 const entries: [string, string, string][] = [
   ["CASE TIMELINE", "ลำดับเหตุการณ์", "사건 경과"],
   ["SOURCES", "แหล่งข้อมูล", "자료 출처"],
@@ -74,10 +81,10 @@ const entries: [string, string, string][] = [
   ["EVIDENCE PUBG CITES", "หลักฐานที่ PUBG อ้าง", "PUBG가 제시한 증거"],
   ["Broadcasts, participant footage, in-game data and replays; the complete player-specific record is not public in the sources archived here.", "ภาพถ่ายทอดสด วิดีโอผู้เข้าร่วม ข้อมูลในเกม และรีเพลย์ แต่หลักฐานฉบับเต็มของผู้เล่นแต่ละคนไม่ปรากฏต่อสาธารณะในแหล่งข้อมูลที่เก็บไว้ที่นี่", "방송, 참가자 영상, 게임 내 데이터, 리플레이를 들었습니다. 다만 이곳에 보관된 자료에는 선수별 전체 기록이 공개되어 있지 않습니다."],
   ["FINDING", "ข้อสรุป", "조사 결과"],
-  ["PUBG concluded the information informed play. This is an attributed finding, not this site's independent verification.", "PUBG สรุปว่าข้อมูลดังกล่าวมีผลต่อการเล่น นี่เป็นข้อสรุปของ PUBG ที่เว็บไซต์นำมาอ้าง ไม่ใช่ผลตรวจสอบอิสระของเว็บไซต์", "PUBG는 해당 정보가 경기 판단에 반영되었다고 결론 내렸습니다. 이는 PUBG의 발표를 인용한 것이며 이 사이트가 독립적으로 확인한 결과는 아닙니다."],
+  ["PUBG concluded that the players used outside information to make decisions during play. This is PUBG's finding, not this site's independent verification.", "PUBG สรุปว่าข้อมูลดังกล่าวมีผลต่อการเล่น นี่เป็นข้อสรุปของ PUBG ที่เว็บไซต์นำมาอ้าง ไม่ใช่ผลตรวจสอบอิสระของเว็บไซต์", "PUBG는 해당 정보가 경기 판단에 반영되었다고 결론 내렸습니다. 이는 PUBG의 발표를 인용한 것이며 이 사이트가 독립적으로 확인한 결과는 아닙니다."],
   ["This site has no archived player-specific evidence file or verified individual responses, so it cannot independently check each step of the reasoning.", "เว็บไซต์นี้ไม่มีแฟ้มหลักฐานแยกตามผู้เล่นหรือคำชี้แจงรายบุคคลที่ตรวจสอบได้ จึงไม่อาจตรวจสอบเหตุผลทุกขั้นตอนอย่างอิสระ", "이 사이트에는 선수별 증거 자료나 확인된 개별 소명 내용이 보관되어 있지 않아, 결론에 이른 각 단계를 독립적으로 검증할 수 없습니다."],
   ["THE SAME THREE QUESTIONS FOR EACH CASE", "คำถามสามข้อเดียวกันในทุกกรณี", "모든 사례에 같은 세 가지 질문"],
-  ["PUBG dates conduct to Day 1", "PUBG ระบุว่าเกิดในวันที่ 1", "PUBG는 행위 시점을 1일 차로 특정"],
+  ["PUBG says the conduct occurred on Day 1", "PUBG ระบุว่าเกิดในวันที่ 1", "PUBG는 행위 시점을 1일 차로 특정"],
   ["PUBG says another stream was viewed", "PUBG ระบุว่าได้ดูสตรีมของผู้เข้าร่วมคนอื่น", "PUBG는 다른 참가자의 방송을 시청했다고 발표"],
   ["PUBG found strategic use", "PUBG สรุปว่านำข้อมูลไปใช้วางกลยุทธ์", "PUBG는 전략에 활용했다고 판단"],
   ["SOOPI-RELATED STILLS", "ภาพนิ่งที่เกี่ยวข้องกับ Soopi", "Soopi 관련 정지 화면"],
@@ -317,6 +324,17 @@ if (zhEntries.length !== entries.length) {
   throw new Error("Chinese translation count does not match UI copy");
 }
 
-export const translations: Record<string, { th: string; ko: string; zh: string }> = Object.fromEntries(
+const existing = Object.fromEntries(
   entries.map(([en, th, ko], index) => [en, { th, ko, zh: zhEntries[index] }]),
+) as Record<string, { th: string; ko: string; zh: string }>;
+
+const newLocales = { ja: jaTranslations, de: deTranslations, ms: msTranslations, fil: filTranslations, ru: ruTranslations } as Record<string, Record<string, string>>;
+export const translations: Record<string, Partial<Record<Language, string>>> = Object.fromEntries(
+  [...new Set([...Object.keys(existing), ...Object.keys(supplementalTranslations)])].map((key) => [
+    key,
+    {
+      ...(existing[key] ?? supplementalTranslations[key as keyof typeof supplementalTranslations]),
+      ...Object.fromEntries(Object.entries(newLocales).map(([language, values]) => [language, values[key]])),
+    },
+  ]),
 );

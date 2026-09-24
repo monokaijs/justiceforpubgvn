@@ -1,6 +1,7 @@
 "use client";
 
 import { useLanguage } from "@/components/language-provider";
+import { loc } from "@/lib/i18n";
 
 const quotes = {
   delay: {
@@ -20,5 +21,7 @@ const quotes = {
 export default function TranslatedQuote({ quote }: { quote: keyof typeof quotes }) {
   const { language } = useLanguage();
   if (language === "vi") return null;
-  return <p className="translation-note">{quotes[quote][language]}</p>;
+  const text = quotes[quote];
+  const existing = language === "th" || language === "ko" || language === "zh" ? text[language] : undefined;
+  return <p className="translation-note">{existing ?? loc(language, text.en, text.en)}</p>;
 }

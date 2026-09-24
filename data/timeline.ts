@@ -106,7 +106,7 @@ export const timeline: TimelineEvent[] = [
       },
       {
         heading: { vi: "Mốc thời gian", en: "Date of the event" },
-        text: { vi: "Ngày 17/09 là ngày thi đấu liên quan; các bài đăng, ảnh và kết luận về vụ việc xuất hiện vào những ngày sau đó.", en: "September 17 is the date of the relevant play. Posts, images and findings about it appeared on later dates." },
+        text: { vi: "Ngày 17/09 là ngày thi đấu liên quan; các bài đăng, ảnh và kết luận về vụ việc xuất hiện vào những ngày sau đó.", en: "The relevant match events occurred on September 17. Posts, images, and investigation findings appeared later." },
       },
     ],
     sources: ["eventNotice", "dayOneReport", "chipReport", "findingsVi"],

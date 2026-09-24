@@ -3,8 +3,9 @@
 import { useLanguage } from "@/components/language-provider";
 import LocalizedAnchor from "@/components/localized-anchor";
 import type { Language } from "@/lib/language";
+import { loc } from "@/lib/i18n";
 
-const copy: Record<Language, {
+const copy: Record<"vi" | "th" | "en" | "ko" | "zh", {
   kicker: string;
   title: string;
   intro: string;
@@ -128,7 +129,9 @@ const copy: Record<Language, {
 
 export default function GyuminComparison() {
   const { language } = useLanguage();
-  const t = copy[language];
+  const t = language in copy
+    ? copy[language as keyof typeof copy]
+    : Object.fromEntries(Object.entries(copy.en).map(([key, value]) => [key, loc(language, value, value)])) as typeof copy.en;
 
   return (
     <section id="gyumin-comparison" className="gyumin-comparison" aria-labelledby="gyumin-comparison-title">

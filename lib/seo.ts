@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { languages, type Language } from "@/lib/language";
+import { loc } from "@/lib/i18n";
 
 export const siteUrl = (process.env.SITE_URL || "https://justiceforpubgvn.com").replace(/\/$/, "");
 export const siteName = "Justice for PUBG VN";
@@ -7,7 +8,7 @@ export const siteName = "Justice for PUBG VN";
 type PageKey = "home" | "sources" | "players" | "legal" | "himass" | "tanvuu";
 type Copy = { title: string; description: string };
 
-const copy: Record<PageKey, Record<Language, Copy>> = {
+const copy: Record<PageKey, Record<"vi" | "th" | "en" | "ko" | "zh", Copy>> = {
   home: {
     vi: { title: "Công bằng cho Himass & TanVuu | Justice for PUBG VN", description: "Theo dõi diễn biến PUBG Asia Stars 2026, đối chiếu thông báo chính thức và tài liệu gốc. Kêu gọi điều tra minh bạch và án phạt tương xứng." },
     th: { title: "ความเป็นธรรมสำหรับ Himass และ TanVuu | Justice for PUBG VN", description: "ติดตามเหตุการณ์ PUBG Asia Stars 2026 ตรวจสอบประกาศอย่างเป็นทางการและเอกสารต้นฉบับ พร้อมเรียกร้องการสอบสวนที่โปร่งใสและบทลงโทษที่ได้สัดส่วน" },
@@ -57,14 +58,17 @@ const paths: Record<PageKey, string> = {
   himass: "/players/himass", tanvuu: "/players/tanvuu",
 };
 
-const ogLocales: Record<Language, string> = { vi: "vi_VN", th: "th_TH", en: "en_US", ko: "ko_KR", zh: "zh_CN" };
+const ogLocales: Record<Language, string> = { vi: "vi_VN", th: "th_TH", en: "en_US", ko: "ko_KR", zh: "zh_CN", ja: "ja_JP", de: "de_DE", ms: "ms_MY", fil: "fil_PH", ru: "ru_RU" };
 
 export function pageUrl(language: Language, page: PageKey): string {
   return `${siteUrl}/${language}${paths[page]}`;
 }
 
 export function pageMetadata(language: Language, page: PageKey): Metadata {
-  const { title, description } = copy[page][language];
+  const english = copy[page].en;
+  const { title, description } = language in copy[page]
+    ? copy[page][language as keyof typeof copy[PageKey]]
+    : { title: loc(language, english.title, english.title), description: loc(language, english.description, english.description) };
   return {
     title,
     description,

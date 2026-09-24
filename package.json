@@ -7,7 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit && node scripts/check-translations.cjs"
   },
   "dependencies": {
     "@fontsource/barlow-condensed": "^5.2.8",

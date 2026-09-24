@@ -753,6 +753,7 @@ html:has(.story-section) { scroll-snap-type: y proximity; }
 .language-trigger { display: flex; align-items: center; gap: 9px; min-width: 130px; min-height: 36px; padding: 6px 9px; color: #f5f5f5; background: #111; border: 1px solid #62676c; cursor: pointer; font-size: 11px; font-weight: 700; white-space: nowrap; }
 .language-trigger > span { flex: 1; text-align: left; }
 .language-flag { display: block; flex: none; width: 24px; height: 16px; border: 1px solid rgba(0,0,0,.22); }
+.language-flag-emoji { border: 0; font-size: 19px; line-height: 16px; }
 .language-chevron { flex: none; width: 12px; height: 12px; transition: transform .2s; }
 .language-trigger[aria-expanded="true"] .language-chevron { transform: rotate(180deg); }
 .language-menu { position: absolute; top: calc(100% + 5px); right: 0; width: max(100%, 154px); padding: 4px; background: #111; border: 1px solid #62676c; box-shadow: 0 12px 24px rgba(0,0,0,.28); }

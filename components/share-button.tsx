@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useLanguage } from "@/components/language-provider";
 import { Share } from "lucide-react";
+import { loc } from "@/lib/i18n";
 
 const labels = {
   vi: { share: "Chia sẻ", copied: "Đã sao chép liên kết", error: "Không thể sao chép liên kết" },
@@ -15,7 +16,9 @@ const labels = {
 export default function ShareButton({ className = "" }: { className?: string }) {
   const { language } = useLanguage();
   const [status, setStatus] = useState<"idle" | "copied" | "error">("idle");
-  const label = labels[language];
+  const label = language in labels
+    ? labels[language as keyof typeof labels]
+    : Object.fromEntries(Object.entries(labels.en).map(([key, value]) => [key, loc(language, value, value)])) as typeof labels.en;
 
   const share = async () => {
     const url = `${window.location.origin}${window.location.pathname}`;

@@ -9,6 +9,11 @@ function languageForCountry(country: string | null): Language {
     case "TH": return "th";
     case "KR": return "ko";
     case "CN": return "zh";
+    case "JP": return "ja";
+    case "DE": return "de";
+    case "MY": return "ms";
+    case "PH": return "fil";
+    case "RU": return "ru";
     default: return "en";
   }
 }
