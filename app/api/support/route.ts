@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { readSupportCount, addSupport } from "@/lib/support";
+import { voterIp } from "@/lib/voter-ip";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -56,6 +57,11 @@ export async function POST(request: NextRequest) {
       return response(await readSupportCount(), true);
     }
 
+    const ip = voterIp(request.headers);
+    if (!ip) {
+      return NextResponse.json({ error: "Visitor IP unavailable" }, { status: 503 });
+    }
+
     const body: unknown = await request.json().catch(() => null);
     const token = body && typeof body === "object" && "token" in body ? body.token : null;
     if (typeof token !== "string" || !token || token.length > 2048) {
@@ -65,7 +71,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Verification failed" }, { status: 403 });
     }
 
-    const result = response(await addSupport(), true);
+    const result = response(await addSupport(ip), true);
     result.cookies.set(COOKIE_NAME, "1", {
       httpOnly: true,
       sameSite: "lax",

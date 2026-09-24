@@ -2,6 +2,9 @@ import { Pool } from "pg";
 
 let pool: Pool | undefined;
 let schemaReady: Promise<void> | undefined;
+let cachedCount: { count: number; expiresAt: number } | undefined;
+let countPromise: Promise<number> | undefined;
+const COUNT_CACHE_MS = 2000;
 
 function connection() {
   if (!pool) {
@@ -20,7 +23,10 @@ async function ensureSchema() {
       CREATE TABLE IF NOT EXISTS support_counter (
         id SMALLINT PRIMARY KEY CHECK (id = 1),
         count BIGINT NOT NULL CHECK (count >= 0)
-      )
+      );
+      CREATE TABLE IF NOT EXISTS support_vote (
+        ip INET PRIMARY KEY
+      );
     `).then(() => undefined).catch((error) => {
       schemaReady = undefined;
       throw error;
@@ -37,17 +43,42 @@ function validCount(value: unknown): number {
 }
 
 export async function readSupportCount(): Promise<number> {
-  const db = await ensureSchema();
-  const result = await db.query<{ count: string }>("SELECT count FROM support_counter WHERE id = 1");
-  return result.rows.length ? validCount(result.rows[0].count) : 0;
+  if (cachedCount && cachedCount.expiresAt > Date.now()) return cachedCount.count;
+  if (!countPromise) {
+    countPromise = (async () => {
+      const db = await ensureSchema();
+      const result = await db.query<{ count: string }>("SELECT count FROM support_counter WHERE id = 1");
+      const count = result.rows.length ? validCount(result.rows[0].count) : 0;
+      cachedCount = { count: Math.max(count, cachedCount?.count ?? 0), expiresAt: Date.now() + COUNT_CACHE_MS };
+      return cachedCount.count;
+    })().finally(() => { countPromise = undefined; });
+  }
+  return countPromise;
 }
 
-export async function addSupport(): Promise<number> {
+export async function addSupport(ip: string): Promise<number> {
   const db = await ensureSchema();
   const result = await db.query<{ count: string }>(`
-    INSERT INTO support_counter (id, count) VALUES (1, 1)
-    ON CONFLICT (id) DO UPDATE SET count = support_counter.count + 1
-    RETURNING count
-  `);
-  return validCount(result.rows[0].count);
+    WITH vote AS (
+      INSERT INTO support_vote (ip) VALUES ($1::inet)
+      ON CONFLICT (ip) DO NOTHING
+      RETURNING 1
+    ), updated AS (
+      INSERT INTO support_counter (id, count)
+      SELECT 1, 1 FROM vote
+      ON CONFLICT (id) DO UPDATE SET count = support_counter.count + 1
+      RETURNING count
+    )
+    SELECT COALESCE(
+      (SELECT count FROM updated),
+      (SELECT count FROM support_counter WHERE id = 1),
+      0
+    ) AS count
+  `, [ip]);
+  const count = validCount(result.rows[0].count);
+  cachedCount = {
+    count: Math.max(count, cachedCount?.count ?? 0),
+    expiresAt: cachedCount?.expiresAt ?? Date.now() + COUNT_CACHE_MS,
+  };
+  return cachedCount.count;
 }
