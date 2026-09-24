@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { ArrowRight, ArrowUpRight, Heart } from "lucide-react";
 import Image from "next/image";
+import Script from "next/script";
 import { Language, sources, timeline, type SourceKey, type TimelineEvent } from "@/data/timeline";
 import { useLanguage } from "@/components/language-provider";
 import LanguageSelector from "@/components/language-selector";
@@ -30,6 +31,7 @@ const copy = {
     supportButton: "Đồng hành cùng họ",
     supportedButton: "Đã đồng hành",
     supportCount: "người ủng hộ",
+    supportChecking: "Đang xác minh…",
     supportError: "Chưa thể cập nhật. Vui lòng thử lại.",
     independent: "Trang tổng hợp độc lập · không thuộc PUBG hoặc KRAFTON",
     timelineTitle: "DÒNG THỜI GIAN",
@@ -65,6 +67,7 @@ const copy = {
     supportButton: "Stand with them",
     supportedButton: "You stand with them",
     supportCount: "supporters",
+    supportChecking: "Verifying…",
     supportError: "Could not update. Please try again.",
     independent: "Independent summary · not affiliated with PUBG or KRAFTON",
     timelineTitle: "CASE TIMELINE",
@@ -84,6 +87,26 @@ const copy = {
     checkContext: "CHECK THE CONTEXT",
   },
 } as const;
+
+type TurnstileApi = {
+  render: (container: HTMLElement, options: {
+    sitekey: string;
+    action: string;
+    appearance: "interaction-only";
+    size: "flexible";
+    theme: "dark";
+    language: string;
+    callback: (token: string) => void;
+    "expired-callback": () => void;
+    "error-callback": () => void;
+  }) => string;
+  reset: (widgetId: string) => void;
+  remove: (widgetId: string) => void;
+};
+
+function turnstileApi(): TurnstileApi | undefined {
+  return (window as Window & { turnstile?: TurnstileApi }).turnstile;
+}
 
 const heroArguments = {
   vi: [
@@ -296,8 +319,13 @@ export default function TimelineExperience() {
   const [heroActiveIndex, setHeroActiveIndex] = useState(0);
   const [verticalHero, setVerticalHero] = useState(false);
   const [support, setSupport] = useState<{ count: number; supported: boolean } | null>(null);
+  const [siteKey, setSiteKey] = useState<string | null | undefined>();
+  const [turnstileReady, setTurnstileReady] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [supportPending, setSupportPending] = useState(false);
   const [supportError, setSupportError] = useState(false);
+  const turnstileContainerRef = useRef<HTMLDivElement>(null);
+  const turnstileWidgetRef = useRef<string | null>(null);
   const snipingDialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
@@ -315,10 +343,38 @@ export default function TimelineExperience() {
         if (!result.ok) throw new Error("Support count unavailable");
         return result.json();
       })
-      .then((data) => setSupport((current) => current?.supported ? current : data))
+      .then((data) => {
+        setSiteKey(data.siteKey);
+        setSupport((current) => current?.supported ? current : data);
+        if (!data.siteKey && !data.supported) setSupportError(true);
+      })
       .catch((error) => { if (error.name !== "AbortError") setSupportError(true); });
     return () => controller.abort();
   }, []);
+
+  useEffect(() => {
+    const api = turnstileApi();
+    const container = turnstileContainerRef.current;
+    if (!turnstileReady || !siteKey || support?.supported || !api || !container) return;
+
+    const widgetId = api.render(container, {
+      sitekey: siteKey,
+      action: "support",
+      appearance: "interaction-only",
+      size: "flexible",
+      theme: "dark",
+      language: language === "zh" ? "zh-CN" : language,
+      callback: (token) => { setTurnstileToken(token); setSupportError(false); },
+      "expired-callback": () => setTurnstileToken(null),
+      "error-callback": () => { setTurnstileToken(null); setSupportError(true); },
+    });
+    turnstileWidgetRef.current = widgetId;
+    return () => {
+      api.remove(widgetId);
+      turnstileWidgetRef.current = null;
+      setTurnstileToken(null);
+    };
+  }, [turnstileReady, siteKey, support?.supported, language]);
 
   useEffect(() => {
     const panels = Array.from(document.querySelectorAll<HTMLElement>(".story-panel"));
@@ -423,15 +479,22 @@ export default function TimelineExperience() {
   const snipingCopy = snipingDialogCopy[language];
 
   const standWithThem = async () => {
-    if (supportPending || support?.supported) return;
+    if (supportPending || support?.supported || !turnstileToken) return;
     setSupportPending(true);
     setSupportError(false);
     try {
-      const result = await fetch("/api/support", { method: "POST", cache: "no-store" });
+      const result = await fetch("/api/support", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token: turnstileToken }),
+        cache: "no-store",
+      });
       if (!result.ok) throw new Error("Support count unavailable");
       setSupport(await result.json());
     } catch {
       setSupportError(true);
+      setTurnstileToken(null);
+      if (turnstileWidgetRef.current) turnstileApi()?.reset(turnstileWidgetRef.current);
     } finally {
       setSupportPending(false);
     }
@@ -477,11 +540,15 @@ export default function TimelineExperience() {
                     <p className="hero-statement">{t.heroStatement}</p>
                     <p className="hero-description">{t.heroDescription}</p>
                     <div className="hero-support">
-                      <button type="button" className="hero-support-button" onClick={standWithThem} disabled={supportPending || support?.supported} aria-pressed={support?.supported ?? false}>
-                        <SupportIcon supported={support?.supported ?? false} />{support?.supported ? t.supportedButton : t.supportButton}
+                      <button type="button" className="hero-support-button" onClick={standWithThem} disabled={supportPending || support?.supported || !turnstileToken} aria-pressed={support?.supported ?? false}>
+                        <SupportIcon supported={support?.supported ?? false} />{support?.supported ? t.supportedButton : (supportPending || (!turnstileToken && !!siteKey)) ? t.supportChecking : t.supportButton}
                       </button>
                       <div className="hero-support-count" aria-live="polite"><strong>{support ? new Intl.NumberFormat({ vi: "vi-VN", th: "th-TH", en: "en-US", ko: "ko-KR", zh: "zh-CN" }[language]).format(support.count) : "…"}</strong><span>{t.supportCount}</span></div>
                     </div>
+                    {siteKey && !support?.supported && <>
+                      <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" strategy="afterInteractive" onReady={() => setTurnstileReady(true)} onError={() => setSupportError(true)} />
+                      <div className="hero-support-challenge" ref={turnstileContainerRef} />
+                    </>}
                     {supportError && <p className="hero-support-error" role="alert">{t.supportError}</p>}
                     <p className="hero-intro-credit">{t.independent} · {t.heroVisualSource}</p>
                     <LocalizedAnchor className="campaign-mobile-skip" href="#timeline" onClick={skipToTimeline}>{t.heroSkip} ↗</LocalizedAnchor>

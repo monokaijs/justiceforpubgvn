@@ -24,6 +24,9 @@ services:
     restart: unless-stopped
     environment:
       DATABASE_URL: postgres://justiceforpubgvn:${POSTGRES_PASSWORD}@db:5432/justiceforpubgvn
+      TURNSTILE_SITE_KEY: ${TURNSTILE_SITE_KEY:-}
+      TURNSTILE_SECRET_KEY: ${TURNSTILE_SECRET_KEY:-}
+      TURNSTILE_HOSTNAME: justiceforpubgvn.com
       NODE_ENV: production
     depends_on:
       db:

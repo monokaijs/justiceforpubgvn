@@ -306,6 +306,8 @@ const entries: [string, string, string][] = [
   ["Stills from Soopi-related livestream footage show her opening and watching the tournament stream on SOOP. The viewing is visible; the stills do not show whether that information informed tactical decisions in a match.", "ภาพจากไลฟ์ที่เกี่ยวข้องกับ Soopi แสดงว่าเธอเปิดและดูสตรีมการแข่งขันบน SOOP การดูสตรีมเห็นได้ชัด แต่ภาพไม่แสดงว่าข้อมูลนั้นมีผลต่อการตัดสินใจเชิงกลยุทธ์ในแมตช์หรือไม่", "Soopi 관련 방송 화면에는 그가 SOOP에서 대회 중계를 열어 시청하는 모습이 보입니다. 시청 사실은 확인되지만, 그 정보가 경기 중 전술 판단에 반영됐는지는 화면에 드러나지 않습니다."],
   ["App switcher in Soopi-related livestream footage, showing the Day 1 R4 lobby and a SOOP window.", "หน้าสลับแอปในไลฟ์ที่เกี่ยวข้องกับ Soopi แสดงล็อบบี้ Day 1 R4 และหน้าต่าง SOOP", "Soopi 관련 방송의 앱 전환 화면에 Day 1 R4 대기실과 SOOP 창이 보입니다."],
   ["The livestream still shows Soopi opening and watching the tournament stream on SOOP; it does not show in-match tactical decisions.", "ภาพจากไลฟ์แสดงว่า Soopi เปิดและดูสตรีมการแข่งขันบน SOOP แต่ไม่แสดงการตัดสินใจเชิงกลยุทธ์ระหว่างแข่ง", "방송 화면에는 Soopi가 SOOP에서 대회 중계를 열어 시청하는 모습이 보이지만 경기 중 전술 판단은 드러나지 않습니다."],
+  ["Verifying…", "กำลังตรวจสอบ…", "확인 중…"],
+  ["Cloudflare Turnstile checks new support submissions for automated traffic. The server verifies the resulting token with Cloudflare and does not store it.", "Cloudflare Turnstile ตรวจสอบการกดสนับสนุนใหม่เพื่อป้องกันบอต เซิร์ฟเวอร์ตรวจสอบโทเค็นกับ Cloudflare และไม่จัดเก็บโทเค็นนั้น", "Cloudflare Turnstile은 새로운 지지 참여에서 자동화된 트래픽을 확인합니다. 서버는 Cloudflare에서 확인 토큰을 검증하며 이를 저장하지 않습니다."],
 ];
 
 if (zhEntries.length !== entries.length) {

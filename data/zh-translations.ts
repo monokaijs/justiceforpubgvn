@@ -305,4 +305,6 @@ export const zhEntries = [
   "Soopi 相关直播画面显示她在 SOOP 打开并观看了赛事直播。观看行为清晰可见；截图未显示这些信息是否影响比赛中的战术决策。",
   "Soopi 相关直播中的应用切换界面，显示 Day 1 R4 等候大厅和 SOOP 窗口。",
   "直播截图显示 Soopi 在 SOOP 打开并观看了赛事直播；截图未显示比赛中的战术决策。",
+  "正在验证…",
+  "Cloudflare Turnstile 会检查新增的支持提交，以防止自动化流量。服务器向 Cloudflare 验证生成的令牌，且不会存储该令牌。",
 ] as const;

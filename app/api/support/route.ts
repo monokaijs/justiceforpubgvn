@@ -7,7 +7,32 @@ export const dynamic = "force-dynamic";
 const COOKIE_NAME = "justiceforpubgvn_supported";
 
 function response(count: number, supported: boolean) {
-  return NextResponse.json({ count, supported }, { headers: { "Cache-Control": "no-store" } });
+  const siteKey = process.env.TURNSTILE_SITE_KEY && process.env.TURNSTILE_SECRET_KEY
+    ? process.env.TURNSTILE_SITE_KEY : null;
+  return NextResponse.json({ count, supported, siteKey }, { headers: { "Cache-Control": "no-store" } });
+}
+
+async function verifyTurnstile(token: string): Promise<boolean> {
+  const secret = process.env.TURNSTILE_SECRET_KEY;
+  if (!secret) return false;
+
+  const result = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ secret, response: token }),
+    signal: AbortSignal.timeout(5000),
+    cache: "no-store",
+  });
+  if (!result.ok) return false;
+
+  const validation: { success?: boolean; action?: string; hostname?: string } = await result.json();
+  const localTestKey = process.env.NODE_ENV !== "production"
+    && secret === "1x0000000000000000000000000000000AA";
+  const expectedHostname = process.env.TURNSTILE_HOSTNAME
+    || (process.env.NODE_ENV === "production" ? "justiceforpubgvn.com" : "localhost");
+  return validation.success === true
+    && (validation.action === "support" || (localTestKey && !validation.action))
+    && validation.hostname === expectedHostname;
 }
 
 export async function GET(request: NextRequest) {
@@ -29,6 +54,15 @@ export async function POST(request: NextRequest) {
   try {
     if (request.cookies.get(COOKIE_NAME)?.value === "1") {
       return response(await readSupportCount(), true);
+    }
+
+    const body: unknown = await request.json().catch(() => null);
+    const token = body && typeof body === "object" && "token" in body ? body.token : null;
+    if (typeof token !== "string" || !token || token.length > 2048) {
+      return NextResponse.json({ error: "Verification required" }, { status: 400 });
+    }
+    if (!await verifyTurnstile(token)) {
+      return NextResponse.json({ error: "Verification failed" }, { status: 403 });
     }
 
     const result = response(await addSupport(), true);
